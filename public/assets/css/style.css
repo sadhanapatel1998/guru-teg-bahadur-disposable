@@ -3434,7 +3434,7 @@ ABOUT PAGE
 
 .gtb-ff-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: #0B3A63;
     margin: 0 0 3px 0;
@@ -3514,7 +3514,7 @@ ABOUT PAGE
 }
 
 .gtb-footer-about-text {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.65;
     color: #64748B;
     margin: 14px 0 18px 0;
@@ -3577,7 +3577,7 @@ ABOUT PAGE
 .gtb-footer-link {
     color: #556575 !important;
     text-decoration: none !important;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
@@ -3641,7 +3641,7 @@ ABOUT PAGE
 }
 
 .gtb-fc-text {
-    font-size: 13px;
+    font-size: 14px !important;
     line-height: 1.45;
     color: #475569;
     font-weight: 500;

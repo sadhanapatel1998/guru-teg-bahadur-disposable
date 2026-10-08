@@ -160,6 +160,7 @@
         .about-sharp-card {
             padding: 22px 22px;
         }
+
         .about-split-row {
             grid-template-columns: 1fr;
             gap: 16px;
@@ -170,19 +171,23 @@
         .about-clean-section {
             padding: 20px 0 35px;
         }
+
         .about-sharp-card {
             padding: 18px 16px;
             border-radius: 10px;
         }
+
         .about-sharp-split-card {
             padding: 18px 16px;
             border-radius: 10px;
             gap: 12px;
         }
+
         .about-flow-text {
             font-size: 14px;
             line-height: 1.7;
         }
+
         .about-services-grid {
             grid-template-columns: 1fr;
             gap: 10px;
@@ -215,7 +220,7 @@
         {{-- Section 1: Main Story Card (Clean, Sharp, Borderless) --}}
         <div class="about-sharp-card">
             <p class="about-flow-text">
-                Finesse By Design is a trusted name in the manufacturing of premium brass and silver-plated articles, bringing exceptional craftsmanship and quality to clients across India and the world. With over 43 years of manufacturing excellence, we are a renowned export house committed to creating timeless products that blend elegance, durability, and superior workmanship. As a direct manufacturer, we eliminate middlemen, offering export-quality products at competitive factory prices. Every article is meticulously handcrafted by skilled artisans and undergoes a stringent 7-step quality assurance process, ensuring perfection in every piece. Our product range is available in Premium Brass, Silver-Plated, Nickel-Plated, Matte, and Shine Finishes, with complete customization options including tailor-made designs and personalized logos to meet the unique requirements of our clients.
+                Guru Teg Bahadur Disposable is a trusted name in the supply of quality disposable tableware and catering products, offering reliable and practical solutions for businesses, events, and everyday needs. We are committed to providing a wide range of disposable products that combine convenience, durability, and excellent value. Our extensive product range includes disposable plates, spoons, bowls, glasses, cups, wooden cutlery, serving items, and other catering essentials. With a strong focus on product quality and customer satisfaction, we carefully source and supply products that meet diverse requirements. Whether for parties, catering services, restaurants, events, or large gatherings, Guru Teg Bahadur Disposable offers dependable products at competitive prices, making disposable serving solutions simple and convenient for every customer.
             </p>
         </div>
 

@@ -270,10 +270,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    margin-top: 6px;
-    margin-bottom: 12px;
+     gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 14px;
 }
+
 
 .prod-price-group {
     display: flex;
