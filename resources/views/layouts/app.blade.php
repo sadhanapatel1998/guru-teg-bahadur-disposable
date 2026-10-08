@@ -80,7 +80,7 @@
         @media (min-width: 992px) {
             .mega-category-dropdown {
                 position: absolute !important;
-                top: 100% !important;
+                top: 80% !important;
                 left: 0 !important;
                 min-width: 760px;
                 max-width: 820px;
@@ -1073,9 +1073,9 @@
             display: inline-flex;
             align-items: center;
             padding: 15px 18px !important;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14.5px;
-            font-weight: 600;
+            font-family: 'Poppins', sans-serif !important;
+            font-size: 14.5px !important;
+            font-weight: 600 !important;
             color: #1E293B !important;
             text-decoration: none !important;
             transition: color 0.2s ease;
@@ -1090,7 +1090,7 @@
             background: transparent !important;
         }
 
-        /* Active Indicator Tab (Thick red bottom indicator as in reference) */
+        /* Active Indicator Tab */
         #gtb-sticky-nav-header .gtb-nav-link.active {
             color: var(--gtb-red) !important;
             background: transparent !important;
@@ -1120,7 +1120,7 @@
             transform: rotate(180deg);
         }
 
-        /* Right Side Trust Badges (Matching Shared Design) */
+        /* Right Side Trust Badges (Matching Shared Reference Design) */
         .gtb-nav-features {
             display: flex;
             align-items: center;
@@ -1173,8 +1173,8 @@
 
         .gtb-feature-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 600;
             color: #0B3A63;
             white-space: nowrap;
             letter-spacing: -0.2px;
@@ -1192,16 +1192,20 @@
             .gtb-feature-block {
                 padding: 0 10px;
             }
+
             .gtb-feature-title {
                 font-size: 12px;
             }
+
             .gtb-feature-sub {
                 font-size: 11px;
             }
+
             .gtb-feature-icon-wrap svg {
                 width: 22px;
                 height: 22px;
             }
+
             #gtb-sticky-nav-header .gtb-nav-link {
                 padding: 15px 12px !important;
                 font-size: 13.5px;
@@ -1231,8 +1235,8 @@
             }
 
             .gtb-header-logo {
-                height: 48px;
-                max-height: 48px;
+                height: 48px !important;
+                max-height: 48px !important;
             }
 
             .gtb-logo-title {
@@ -1248,7 +1252,7 @@
             }
 
             #gtb-sticky-nav-header.gtb-main-sticky-nav {
-                border-top: none;
+                border-top: none !important;
             }
 
             .gtb-nav-features {
@@ -1257,7 +1261,7 @@
 
             /* Mobile Dropdown Menu */
             .gtb-nav-collapse.collapse:not(.show) {
-                display: none;
+                display: none !important;
             }
 
             .gtb-nav-collapse.collapsing {
@@ -1265,11 +1269,11 @@
             }
 
             .gtb-nav-collapse.collapse.show {
-                display: block;
+                display: block !important;
                 background: #FFFFFF;
                 border-top: 1px solid #E2E8F0;
                 padding: 12px 0 16px 0;
-                box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
             }
 
             .gtb-nav-list {
@@ -1294,471 +1298,6 @@
             #gtb-sticky-nav-header .gtb-nav-link.active {
                 background: #FEF2F2 !important;
                 color: var(--gtb-red) !important;
-            }
-        }
-
-        /* ============================================================
-           GTB MODERN FOOTER STYLES (MATCHING SHARED DESIGN)
-        ============================================================ */
-        .gw-footer.gtb-modern-footer {
-            background: #FFFFFF !important;
-            color: #475569;
-            font-family: 'Inter', sans-serif;
-            font-size: 13.5px;
-            position: relative;
-            margin-top: auto;
-            margin-bottom: 0 !important;
-            padding-top: 36px;
-            padding-bottom: 0;
-            border-top: 1px solid #EDF2F7;
-            overflow: hidden;
-        }
-
-        .gw-footer.gtb-modern-footer::before {
-            display: none !important;
-        }
-
-        /* 1. TOP FLOATING FEATURE STRIP CARD */
-        .gtb-footer-features-card {
-            background: #F4F8FC;
-            border: 1px solid #E2E8F0;
-            border-radius: 18px;
-            padding: 22px 28px;
-            margin-bottom: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            box-shadow: 0 4px 20px rgba(11, 58, 99, 0.03);
-        }
-
-        .gtb-ff-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex: 1;
-            min-width: 0;
-        }
-
-        .gtb-ff-icon-wrap {
-            width: 48px;
-            height: 48px;
-            min-width: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .gtb-ff-icon-pink {
-            background: #FEE2E2;
-            color: #E02424;
-        }
-
-        .gtb-ff-icon-blue {
-            background: #E0F2FE;
-            color: #0284C7;
-        }
-
-        .gtb-ff-icon-green {
-            background: #DEF7EC;
-            color: #16A34A;
-        }
-
-        .gtb-ff-icon-amber {
-            background: #FEF3C7;
-            color: #D97706;
-        }
-
-        .gtb-ff-content {
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            line-height: 1.25;
-        }
-
-        .gtb-ff-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            color: #0B3A63;
-            margin: 0 0 3px 0;
-            white-space: nowrap;
-            letter-spacing: -0.2px;
-        }
-
-        .gtb-ff-sub {
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 400;
-            color: #64748B;
-            margin: 0;
-            white-space: nowrap;
-        }
-
-        .gtb-ff-divider {
-            width: 1px;
-            height: 38px;
-            background: #CBD5E1;
-            opacity: 0.6;
-            flex-shrink: 0;
-            margin: 0 8px;
-        }
-
-        /* 2. MAIN 5 COLUMNS FOOTER GRID */
-        .gtb-footer-main-grid {
-            display: grid;
-            grid-template-columns: 2.2fr 1.1fr 1.5fr 1.2fr 1.9fr;
-            gap: 32px;
-            padding-bottom: 24px;
-        }
-
-        .gtb-footer-col {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Brand Column */
-        .gtb-footer-brand-col {
-            padding-right: 12px;
-        }
-
-        .gtb-footer-logo-link {
-            display: inline-block;
-            text-decoration: none !important;
-        }
-
-        .gtb-footer-logo-img {
-            max-height: 54px;
-            max-width: 250px;
-            width: auto;
-            object-fit: contain;
-            display: block;
-        }
-
-        .gtb-footer-logo-fallback {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.15;
-        }
-
-        .gtb-fl-title {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 18px;
-            color: #0B3A63;
-            letter-spacing: -0.3px;
-        }
-
-        .gtb-fl-sub {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 10.5px;
-            color: #D9232E;
-            letter-spacing: 2.2px;
-        }
-
-        .gtb-footer-about-text {
-            font-size: 13px;
-            line-height: 1.65;
-            color: #64748B;
-            margin: 14px 0 18px 0;
-            max-width: 320px;
-        }
-
-        .gtb-footer-knowmore-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 22px;
-            border-radius: 50px;
-            border: 1.5px solid #0B3A63;
-            background: #FFFFFF;
-            color: #0B3A63 !important;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none !important;
-            width: fit-content;
-            transition: all 0.25s ease;
-        }
-
-        .gtb-footer-knowmore-btn:hover {
-            background: #0B3A63;
-            color: #FFFFFF !important;
-            transform: translateX(3px);
-            box-shadow: 0 4px 12px rgba(11, 58, 99, 0.16);
-        }
-
-        /* Headings & Red Accent Bar */
-        .gtb-footer-heading {
-            font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: #0B3A63;
-            margin: 0;
-            line-height: 1.3;
-        }
-
-        .gtb-footer-heading-line {
-            width: 32px;
-            height: 3px;
-            background: #D9232E;
-            border-radius: 2px;
-            margin-top: 6px;
-            margin-bottom: 18px;
-        }
-
-        /* Links List */
-        .gtb-footer-links-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .gtb-footer-link {
-            color: #556575 !important;
-            text-decoration: none !important;
-            font-size: 13.5px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .gtb-link-arrow {
-            font-size: 10.5px;
-            color: #94A3B8;
-            margin-right: 8px;
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-
-        .gtb-footer-link:hover {
-            color: #0B3A63 !important;
-            transform: translateX(4px);
-        }
-
-        .gtb-footer-link:hover .gtb-link-arrow {
-            color: #D9232E;
-        }
-
-        /* Contact Column */
-        .gtb-footer-contact-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .gtb-fc-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .gtb-fc-icon {
-            width: 36px;
-            height: 36px;
-            min-width: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            flex-shrink: 0;
-        }
-
-        .gtb-fc-icon-pink {
-            background: #FEE2E2;
-            color: #EF4444;
-        }
-
-        .gtb-fc-icon-blue {
-            background: #E0F2FE;
-            color: #0284C7;
-        }
-
-        .gtb-fc-icon-green {
-            background: #DCFCE7;
-            color: #16A34A;
-        }
-
-        .gtb-fc-text {
-            font-size: 13px;
-            line-height: 1.45;
-            color: #475569;
-            font-weight: 500;
-        }
-
-        .gtb-fc-text a {
-            color: #1E293B !important;
-            text-decoration: none !important;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .gtb-fc-text a:hover {
-            color: #0B3A63 !important;
-        }
-
-        /* 3. DECORATIVE BOTTOM WAVE GRAPHIC */
-        .gtb-footer-wave-wrap {
-            width: 100%;
-            margin-top: 15px;
-            line-height: 0;
-            display: block;
-            overflow: hidden;
-        }
-
-        .gtb-footer-wave-svg {
-            width: 100%;
-            height: 48px;
-            display: block;
-        }
-
-        /* 4. BOTTOM COPYRIGHT & SOCIAL BAR */
-        .gtb-footer-bottom-bar {
-            background: #0B3A63;
-            padding: 14px 0;
-            color: #FFFFFF;
-            position: relative;
-            z-index: 2;
-        }
-
-        .gtb-fbb-copy {
-            font-size: 13px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 0;
-            letter-spacing: 0.1px;
-        }
-
-        .gtb-fbb-divider {
-            height: 20px;
-            width: 1px;
-            background: rgba(255, 255, 255, 0.25);
-            margin: 0 18px;
-        }
-
-        .gtb-fbb-social-icons {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .gtb-bottom-social-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #FFFFFF;
-            color: #0B3A63 !important;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            text-decoration: none !important;
-            transition: all 0.25s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
-        }
-
-        .gtb-bottom-social-btn:hover {
-            background: #D9232E;
-            color: #FFFFFF !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(217, 35, 46, 0.35);
-        }
-
-        /* 5. RESPONSIVE MEDIA QUERIES */
-        @media (max-width: 1199.98px) {
-            .gtb-footer-features-card {
-                padding: 18px 20px;
-                gap: 12px;
-            }
-
-            .gtb-ff-title {
-                font-size: 13px;
-            }
-
-            .gtb-ff-sub {
-                font-size: 11px;
-            }
-
-            .gtb-footer-main-grid {
-                grid-template-columns: 2fr 1fr 1.3fr 1.1fr 1.7fr;
-                gap: 24px;
-            }
-        }
-
-        @media (max-width: 991.98px) {
-            .gtb-footer-features-card {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 18px;
-                padding: 20px;
-                margin-bottom: 32px;
-            }
-
-            .gtb-ff-divider {
-                display: none !important;
-            }
-
-            .gtb-footer-main-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px;
-            }
-
-            .gtb-footer-brand-col {
-                grid-column: 1 / -1;
-                max-width: 100%;
-                padding-right: 0;
-            }
-
-            .gtb-footer-about-text {
-                max-width: 520px;
-            }
-
-            .gtb-footer-contact-col {
-                grid-column: 1 / -1;
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .gw-footer.gtb-modern-footer {
-                padding-top: 26px;
-            }
-
-            .gtb-footer-features-card {
-                grid-template-columns: 1fr;
-                gap: 14px;
-                padding: 16px;
-            }
-
-            .gtb-footer-main-grid {
-                grid-template-columns: 1fr;
-                gap: 26px;
-            }
-
-            .gtb-fbb-inner {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-            }
-
-            .gtb-fbb-divider {
-                display: none !important;
-            }
-
-            .gtb-fbb-social-icons {
-                justify-content: center;
-            }
-
-            .gtb-footer-wave-svg {
-                height: 35px;
             }
         }
     </style>
@@ -1966,7 +1505,8 @@
                                name="q"
                                id="mobile-search-input"
                                class="gtb-search-input"
-                               placeholder="Search products, categories..."
+                               placeholder="Search products, categories...
+"
                                value="{{ request('q') }}"
                                autocomplete="off">
                         <button type="submit" class="gtb-search-btn" aria-label="Search">
@@ -1978,280 +1518,286 @@
             </div>
 
             <div class="gtb-sticky-nav-inner d-flex align-items-center justify-content-between w-100">
-                    {{-- Navigation Menu (Desktop & Collapsible for Mobile) --}}
-                    <div class="collapse navbar-collapse gtb-nav-collapse" id="gtbNavCollapse">
-                        {{-- Nav Links List --}}
-                        <ul class="gtb-nav-list navbar-nav me-auto">
-                            <li class="gtb-nav-item nav-item">
-                                <a class="gtb-nav-link nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                                    Home
-                                </a>
-                            </li>
+                {{-- Navigation Menu (Desktop & Collapsible for Mobile) --}}
+                <div class="collapse navbar-collapse gtb-nav-collapse" id="gtbNavCollapse">
+                    {{-- Nav Links List --}}
+                    <ul class="gtb-nav-list navbar-nav me-auto">
+                        <li class="gtb-nav-item nav-item">
+                            <a class="gtb-nav-link nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                                Home
+                            </a>
+                        </li>
 
-                            <li class="gtb-nav-item nav-item">
-                                <a class="gtb-nav-link nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">
-                                    About
-                                </a>
-                            </li>
+                        <li class="gtb-nav-item nav-item">
+                            <a class="gtb-nav-link nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">
+                                About
+                            </a>
+                        </li>
 
-                            @php
-                                $categories = \App\Models\Category::with('subcategories')
-                                    ->orderBy('name')
-                                    ->get();
-                            @endphp
-                            <li class="gtb-nav-item nav-item dropdown-mega">
-                                <a class="gtb-nav-link nav-link dropdown-toggle {{ request()->routeIs('shop.category') || request()->routeIs('shop.subcategory') ? 'active' : '' }}"
-                                   href="{{ route('shop') }}"
-                                   role="button"
-                                   id="productsMenuToggle"
-                                   aria-expanded="false">
-                                    <span>Categories</span>
-                                </a>
+                        @php
+                            $categories = \App\Models\Category::with('subcategories')
+                                ->orderBy('name')
+                                ->get();
+                        @endphp
+                        <li class="gtb-nav-item nav-item dropdown-mega">
+                            <a class="gtb-nav-link nav-link dropdown-toggle"
+                               href="{{ route('shop') }}"
+                               role="button"
+                               id="productsMenuToggle"
+                               aria-expanded="false">
+                                <span>Categories</span>
+                            </a>
 
-                                {{-- SINGLE UNIFIED MEGA DROPDOWN MENU FOR DESKTOP & MOBILE --}}
-                                <div class="mega-category-dropdown">
-                                    {{-- DESKTOP VIEW (>= 992px) --}}
-                                    <div class="mega-desktop-wrapper d-none d-lg-flex">
-                                        {{-- Left Sidebar: Main Categories Rail --}}
-                                        <div class="mega-cat-sidebar">
-                                            <div class="mega-sidebar-header">
-                                                <span class="mega-sidebar-title">Categories</span>
-                                            </div>
-                                            <ul class="mega-cat-list">
-                                                @foreach ($categories as $index => $cat)
-                                                    <li class="mega-cat-item {{ $index === 0 ? 'active' : '' }}"
-                                                        data-target="mega-panel-{{ $cat->id }}">
-                                                        <a href="{{ route('shop.category', $cat->slug) }}" class="mega-cat-link">
-                                                            <span class="mega-cat-name">{{ $cat->name }}</span>
-                                                            @if($cat->subcategories->count())
-                                                                <i class="bi bi-chevron-right mega-arrow"></i>
-                                                            @endif
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
+                            {{-- SINGLE UNIFIED MEGA DROPDOWN MENU FOR DESKTOP & MOBILE --}}
+                            <div class="mega-category-dropdown">
+                                {{-- DESKTOP VIEW (>= 992px) --}}
+                                <div class="mega-desktop-wrapper d-none d-lg-flex">
+                                    {{-- Left Sidebar: Main Categories Rail --}}
+                                    <div class="mega-cat-sidebar">
+                                        <div class="mega-sidebar-header">
+                                            <span class="mega-sidebar-title">Categories</span>
                                         </div>
-
-                                        {{-- Right Content: Subcategories Showcase --}}
-                                        <div class="mega-subcat-content">
+                                        <ul class="mega-cat-list">
                                             @foreach ($categories as $index => $cat)
-                                                <div class="mega-subcat-panel {{ $index === 0 ? 'active' : '' }}" id="mega-panel-{{ $cat->id }}">
-                                                    {{-- Header --}}
-                                                    <div class="mega-panel-header">
-                                                        <div>
-                                                            <span class="mega-panel-tag">Collection</span>
-                                                            <h4 class="mega-panel-title">{{ $cat->name }}</h4>
-                                                        </div>
-                                                        <a href="{{ route('shop.category', $cat->slug) }}" class="mega-explore-link">
-                                                            <span>Explore All {{ $cat->name }}</span>
-                                                            <i class="bi bi-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-
-                                                    {{-- Subcategories Grid --}}
-                                                    <div class="mega-panel-body">
+                                                <li class="mega-cat-item {{ $index === 0 ? 'active' : '' }}"
+                                                    data-target="mega-panel-{{ $cat->id }}">
+                                                    <a href="{{ route('shop.category', $cat->slug) }}" class="mega-cat-link">
+                                                        <span class="mega-cat-name">{{ $cat->name }}</span>
                                                         @if($cat->subcategories->count())
-                                                            <div class="mega-subcat-grid">
-                                                                @foreach($cat->subcategories as $sub)
-                                                                    <a href="{{ route('shop.subcategory', ['categorySlug' => $cat->slug, 'subcategorySlug' => $sub->slug]) }}"
-                                                                       class="mega-subcat-card">
-                                                                        <span class="mega-subcat-dot"></span>
-                                                                        <span class="mega-subcat-name">{{ $sub->name }}</span>
-                                                                        <i class="bi bi-arrow-up-right mega-subcat-icon"></i>
-                                                                    </a>
-                                                                @endforeach
-                                                            </div>
-                                                        @else
-                                                            <div class="mega-empty-state">
-                                                                <p>Discover our exclusive {{ $cat->name }} collection handcrafted for fine living.</p>
-                                                                <a href="{{ route('shop.category', $cat->slug) }}" class="btn btn-sm mega-viewall-btn">
-                                                                    Shop {{ $cat->name }}
-                                                                </a>
-                                                            </div>
+                                                            <i class="bi bi-chevron-right mega-arrow"></i>
                                                         @endif
-
-                                                        {{-- Featured Banner Strip (if category has image) --}}
-                                                        @if($cat->image)
-                                                            <a href="{{ route('shop.category', $cat->slug) }}" class="mega-banner-strip">
-                                                                <div class="mega-banner-img-wrap">
-                                                                    <img src="{{ asset('public/storage/' . $cat->image) }}" alt="{{ $cat->name }}">
-                                                                </div>
-                                                                <div class="mega-banner-info">
-                                                                    <span class="mega-banner-eyebrow">Handcrafted Luxury</span>
-                                                                    <span class="mega-banner-text">View curated {{ strtolower($cat->name) }} designs</span>
-                                                                </div>
-                                                                <i class="bi bi-arrow-right mega-banner-arrow"></i>
-                                                            </a>
-                                                        @endif
-                                                    </div>
-                                                </div>
+                                                    </a>
+                                                </li>
                                             @endforeach
-                                        </div>
+                                        </ul>
                                     </div>
 
-                                    {{-- MOBILE VIEW (< 992px) --}}
-                                    <div class="mega-mobile-wrapper d-lg-none">
-                                        {{-- Direct Link to All Products --}}
-                                        <a href="{{ route('shop') }}" class="mobile-all-products-btn">
-                                            <span class="d-flex align-items-center gap-2">
-                                                <i class="bi bi-grid"></i>
-                                                <strong>All Products</strong>
-                                            </span>
-                                            <span>Explore Catalog &rarr;</span>
-                                        </a>
-
-                                        <div class="mobile-cat-accordion">
-                                            @foreach ($categories as $cat)
-                                                <div class="mobile-cat-item">
-                                                    <div class="mobile-cat-row">
-                                                        <a href="{{ route('shop.category', $cat->slug) }}" class="mobile-cat-link">
-                                                            {{ $cat->name }}
-                                                        </a>
-                                                        @if($cat->subcategories->count())
-                                                            <button type="button"
-                                                                    class="mobile-subcat-toggle collapsed"
-                                                                    data-subcat-target="#mob-sub-{{ $cat->id }}"
-                                                                    aria-expanded="false"
-                                                                    aria-label="Toggle {{ $cat->name }} subcategories">
-                                                                <i class="bi bi-chevron-down"></i>
-                                                            </button>
-                                                        @endif
+                                    {{-- Right Content: Subcategories Showcase --}}
+                                    <div class="mega-subcat-content">
+                                        @foreach ($categories as $index => $cat)
+                                            <div class="mega-subcat-panel {{ $index === 0 ? 'active' : '' }}" id="mega-panel-{{ $cat->id }}">
+                                                {{-- Header --}}
+                                                <div class="mega-panel-header">
+                                                    <div>
+                                                        <span class="mega-panel-tag">Collection</span>
+                                                        <h4 class="mega-panel-title">{{ $cat->name }}</h4>
                                                     </div>
+                                                    <a href="{{ route('shop.category', $cat->slug) }}" class="mega-explore-link">
+                                                        <span>Explore All {{ $cat->name }}</span>
+                                                        <i class="bi bi-arrow-right"></i>
+                                                    </a>
+                                                </div>
 
+                                                {{-- Subcategories Grid --}}
+                                                <div class="mega-panel-body">
                                                     @if($cat->subcategories->count())
-                                                        <div class="collapse mobile-subcat-collapse" id="mob-sub-{{ $cat->id }}">
-                                                            <ul class="mobile-subcat-list">
-                                                                @foreach($cat->subcategories as $sub)
-                                                                    <li>
-                                                                        <a href="{{ route('shop.subcategory', ['categorySlug' => $cat->slug, 'subcategorySlug' => $sub->slug]) }}"
-                                                                           class="mobile-subcat-link">
-                                                                            <i class="bi bi-dash"></i>
-                                                                            <span>{{ $sub->name }}</span>
-                                                                        </a>
-                                                                    </li>
-                                                                @endforeach
-                                                                <li>
-                                                                    <a href="{{ route('shop.category', $cat->slug) }}" class="mobile-subcat-link mobile-subcat-all">
-                                                                        <i class="bi bi-arrow-right"></i>
-                                                                        <span>View All {{ $cat->name }}</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
+                                                        <div class="mega-subcat-grid">
+                                                            @foreach($cat->subcategories as $sub)
+                                                                <a href="{{ route('shop.subcategory', ['categorySlug' => $cat->slug, 'subcategorySlug' => $sub->slug]) }}"
+                                                                   class="mega-subcat-card">
+                                                                    <span class="mega-subcat-dot"></span>
+                                                                    <span class="mega-subcat-name">{{ $sub->name }}</span>
+                                                                    <i class="bi bi-arrow-up-right mega-subcat-icon"></i>
+                                                                </a>
+                                                            @endforeach
+                                                        </div>
+                                                    @else
+                                                        <div class="mega-empty-state">
+                                                            <p>Discover our exclusive {{ $cat->name }} collection handcrafted for quality living.</p>
+                                                            <a href="{{ route('shop.category', $cat->slug) }}" class="btn btn-sm mega-viewall-btn">
+                                                                Shop {{ $cat->name }}
+                                                            </a>
                                                         </div>
                                                     @endif
+
+                                                    {{-- Featured Banner Strip (if category has image) --}}
+                                                    @if($cat->image)
+                                                        <a href="{{ route('shop.category', $cat->slug) }}" class="mega-banner-strip">
+                                                            <div class="mega-banner-img-wrap">
+                                                                <img src="{{ asset('public/storage/' . $cat->image) }}" alt="{{ $cat->name }}">
+                                                            </div>
+                                                            <div class="mega-banner-info">
+                                                                <span class="mega-banner-eyebrow">Quality Disposable</span>
+                                                                <span class="mega-banner-text">View curated {{ strtolower($cat->name) }} products</span>
+                                                            </div>
+                                                            <i class="bi bi-arrow-right mega-banner-arrow"></i>
+                                                        </a>
+                                                    @endif
                                                 </div>
-                                            @endforeach
-                                        </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                            </li>
 
-                            <li class="gtb-nav-item nav-item">
-                                <a class="gtb-nav-link nav-link {{ request()->routeIs('shop') && !request()->routeIs('shop.category') ? 'active' : '' }}" href="{{ route('shop') }}">
-                                    Shops
-                                </a>
-                            </li>
+                                {{-- MOBILE VIEW (< 992px) --}}
+                                <div class="mega-mobile-wrapper d-lg-none">
+                                    {{-- Direct Link to All Products --}}
+                                    <a href="{{ route('shop') }}" class="mobile-all-products-btn">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="bi bi-grid"></i>
+                                            <strong>All Products</strong>
+                                        </span>
+                                        <span>Explore Catalog &rarr;</span>
+                                    </a>
 
-                            <li class="gtb-nav-item nav-item">
-                                <a class="gtb-nav-link nav-link {{ request()->routeIs('blog*') ? 'active' : '' }}" href="{{ route('blog.index') }}">
-                                    Blogs
-                                </a>
-                            </li>
+                                    <div class="mobile-cat-accordion">
+                                        @foreach ($categories as $cat)
+                                            <div class="mobile-cat-item">
+                                                <div class="mobile-cat-row">
+                                                    <a href="{{ route('shop.category', $cat->slug) }}" class="mobile-cat-link">
+                                                        {{ $cat->name }}
+                                                    </a>
+                                                    @if($cat->subcategories->count())
+                                                        <button type="button"
+                                                                class="mobile-subcat-toggle collapsed"
+                                                                data-subcat-target="#mob-sub-{{ $cat->id }}"
+                                                                aria-expanded="false"
+                                                                aria-label="Toggle {{ $cat->name }} subcategories">
+                                                            <i class="bi bi-chevron-down"></i>
+                                                        </button>
+                                                    @endif
+                                                </div>
 
-                            <li class="gtb-nav-item nav-item">
-                                <a class="gtb-nav-link nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">
-                                    Contact
-                                </a>
-                            </li>
-                        </ul>
-
-                        {{-- Mobile Drawer Additional Actions (Account & Help inside mobile menu) --}}
-                        <div class="gtb-mobile-drawer-footer d-lg-none p-3 border-top mt-3 bg-light rounded-3">
-                            @auth
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="fw-semibold text-dark">Hello, {{ Auth::user()->name }}</span>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
-                                    </form>
+                                                @if($cat->subcategories->count())
+                                                    <div class="collapse mobile-subcat-collapse" id="mob-sub-{{ $cat->id }}">
+                                                        <ul class="mobile-subcat-list">
+                                                            @foreach($cat->subcategories as $sub)
+                                                                <li>
+                                                                    <a href="{{ route('shop.subcategory', ['categorySlug' => $cat->slug, 'subcategorySlug' => $sub->slug]) }}"
+                                                                       class="mobile-subcat-link">
+                                                                        <i class="bi bi-dash"></i>
+                                                                        <span>{{ $sub->name }}</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                            <li>
+                                                                <a href="{{ route('shop.category', $cat->slug) }}" class="mobile-subcat-link mobile-subcat-all">
+                                                                    <i class="bi bi-arrow-right"></i>
+                                                                    <span>View All {{ $cat->name }}</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="d-flex gap-2">
-                                    <a href="{{ route('account.dashboard') }}" class="btn btn-sm btn-primary flex-fill">Dashboard</a>
-                                    <a href="{{ route('account.orders') }}" class="btn btn-sm btn-outline-secondary flex-fill">Orders</a>
-                                </div>
-                            @else
-                                <div class="d-flex gap-2 mb-2">
-                                    <a href="{{ route('login') }}" class="btn btn-sm btn-primary flex-fill">Login / Account</a>
-                                </div>
-                            @endauth
-                            <div class="mt-3 pt-2 border-top text-center">
-                                <a href="tel:{{ setting('site_phone', '+91 9310099249') }}" class="text-decoration-none text-muted small">
-                                    <i class="bi bi-telephone me-1 text-danger"></i> Need Help? {{ setting('site_phone', '+91 9310099249') }}
-                                </a>
                             </div>
+                        </li>
+
+                        <li class="gtb-nav-item nav-item">
+                            <a class="gtb-nav-link nav-link {{ request()->routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">
+                                Shops
+                            </a>
+                        </li>
+                        <li class="gtb-nav-item nav-item">
+                            <a class="gtb-nav-link nav-link {{ request()->routeIs('blog.*') ? 'active' : '' }}" href="{{ route('blog.index') }}">
+                                Blogs
+                            </a>
+                        </li>
+                        <li class="gtb-nav-item nav-item">
+                            <a class="gtb-nav-link nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+
+                    {{-- Mobile User & Quick Links Drawer Section (< 992px) --}}
+                    <div class="d-lg-none mt-3 pt-3 border-top px-3">
+                        @auth
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="gtb-action-icon" style="width:36px; height:36px; min-width:36px;">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold fs-6">{{ Auth::user()->name }}</div>
+                                        <div class="text-muted small">{{ Auth::user()->email }}</div>
+                                    </div>
+                                </div>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+                                </form>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="{{ route('account.dashboard') }}" class="btn btn-sm btn-primary flex-fill">Dashboard</a>
+                                <a href="{{ route('account.orders') }}" class="btn btn-sm btn-outline-secondary flex-fill">Orders</a>
+                            </div>
+                        @else
+                            <div class="d-flex gap-2 mb-2">
+                                <a href="{{ route('login') }}" class="btn btn-sm btn-primary flex-fill">Login / Account</a>
+                            </div>
+                        @endauth
+                        <div class="mt-3 pt-2 border-top text-center">
+                            <a href="tel:{{ setting('site_phone', '+91 9310099249') }}" class="text-decoration-none text-muted small">
+                                <i class="bi bi-telephone me-1 text-danger"></i> Need Help? {{ setting('site_phone', '+91 9310099249') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right Side Trust / Feature Badges (Desktop Only, matching shared reference) --}}
+                <div class="gtb-nav-features d-none d-lg-flex align-items-center">
+                    {{-- Feature 1: Wide Range of Products --}}
+                    <div class="gtb-feature-block">
+                        <div class="gtb-feature-icon-wrap">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 9h4" />
+                                <path d="M1 13h5" />
+                                <path d="M3 17h3" />
+                                <path d="M9 17h1" />
+                                <path d="M13 17h4" />
+                                <circle cx="11.5" cy="17.5" r="2" />
+                                <circle cx="18.5" cy="17.5" r="2" />
+                                <path d="M8 5h7a1 1 0 0 1 1 1v11" />
+                                <path d="M16 8h3.3a1 1 0 0 1 .8.4l2.5 3.3a1 1 0 0 1 .4.6V16a1 1 0 0 1-1 1h-1.5" />
+                            </svg>
+                        </div>
+                        <div class="gtb-feature-text-wrap">
+                            <span class="gtb-feature-title">Wide Range</span>
+                            <span class="gtb-feature-sub">of Products</span>
                         </div>
                     </div>
 
-                    {{-- Right Side Trust / Feature Badges (Desktop Only, matching shared reference) --}}
-                    <div class="gtb-nav-features d-none d-lg-flex align-items-center">
-                        {{-- Feature 1: Wide Range of Products --}}
-                        <div class="gtb-feature-block">
-                            <div class="gtb-feature-icon-wrap">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M2 9h4" />
-                                    <path d="M1 13h5" />
-                                    <path d="M3 17h3" />
-                                    <path d="M9 17h1" />
-                                    <path d="M13 17h4" />
-                                    <circle cx="11.5" cy="17.5" r="2" />
-                                    <circle cx="18.5" cy="17.5" r="2" />
-                                    <path d="M8 5h7a1 1 0 0 1 1 1v11" />
-                                    <path d="M16 8h3.3a1 1 0 0 1 .8.4l2.5 3.3a1 1 0 0 1 .4.6V16a1 1 0 0 1-1 1h-1.5" />
-                                </svg>
-                            </div>
-                            <div class="gtb-feature-text-wrap">
-                                <span class="gtb-feature-title">Wide Range</span>
-                                <span class="gtb-feature-sub">of Products</span>
-                            </div>
+                    <div class="gtb-feature-divider"></div>
+
+                    {{-- Feature 2: Bulk & Retail Supply --}}
+                    <div class="gtb-feature-block">
+                        <div class="gtb-feature-icon-wrap">
+                            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
                         </div>
-
-                        <div class="gtb-feature-divider"></div>
-
-                        {{-- Feature 2: Bulk & Retail Supply --}}
-                        <div class="gtb-feature-block">
-                            <div class="gtb-feature-icon-wrap">
-                                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                    <path d="m9 12 2 2 4-4" />
-                                </svg>
-                            </div>
-                            <div class="gtb-feature-text-wrap">
-                                <span class="gtb-feature-title">Bulk &amp; Retail</span>
-                                <span class="gtb-feature-sub">Supply</span>
-                            </div>
+                        <div class="gtb-feature-text-wrap">
+                            <span class="gtb-feature-title">Bulk &amp; Retail</span>
+                            <span class="gtb-feature-sub">Supply</span>
                         </div>
+                    </div>
 
-                        <div class="gtb-feature-divider"></div>
+                    <div class="gtb-feature-divider"></div>
 
-                        {{-- Feature 3: Trusted by Homes, Businesses & Caterers --}}
-                        <div class="gtb-feature-block">
-                            <div class="gtb-feature-icon-wrap">
-                                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                </svg>
-                            </div>
-                            <div class="gtb-feature-text-wrap">
-                                <span class="gtb-feature-title">Trusted by Homes,</span>
-                                <span class="gtb-feature-sub">Businesses &amp; Caterers</span>
-                            </div>
+                    {{-- Feature 3: Trusted by Homes, Businesses & Caterers --}}
+                    <div class="gtb-feature-block">
+                        <div class="gtb-feature-icon-wrap">
+                            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <div class="gtb-feature-text-wrap">
+                            <span class="gtb-feature-title">Trusted by Homes,</span>
+                            <span class="gtb-feature-sub">Businesses &amp; Caterers</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
     {{-- Flash Messages --}}
     @if (session('success') || session('error'))
@@ -2341,7 +1887,7 @@
                         @endif
                     </a>
                     <p class="gtb-footer-about-text">
-                        {{ setting('site_description', 'Finesse By Design is a trusted name in the manufacturing of premium brass and silver-plated articles, bringing exceptional craftsmanship and quality to clients across India and the world.') }}
+                        {{ setting('site_description', 'Guru Teg Bahadur Disposable is a trusted supplier of quality disposable tableware and catering products, offering reliable products and convenient solutions to customers across India and beyond.') }}
                     </p>
                     <a href="{{ route('about') }}" class="gtb-footer-knowmore-btn">
                         <span>Know More</span>
@@ -2480,10 +2026,10 @@
                             <a href="{{ setting('social_instagram', 'https://www.instagram.com/') }}" target="_blank" rel="noopener" class="gtb-bottom-social-btn" title="Instagram">
                                 <i class="bi bi-instagram"></i>
                             </a>
-                            <a href="{{ setting('social_linkedin', 'https://www.linkedin.com/') }}" target="_blank" rel="noopener" class="gtb-bottom-social-btn" title="LinkedIn">
+                            <a href="{{ setting('social_linkedin', '#') }}" target="_blank" rel="noopener" class="gtb-bottom-social-btn" title="LinkedIn">
                                 <i class="bi bi-linkedin"></i>
                             </a>
-                            <a href="{{ setting('social_youtube', 'https://www.youtube.com/') }}" target="_blank" rel="noopener" class="gtb-bottom-social-btn" title="YouTube">
+                            <a href="{{ setting('social_youtube', '#') }}" target="_blank" rel="noopener" class="gtb-bottom-social-btn" title="YouTube">
                                 <i class="bi bi-youtube"></i>
                             </a>
                             <a href="{{ setting('social_whatsapp', 'https://wa.me/919310099249') }}" target="_blank" rel="noopener" class="gtb-bottom-social-btn" title="WhatsApp">
@@ -2499,195 +2045,143 @@
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-    // CSRF setup for AJAX
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
-    // Auto-dismiss toasts
-    setTimeout(() => {
-        document.querySelectorAll('.toast').forEach(t => new bootstrap.Toast(t, {
-            autohide: true,
-            delay: 3500
-        }).hide());
-    }, 3500);
-
-    // AJAX Search (Desktop & Mobile)
-    let searchTimeout;
-
-    $('#search-input, #mobile-search-input').on('input', function() {
-        const q = $(this).val().trim();
-        const $form = $(this).closest('form');
-        const $d = $form.find('#search-results-dropdown, .gtb-search-dropdown');
-
-        clearTimeout(searchTimeout);
-
-        if (q.length < 2) {
-            $d.addClass('d-none').empty();
-            return;
-        }
-
-        searchTimeout = setTimeout(() => {
-            $.get('{{ route('search.ajax') }}', {
-                q: q
-            }, function(data) {
-                if (!data.length) {
-                    $d.addClass('d-none').empty();
-                    return;
-                }
-
-                let html = data.map(p => `
-                    <a href="${p.url}" class="search-item">
-                        <img src="${p.image}" alt="${p.name}">
-                        <div>
-                            <div style="font-size:.88rem;font-weight:600;color:#0F172A;">
-                                ${p.name}
-                            </div>
-                            <div style="color:#D9232E;font-weight:700;">
-                                ₹ ${Math.round(parseFloat(p.price)).toLocaleString('en-IN')}
-                            </div>
-                        </div>
-                    </a>
-                `).join('');
-
-                $d.html(html).removeClass('d-none');
-            });
-        }, 300);
-    });
-
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest('form').length) {
-            $('#search-results-dropdown, .gtb-search-dropdown').addClass('d-none');
-        }
-    });
-
-    // Sticky Nav Header Scroll Shadow Indicator
-    const stickyHeader = document.getElementById('gtb-sticky-nav-header');
-    if (stickyHeader) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 45) {
-                stickyHeader.classList.add('is-stuck');
-            } else {
-                stickyHeader.classList.remove('is-stuck');
+    <script>
+        // CSRF setup for AJAX
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        }, { passive: true });
-    }
-
-
-    // Shared helper: keep the navbar cart badges (mobile + desktop) in sync
-    // instantly, without needing a page refresh.
-    // Any add/remove/update flow anywhere in the app should call this
-    // with the fresh count from the server.
-    window.updateCartCount = function(count) {
-        $('#mobile-cart-count').text(count);
-        $('#desktop-cart-count').text(count);
-    };
-
-
-    // Add to Cart AJAX (product listing / category / wishlist cards).
-    // The product detail page (products/show.blade.php) has its own handler
-    // with a loading spinner on the button, so we skip delegating to this one
-    // there to avoid submitting the request twice.
-    $(document).on('click', '.btn-add-to-cart:not(#main-add-to-cart)', function(e) {
-        e.preventDefault();
-
-        const btn = $(this);
-        const productId = btn.attr('data-product-id');
-        const variantId = btn.attr('data-variant-id') || null;
-        const qty = parseInt($('#qty-input').val() || 1);
-
-        $.post('{{ route('cart.add') }}', {
-            product_id: productId,
-            product_variant_id: variantId,
-            quantity: qty
-        })
-        .done(res => {
-            if (res.success) {
-                window.updateCartCount(res.count);
-                showToast(res.message, 'success');
-            }
-        })
-        .fail(() => {
-            showToast('Failed to add product to cart', 'danger');
         });
-    });
 
+        // Auto-dismiss toasts
+        setTimeout(() => {
+            document.querySelectorAll('.toast').forEach(t => new bootstrap.Toast(t, {
+                autohide: true,
+                delay: 3500
+            }).hide());
+        }, 3500);
 
-    // Wishlist toggle
-    $(document).on('click', '.btn-wishlist', function(e) {
-        e.preventDefault();
+        // AJAX Search (Desktop + Mobile)
+        let searchTimeout;
+        $('#search-input, #mobile-search-input').on('input', function() {
+            const inputEl = $(this);
+            const q = inputEl.val().trim();
+            const form = inputEl.closest('form');
+            const $d = form.find('.gtb-search-dropdown, #search-results-dropdown');
+            clearTimeout(searchTimeout);
+            if (q.length < 2) {
+                $d.addClass('d-none').empty();
+                return;
+            }
+            searchTimeout = setTimeout(() => {
+                $.get('{{ route('search.ajax') }}', {
+                    q
+                }, function(data) {
+                    if (!data.length) {
+                        $d.addClass('d-none');
+                        return;
+                    }
+                    let html = data.map(p => `
+                <a href="${p.url}" class="search-item">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div><div style="font-size:.88rem;font-weight:600;">${p.name}</div>
+                    <div style="color:var(--gtb-red, #D9232E);font-weight:700;">₹ ${Math.round(parseFloat(p.price)).toLocaleString('en-IN')}</div></div>
+                </a>`).join('');
+                    $d.html(html).removeClass('d-none');
+                });
+            }, 300);
+        });
 
-        @guest
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('form').length) {
+                $('.gtb-search-dropdown, #search-results-dropdown').addClass('d-none');
+            }
+        });
+
+        // Sticky Header scroll elevation class
+        const stickyNav = document.getElementById('gtb-sticky-nav-header');
+        if (stickyNav) {
+            const checkSticky = () => {
+                if (window.scrollY > 20) {
+                    stickyNav.classList.add('is-stuck');
+                } else {
+                    stickyNav.classList.remove('is-stuck');
+                }
+            };
+            window.addEventListener('scroll', checkSticky, { passive: true });
+            checkSticky();
+        }
+
+        // Shared helper: keep the navbar cart badges (mobile + desktop) in sync
+        // instantly, without needing a page refresh. Any add/remove/update flow
+        // anywhere in the app should call this with the fresh count from the server.
+        window.updateCartCount = function(count) {
+            $('#mobile-cart-count').text(count);
+            $('#desktop-cart-count').text(count);
+        };
+
+        // Add to Cart AJAX (product listing / category / wishlist cards).
+        // The product detail page (products/show.blade.php) has its own handler
+        // with a loading spinner on the button, so we skip delegating to this one
+        // there to avoid submitting the request twice.
+        $(document).on('click', '.btn-add-to-cart:not(#main-add-to-cart)', function(e) {
+            e.preventDefault();
+            const btn = $(this);
+            const productId = btn.attr('data-product-id');
+            const variantId = btn.attr('data-variant-id') || null;
+            const qty = parseInt($('#qty-input').val() || 1);
+
+            $.post('{{ route('cart.add') }}', {
+                    product_id: productId,
+                    product_variant_id: variantId,
+                    quantity: qty
+                })
+                 .done(res => {
+                    if (res.success) {
+                        window.updateCartCount(res.count);
+                        showToast(res.message, 'success');
+                    }
+                })
+                .fail(() => showToast('Failed to add product to cart', 'danger'));
+        });
+
+        // Wishlist toggle
+        $(document).on('click', '.btn-wishlist', function(e) {
+            e.preventDefault();
+            @guest
             return;
         @endguest
-
-        const btn = $(this);
-
-        $.post('{{ route('wishlist.toggle') }}', {
+        const btn = $(this); $.post('{{ route('wishlist.toggle') }}', {
             product_id: btn.data('product-id')
         })
         .done(res => {
             if (res.success) {
                 btn.toggleClass('wishlisted', res.inWishlist);
-
-                btn.find('i')
-                    .toggleClass('bi-heart', !res.inWishlist)
-                    .toggleClass('bi-heart-fill', res.inWishlist);
-
-                showToast(
-                    res.message,
-                    res.inWishlist ? 'success' : 'warning'
-                );
+                btn.find('i').toggleClass('bi-heart', !res.inWishlist).toggleClass('bi-heart-fill', res
+                    .inWishlist);
+                showToast(res.message, res.inWishlist ? 'success' : 'warning');
             }
         });
-    });
+        });
 
-
-    function showToast(msg, type = 'success') {
-        const id = 'toast-' + Date.now();
-
-        const bg = type === 'success'
-            ? 'bg-success'
-            : (type === 'danger'
-                ? 'bg-danger'
-                : 'bg-warning text-dark');
-
-        const html = `
-            <div id="${id}"
-                 class="toast show align-items-center text-white ${bg} border-0 mb-2"
-                 role="alert">
-
-                <div class="d-flex">
-                    <div class="toast-body">
-                        ${msg}
-                    </div>
-
-                    <button type="button"
-                            class="btn-close btn-close-white me-2 m-auto"
-                            data-bs-dismiss="toast">
-                    </button>
-                </div>
-            </div>
-        `;
-
-        let container = document.querySelector('.toast-container');
-
-        if (!container) {
-            container = document.createElement('div');
-            container.className = 'toast-container';
-            document.body.appendChild(container);
+        function showToast(msg, type = 'success') {
+            const id = 'toast-' + Date.now();
+            const bg = type === 'success' ? 'bg-success' : (type === 'danger' ? 'bg-danger' : 'bg-warning text-dark');
+            const html =
+                `<div id="${id}" class="toast show align-items-center text-white ${bg} border-0 mb-2" role="alert">
+        <div class="d-flex"><div class="toast-body">${msg}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div></div>`;
+            let container = document.querySelector('.toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+            container.insertAdjacentHTML('beforeend', html);
+            setTimeout(() => document.getElementById(id)?.remove(), 3500);
         }
-
-        container.insertAdjacentHTML('beforeend', html);
-
-        setTimeout(() => {
-            document.getElementById(id)?.remove();
-        }, 3500);
-    }
-</script>
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     <script>
@@ -2978,20 +2472,6 @@
                     }
                 }
             });
-
-            // Sticky Navigation scroll elevation effect
-            var stickyNav = document.getElementById('gtb-sticky-nav-header');
-            if (stickyNav) {
-                var handleNavScroll = function() {
-                    if (window.scrollY > 30) {
-                        stickyNav.classList.add('is-stuck');
-                    } else {
-                        stickyNav.classList.remove('is-stuck');
-                    }
-                };
-                window.addEventListener('scroll', handleNavScroll, { passive: true });
-                handleNavScroll();
-            }
         })();
     </script>
 
