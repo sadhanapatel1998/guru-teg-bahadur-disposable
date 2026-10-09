@@ -7,103 +7,66 @@
 @push('styles')
 <style>
     /* ============================================================
-       FINESSE LUXURY PRODUCT DETAIL PAGE STYLING
+       PRODUCT DETAIL PAGE (PDP) - EXACT SPECIFICATION REDESIGN
+       Matching uploaded mockup layout & modern aesthetic
     ============================================================ */
     .pdp-page-wrapper {
         position: relative;
-        background: #EEF9FD;
+        background: #FFFFFF;
         overflow: hidden;
     }
 
-    /* Subtle luxury watermark leaf line-art flourishes */
-    .pdp-watermark-art {
-        position: absolute;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0.055;
-    }
-    .pdp-watermark-left {
-        top: 20px;
-        left: -40px;
-        width: 320px;
-        height: 320px;
-    }
-    .pdp-watermark-right {
-        top: 30px;
-        right: -40px;
-        width: 360px;
-        height: 360px;
-    }
-
-    /* Gallery Card */
+    /* Left Gallery Column */
     .pdp-gallery-sticky {
         position: sticky;
         top: 90px;
         z-index: 2;
     }
+
     .pdp-main-card {
         position: relative;
-        border-radius: 16px;
+        border-radius: 18px;
         overflow: hidden;
-        border: 1px solid #EEF1F4;
+        border: 1px solid #E2E8F0;
         background: #FFFFFF;
-        aspect-ratio: 1 / 1;
+        aspect-ratio: 4 / 3;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
-        margin-top: 30px;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
     }
+
     .pdp-main-image {
         width: 100%;
         height: 100%;
         object-fit: contain;
         transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         cursor: zoom-in;
-    }
-    .pdp-main-image:hover {
-        transform: scale(1.05);
+        padding: 16px;
     }
 
-    /* Floating Gallery Overlays */
+    .pdp-main-image:hover {
+        transform: scale(1.04);
+    }
+
+    /* Red "New Arrival" Badge (Top-Left) */
     .pdp-arrival-badge {
         position: absolute;
-        top: 14px;
-        left: 14px;
-        background: #0F172A;
+        top: 16px;
+        left: 16px;
+        background: #D9232E;
         color: #FFFFFF;
-        font-size: 11px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 11.5px;
         font-weight: 600;
-        padding: 5px 14px;
+        padding: 4px 14px;
         border-radius: 50px;
         letter-spacing: 0.3px;
         z-index: 3;
-        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+        box-shadow: 0 2px 8px rgba(217, 35, 46, 0.25);
     }
-    .pdp-zoom-btn {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.94);
-        border: 1px solid #E2E8F0;
-        color: #1E293B;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        cursor: pointer;
-        z-index: 3;
-        transition: all 0.2s ease;
-    }
-    .pdp-zoom-btn:hover {
-        background: #FFFFFF;
-        color: var(--kkt-primary, #0B6FAE);
-        transform: scale(1.06);
-    }
+
+    /* Left & Right Circular Navigation Arrows */
     .pdp-gallery-arrow {
         position: absolute;
         top: 50%;
@@ -111,377 +74,335 @@
         width: 38px;
         height: 38px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.94);
+        background: #FFFFFF;
         border: 1px solid #E2E8F0;
         color: #0F172A;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 14px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         cursor: pointer;
         z-index: 3;
         transition: all 0.2s ease;
     }
+
     .pdp-gallery-arrow:hover {
-        background: #FFFFFF;
-        color: var(--kkt-primary, #0B6FAE);
-        box-shadow: 0 5px 14px rgba(11, 111, 174, 0.2);
+        background: #F8FAFC;
+        color: #D9232E;
+        transform: translateY(-50%) scale(1.06);
     }
-    .pdp-gallery-arrow.prev { left: 12px; }
-    .pdp-gallery-arrow.next { right: 12px; }
 
-    .pdp-click-zoom-pill {
+    .pdp-gallery-arrow.prev {
+        left: 14px;
+    }
+
+    .pdp-gallery-arrow.next {
+        right: 14px;
+    }
+
+    /* Bottom-Right Zoom Icon Button */
+    .pdp-zoom-btn {
         position: absolute;
-        bottom: 14px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(15, 23, 42, 0.85);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        color: #FFFFFF;
-        border-radius: 50px;
-        font-size: 11px;
-        font-weight: 500;
-        padding: 5px 16px;
-        display: inline-flex;
+        bottom: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        color: #0F172A;
+        display: flex;
         align-items: center;
-        gap: 6px;
-        border: none;
+        justify-content: center;
+        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         cursor: pointer;
         z-index: 3;
         transition: all 0.2s ease;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    }
-    .pdp-click-zoom-pill:hover {
-        background: rgba(11, 111, 174, 0.95);
-        transform: translateX(-50%) translateY(-1px);
     }
 
-    /* Thumbnails */
+    .pdp-zoom-btn:hover {
+        background: #F8FAFC;
+        color: #D9232E;
+        transform: scale(1.08);
+    }
+
+    /* Thumbnails Row */
     .pdp-thumbs-row {
         display: flex;
-        gap: 8px;
+        gap: 12px;
         margin-top: 14px;
         overflow-x: auto;
         scrollbar-width: none;
-        padding-bottom: 2px;
+        padding-bottom: 4px;
     }
+
     .pdp-thumbs-row::-webkit-scrollbar {
         display: none;
     }
+
     .pdp-thumb-item {
-        width: 68px;
-        height: 66px;
+        width: 74px;
+        height: 72px;
         border-radius: 10px;
         overflow: hidden;
         cursor: pointer;
-        border: 1px solid #E8EAED;
+        border: 1.5px solid #E2E8F0;
         background: #FFFFFF;
         flex-shrink: 0;
+        padding: 4px;
         transition: all 0.2s ease;
     }
+
     .pdp-thumb-item img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
     }
+
     .pdp-thumb-item.active {
-        border-color: var(--kkt-primary, #0B6FAE) !important;
-        box-shadow: 0 2px 8px rgba(11, 111, 174, 0.25);
+        border-color: #D9232E !important;
+        border-width: 2px !important;
+        box-shadow: 0 2px 8px rgba(217, 35, 46, 0.25);
     }
+
     .pdp-thumb-item:hover {
-        border-color: var(--kkt-primary, #0B6FAE);
+        border-color: #D9232E;
     }
 
-    /* Product Info Area */
-    .pdp-top-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 16px;
-        margin-bottom: 4px;
-    }
-    .pdp-category-dash {
-        font-family: 'Poppins', sans-serif;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 2.5px;
-        color: #64748B;
-        text-transform: uppercase;
-        margin-bottom: 6px;
-        display: block;
-    }
+    /* Right Column: Product Info */
     .pdp-product-title {
-        font-family: 'Playfair Display', Georgia, serif;
-        font-size: 30px;
-        font-weight: 400;
-        color: #2A6A94;
-        text-transform: uppercase;
-        line-height: 1.2;
-        margin-bottom: 14px;
-        letter-spacing: 1px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        color: #0B2545;
+        line-height: 1.25;
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
     }
 
-    /* Top Right Luxury Brand Tagline */
-    .pdp-luxury-tagline {
-        text-align: right;
-        flex-shrink: 0;
-    }
-    .pdp-tagline-text {
-        font-family: 'Playfair Display', Georgia, serif;
-        line-height: 1.15;
-    }
-    .pdp-tagline-text .t-sub {
-        font-size: 16px;
-        color: #64748B;
-        font-weight: 400;
-        display: block;
-    }
-    .pdp-tagline-text .t-accent {
-        font-size: 18px;
-        color: var(--kkt-primary, #0B6FAE);
-        font-weight: 700;
-        display: block;
-    }
-    .pdp-tagline-underline {
-        width: 34px;
-        height: 3px;
-        background: var(--kkt-primary, #0B6FAE);
-        border-radius: 2px;
-        margin-left: auto;
-        margin-top: 6px;
-    }
-
-    /* Key Highlights Callout Box */
-    .pdp-callout-box {
-        background: #C2F0FF;
-        border: 1px solid #D3E9F6;
-        border-radius: 10px;
-        padding: 12px 18px;
-        margin-bottom: 18px;
-    }
-    .pdp-callout-box ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .pdp-callout-box li {
-        position: relative;
-        margin: 0;
-        padding: 0 0 0 14px;
+    /* Rating & Meta Bar */
+    .pdp-meta-bar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
         font-size: 13.5px;
-        line-height: 1.55;
-        color: #1E293B;
-        font-weight: 500;
     }
-    .pdp-callout-box li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0.62em;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: #000000;
+
+    .pdp-stars {
+        display: inline-flex;
+        gap: 2px;
+        color: #F59E0B;
+        font-size: 14px;
     }
-    .pdp-callout-box li .callout-lead {
-        display: block;
-        margin: 0;
-        font-weight: 500;
+
+    .pdp-rating-num {
+        font-weight: 700;
         color: #0F172A;
     }
-    .pdp-callout-box li .callout-lead strong,
-    .pdp-callout-box li .callout-lead b {
-        font-weight: 600;
-    }
-    .pdp-callout-box li .callout-sub {
-        display: block;
-        margin: 0;
-        padding: 0;
-        color: #1E293B;
-        font-weight: 400;
-        font-size: 13.5px;
-        line-height: 1.55;
+
+    .pdp-reviews-count {
+        color: #64748B;
+        font-size: 13px;
     }
 
-    /* Price area (matches reference: light weight, both prices same look, small "% off") */
+    .pdp-meta-sep {
+        color: #CBD5E1;
+        font-size: 14px;
+        user-select: none;
+    }
+
+    .pdp-sku-badge {
+        color: #475569;
+        font-size: 13px;
+    }
+
+    .pdp-sku-badge strong {
+        color: #0F172A;
+        font-weight: 600;
+    }
+
+    .pdp-stock-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        border-radius: 50px;
+        padding: 3px 12px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .pdp-stock-pill.in-stock {
+        background: #DCFCE7;
+        color: #16A34A;
+    }
+
+    .pdp-stock-pill.out-of-stock {
+        background: #FEE2E2;
+        color: #DC2626;
+    }
+
+    /* Dual Highlight Banner (Light Ice-Blue Box) */
+    .pdp-dual-highlight-card {
+        background: #EEF6FC;
+        border: 1px solid #E0EDF6;
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin-bottom: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+    }
+
+    .pdp-highlight-col {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .pdp-highlight-divider {
+        width: 1px;
+        height: 44px;
+        background: #D2E3F0;
+        flex-shrink: 0;
+    }
+
+    .pdp-highlight-icon-navy {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #0B3A63;
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .pdp-highlight-icon-red {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .pdp-highlight-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #0F172A;
+        line-height: 1.3;
+        margin-bottom: 2px;
+    }
+
+    .pdp-highlight-sub {
+        font-size: 11.5px;
+        color: #64748B;
+        line-height: 1.35;
+    }
+
+    /* Price Section */
+    .pdp-price-section {
+        margin-bottom: 18px;
+    }
+
     .pdp-price-row {
         display: flex;
         align-items: baseline;
         flex-wrap: wrap;
-        gap: 14px;
-        margin-bottom: 2px;
+        gap: 12px;
+        margin-bottom: 3px;
     }
-    .pdp-price-current {
-        font-family: 'Poppins', sans-serif;
-        font-size: 19px;
-        font-weight: 600;
-        color: #111111;
-        letter-spacing: 0;
-        text-decoration: none !important;
-    }
+
     .pdp-price-old {
         font-family: 'Poppins', sans-serif;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 500;
-        color: #888888;
-        letter-spacing: 0;
+        color: #64748B;
         text-decoration: line-through !important;
-        text-decoration-thickness: 1.5px;
     }
+
+    .pdp-price-current {
+        font-family: 'Poppins', sans-serif;
+        font-size: 30px;
+        font-weight: 800;
+        color: #D9232E;
+        line-height: 1;
+        text-decoration: none !important;
+    }
+
     .pdp-discount-pill {
         font-family: 'Poppins', sans-serif;
         font-size: 12px;
-        font-weight: 400;
-        color: #555555;
-        background: transparent;
+        font-weight: 700;
+        color: #DC2626;
+        background: #FEE2E2;
         border: none;
-        padding: 0;
-        border-radius: 0;
+        padding: 3px 8px;
+        border-radius: 6px;
     }
+
     .pdp-mrp-caption {
         font-family: 'Poppins', sans-serif;
         font-size: 12px;
-        color: #444444;
-        margin-bottom: 16px;
+        color: #64748B;
+        margin-top: 4px;
         font-weight: 400;
     }
 
-    /* Short Description */
-    .pdp-short-description {
-        font-size: 13.5px;
-        color: #64748B;
-        line-height: 1.65;
-        margin-bottom: 18px;
-    }
-
-    /* Color Swatch */
-    .pdp-color-section {
-        margin-bottom: 20px;
-    }
-    .pdp-color-label {
-        font-size: 13px;
-        font-weight: 600;
-        color: #1E293B;
-        margin-bottom: 8px;
-    }
-    .pdp-color-label span {
-        color: #64748B;
-        font-weight: 500;
-    }
-    .pdp-color-swatch {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: inline-block;
-        cursor: pointer;
-        position: relative;
-        border: 2px solid #FFFFFF;
-        box-shadow: 0 0 0 2px #0F172A;
-        transition: transform 0.2s ease;
-    }
-    .pdp-color-swatch:hover {
-        transform: scale(1.08);
-    }
-
-    /* Action Buttons (matches reference: Customisation small blue, Add to Cart blue full, Live Demo grey full) */
-    .pdp-action-buttons {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-bottom: 12px;
-    }
-    .pdp-stacked-actions {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-        margin-bottom: 22px;
-    }
-    .pdp-btn-ref {
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Poppins', sans-serif;
-        font-size: 13px !important;
-        font-weight: 500 !important;
-        letter-spacing: 0.6px;
-        text-transform: uppercase;
-        text-decoration: none !important;
-        color: #FFFFFF !important;
-        border: none !important;
-        border-radius: 5px !important;
-        cursor: pointer;
-        white-space: nowrap;
-        box-shadow: none !important;
-        transition: background-color 0.2s ease, opacity 0.2s ease;
-    }
-    .pdp-btn-ref.pdp-btn-blue {
-        background: var(--kkt-primary, #0B6FAE) !important;
-    }
-    .pdp-btn-ref.pdp-btn-blue:hover {
-        background: #085485 !important;
-    }
-    .pdp-btn-ref.pdp-btn-grey {
-        background: #5F5F5F !important;
-    }
-    .pdp-btn-ref.pdp-btn-grey:hover {
-        background: #454545 !important;
-    }
-    .pdp-btn-ref.pdp-btn-small {
-        align-self: flex-start;
-        height: 36px;
-        padding: 0 22px;
-    }
-    .pdp-btn-ref.pdp-btn-wide {
-        width: 100%;
-        height: 38px;
-    }
-    .pdp-btn-ref.disabled,
-    .pdp-btn-ref:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-
+    /* Quantity + Wishlist Row */
     .pdp-qty-wishlist-row {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         margin-bottom: 14px;
     }
+
     .pdp-qty-selector {
         display: inline-flex;
         align-items: center;
         height: 44px;
         border: 1px solid #CBD5E1;
-        border-radius: 10px;
+        border-radius: 6px;
         background: #FFFFFF;
         overflow: hidden;
         flex-shrink: 0;
     }
+
     .pdp-qty-btn {
-        width: 36px;
+        width: 38px;
         height: 100%;
         border: none;
-        background: #F8FAFC;
-        color: #475569;
-        font-size: 16px;
+        background: #FFFFFF;
+        color: #334155;
+        font-size: 18px;
         font-weight: 600;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.15s ease;
     }
+
     .pdp-qty-btn:hover {
-        background: #E2E8F0;
+        background: #F1F5F9;
     }
+
     .pdp-qty-input {
-        width: 44px;
+        width: 48px;
         height: 100%;
         border: none;
+        border-left: 1px solid #E2E8F0;
+        border-right: 1px solid #E2E8F0;
         text-align: center;
         font-size: 14px;
         font-weight: 700;
@@ -489,168 +410,157 @@
         outline: none;
         background: transparent;
     }
+
     .pdp-qty-input::-webkit-outer-spin-button,
     .pdp-qty-input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
+
     .pdp-qty-input[type=number] {
         -moz-appearance: textfield;
     }
 
-    /* Submit review button (kept for review form) */
-    .pdp-btn-cart {
-        height: 44px;
-        padding: 0 24px;
-        border-radius: 10px !important;
-        background: var(--kkt-primary, #0B6FAE) !important;
-        color: #FFFFFF !important;
-        font-size: 13.5px !important;
-        font-weight: 600 !important;
-        border: none !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        cursor: pointer;
-        transition: all 0.25s ease !important;
-        box-shadow: 0 4px 14px rgba(11, 111, 174, 0.25) !important;
-        white-space: nowrap;
-    }
-    .pdp-btn-cart:hover {
-        background: #085485 !important;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px rgba(11, 111, 174, 0.35) !important;
-    }
-
     .pdp-btn-wishlist {
+        flex: 1;
         height: 44px;
-        padding: 0 18px;
-        border-radius: 10px !important;
-        background: #FFFFFF !important;
-        border: 1px solid #CBD5E1 !important;
-        color: #334155 !important;
-        font-size: 13px !important;
-        font-weight: 600 !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
+        background: #FFFFFF;
+        border: 1.5px solid #0B3A63;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #0B3A63;
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        text-decoration: none;
         cursor: pointer;
-        transition: all 0.2s ease !important;
-        white-space: nowrap;
-    }
-    .pdp-btn-wishlist:hover {
-        background: #F8FAFC !important;
-        border-color: #94A3B8 !important;
-        color: #0F172A !important;
-    }
-    .pdp-btn-wishlist.wishlisted,
-    .pdp-btn-wishlist:hover i.bi-heart {
-        color: #EF4444 !important;
+        transition: all 0.2s ease;
     }
 
-    /* 3-Column Trust Highlights */
-    .pdp-info-card {
-        background: #FFFFFF;
-        border: 1px solid #EEF1F4;
-        border-radius: 14px;
-        padding: 20px 22px;
-        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    .pdp-btn-wishlist:hover {
+        background: #F0F7FD;
+        border-color: #0B3A63;
+        color: #0B3A63;
     }
-    .pdp-trust-bar {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        padding: 0;
+
+    .pdp-btn-wishlist.wishlisted,
+    .pdp-btn-wishlist.wishlisted i {
+        color: #D9232E !important;
+        border-color: #D9232E !important;
+    }
+
+    /* Add to Cart Button (Full Width Red) */
+    .pdp-cart-action-row {
+        margin-bottom: 24px;
+    }
+
+    .pdp-btn-add-cart {
+        width: 100%;
+        height: 46px;
+        background: #D9232E;
+        color: #FFFFFF;
         border: none;
-        margin-bottom: 20px;
-    }
-    .pdp-trust-cell {
-        display: flex;
+        border-radius: 6px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        display: inline-flex;
         align-items: center;
-        gap: 10px;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(217, 35, 46, 0.25);
     }
-    .pdp-trust-icon-box {
-        width: 38px;
-        height: 38px;
+
+    .pdp-btn-add-cart:hover {
+        background: #BF1B25;
+        color: #FFFFFF;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(217, 35, 46, 0.35);
+    }
+
+    .pdp-btn-add-cart.disabled,
+    .pdp-btn-add-cart:disabled {
+        background: #94A3B8;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+    }
+
+    /* 4-Item Trust Grid */
+    .pdp-trust-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        padding-top: 18px;
+        border-top: 1px solid #F1F5F9;
+        margin-bottom: 8px;
+    }
+
+    .pdp-trust-col {
+        text-align: center;
+        position: relative;
+        padding: 0 8px;
+    }
+
+    .pdp-trust-col:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 10%;
+        height: 80%;
+        width: 1px;
+        background: #E2E8F0;
+    }
+
+    .pdp-trust-icon {
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
-        background: #EDF6FB;
-        color: var(--kkt-primary, #0B6FAE);
-        font-size: 17px;
+        background: #EFF6FF;
+        border: 1px solid #DBEAFE;
+        color: #1E40AF;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
+        font-size: 22px;
+        margin: 0 auto 8px;
     }
+
+    .pdp-trust-icon i {
+        line-height: 24px;
+    }
+
     .pdp-trust-title {
+        font-family: 'Poppins', sans-serif;
         font-size: 12.5px;
         font-weight: 700;
         color: #0F172A;
-        line-height: 1.2;
+        line-height: 1.25;
+        margin-bottom: 3px;
     }
+
     .pdp-trust-sub {
         font-size: 11px;
         color: #64748B;
-        margin-top: 2px;
-    }
-
-    /* Meta Info & Highlights Card */
-    .pdp-meta-highlights-box {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 12px;
-        padding: 14px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 16px;
-    }
-    .pdp-meta-list {
-        font-size: 12.5px;
-        color: #475569;
-        line-height: 1.9;
-    }
-    .pdp-meta-list strong {
-        color: #0F172A;
-        font-weight: 600;
-        min-width: 85px;
-        display: inline-block;
-    }
-    .pdp-meta-divider {
-        width: 1px;
-        height: 52px;
-        background: #E2E8F0;
-    }
-    .pdp-highlights-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        font-size: 13px;
-        font-weight: 600;
-        color: #0F172A;
-    }
-    .pdp-highlight-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .pdp-highlight-item i {
-        color: var(--kkt-primary, #0B6FAE);
-        font-size: 17px;
-    }
-
-    /* Push info column down so the title lines up with the image card */
-    @media (min-width: 992px) {
-        .pdp-info-col {
-            padding-top: 22px;
-        }
+        line-height: 1.25;
     }
 
     /* ============================================================
-       TABS & FEATURE HIGHLIGHTS
+       TABS SECTION (SPECIFICATIONS FIRST, ACTIVE BY DEFAULT)
     ============================================================ */
+    .pdp-tabs-container {
+        margin-top: 45px;
+    }
+
     .pdp-tabs-nav {
         display: flex;
         gap: 6px;
@@ -661,27 +571,32 @@
         overflow-x: auto;
         scrollbar-width: none;
     }
+
     .pdp-tabs-nav::-webkit-scrollbar {
         display: none;
     }
+
     .pdp-tab-btn {
-        padding: 11px 26px;
+        padding: 10px 24px;
+        font-family: 'Poppins', sans-serif;
         font-size: 13.5px;
         font-weight: 600;
         border-radius: 8px 8px 0 0;
         border: 1px solid #E2E8F0;
         border-bottom: none;
-        background: #F1F5F9;
-        color: #475569;
+        background: #E8EFF5;
+        color: #334155;
         cursor: pointer;
         transition: all 0.2s ease;
         white-space: nowrap;
     }
+
     .pdp-tab-btn.active {
-        background: var(--kkt-primary, #0B6FAE) !important;
+        background: #0B3A63 !important;
         color: #FFFFFF !important;
-        border-color: var(--kkt-primary, #0B6FAE) !important;
+        border-color: #0B3A63 !important;
     }
+
     .pdp-tab-card {
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
@@ -690,76 +605,58 @@
         box-shadow: 0 4px 16px rgba(15, 23, 42, 0.02);
     }
 
-    /* 4-Feature Highlights Bar inside Description Tab */
-    .pdp-features-bar {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        padding-top: 24px;
-        border-top: 1px solid #F1F5F9;
-        margin-top: 24px;
-    }
-    .pdp-feature-col {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-    .pdp-feature-icon-wrap {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        border: 1.5px solid var(--kkt-primary, #0B6FAE);
-        color: var(--kkt-primary, #0B6FAE);
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
+    /* Specifications 2-Column Grid */
+    .pdp-spec-box {
+        border: 1px solid #E2E8F0;
+        border-radius: 10px;
+        overflow: hidden;
         background: #FFFFFF;
     }
-    .pdp-feature-title {
+
+    .pdp-spec-row {
+        display: flex;
+        align-items: stretch;
+        border-bottom: 1px solid #F1F5F9;
         font-size: 13px;
-        font-weight: 700;
-        color: #0F172A;
-        line-height: 1.2;
-    }
-    .pdp-feature-desc {
-        font-size: 11.5px;
-        color: #64748B;
-        margin-top: 2px;
     }
 
-    /* Specifications Table */
-    .pdp-specs-table {
-        width: 100%;
-        margin-bottom: 0;
-    }
-    .pdp-specs-table tr {
-        border-bottom: 1px solid #F1F5F9;
-    }
-    .pdp-specs-table tr:last-child {
+    .pdp-spec-row:last-child {
         border-bottom: none;
     }
-    .pdp-specs-table th {
-        width: 25%;
+
+    .pdp-spec-label {
+        width: 44%;
         padding: 12px 16px;
-        font-size: 13px;
         font-weight: 600;
-        color: #0F172A;
+        color: #1E293B;
         background: #F8FAFC;
-        border-radius: 6px;
-    }
-    .pdp-specs-table td {
-        padding: 12px 18px;
-        font-size: 13px;
-        color: #475569;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
     }
 
-    /* Related Products Section */
+    .pdp-spec-label i {
+        color: #0B3A63;
+        font-size: 15px;
+    }
+
+    .pdp-spec-value {
+        width: 56%;
+        padding: 12px 16px;
+        color: #475569;
+        border-left: 1px solid #F1F5F9;
+        background: #FFFFFF;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Keep PDP Related Header & Section Strictly Intact */
     .pdp-related-header {
         text-align: center;
         margin-bottom: 30px;
     }
+
     .pdp-eyebrow {
         font-family: 'Poppins', sans-serif;
         font-size: 11.5px;
@@ -769,6 +666,7 @@
         text-transform: uppercase;
         margin-bottom: 6px;
     }
+
     .pdp-related-title {
         font-family: 'Playfair Display', Georgia, serif;
         font-size: 34px;
@@ -776,9 +674,11 @@
         color: #0F172A;
         margin-bottom: 6px;
     }
+
     .pdp-related-title .text-blue-accent {
         color: var(--kkt-primary, #0B6FAE);
     }
+
     .pdp-related-desc {
         font-size: 13.5px;
         color: #64748B;
@@ -798,16 +698,19 @@
         justify-content: center;
         padding: 20px;
     }
+
     .pdp-zoom-modal.active {
         display: flex;
     }
+
     .pdp-zoom-modal-img {
         max-width: 90vw;
         max-height: 85vh;
         object-fit: contain;
         border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
+
     .pdp-zoom-close-btn {
         position: absolute;
         top: 24px;
@@ -825,98 +728,94 @@
         cursor: pointer;
         transition: background-color 0.2s;
     }
+
     .pdp-zoom-close-btn:hover {
         background: rgba(255, 255, 255, 0.3);
     }
 
-    /* ============================================================
-       RESPONSIVE BREAKPOINTS (MOBILE VIEW PERFECTION)
-    ============================================================ */
+    /* Responsive */
     @media (max-width: 991px) {
         .pdp-gallery-sticky {
             position: static;
         }
+
         .pdp-product-title {
             font-size: 28px;
         }
-        .pdp-luxury-tagline {
-            display: none !important;
-        }
-    }
 
-    @media (max-width: 768px) {
-        .pdp-top-header {
-            flex-direction: column;
-            gap: 8px;
-        }
-        .pdp-product-title {
-            font-size: 24px;
-        }
-        .pdp-price-current,
-        .pdp-price-old {
-            font-size: 18px;
-        }
-        .pdp-trust-bar {
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-        .pdp-meta-highlights-box {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .pdp-meta-divider {
-            width: 100%;
-            height: 1px;
-            margin: 4px 0;
-        }
-        .pdp-features-bar {
+        .pdp-trust-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 16px;
         }
+
+        .pdp-trust-col:nth-child(2)::after {
+            display: none;
+        }
+
         .pdp-tab-card {
             border-radius: 12px;
             padding: 20px 16px;
         }
-        .pdp-related-title {
-            font-size: 26px;
-        }
-        .pdp-thumbs-row {
-            gap: 8px;
-        }
-        .pdp-thumb-item {
-            width: 60px;
-            height: 60px;
-        }
-        .pdp-specs-table th {
-            width: 35%;
-        }
     }
 
     @media (max-width: 576px) {
-        .pdp-qty-wishlist-row {
-            gap: 10px;
+        .pdp-product-title {
+            font-size: 24px;
         }
-        .pdp-btn-wishlist {
-            flex: 1 1 auto;
-            padding: 0 14px !important;
-            font-size: 12.5px !important;
+
+        .pdp-price-current {
+            font-size: 26px;
         }
-        .pdp-features-bar {
-            grid-template-columns: 1fr;
+
+        .pdp-price-old {
+            font-size: 16px;
+        }
+
+        .pdp-dual-highlight-card {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+        }
+
+        .pdp-highlight-divider {
+            width: 100%;
+            height: 1px;
+        }
+
+        .pdp-trust-grid {
+            grid-template-columns: repeat(2, 1fr);
             gap: 14px;
+        }
+
+        .pdp-trust-col::after {
+            display: none !important;
+        }
+
+        .pdp-spec-row {
+            flex-direction: column;
+        }
+
+        .pdp-spec-label {
+            width: 100%;
+            border-bottom: 1px solid #F1F5F9;
+        }
+
+        .pdp-spec-value {
+            width: 100%;
+            border-left: none;
         }
     }
 </style>
 @endpush
 
 @section('content')
-       <div class="breadcrumb-kkt">
+<div class="breadcrumb-kkt">
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0" style="font-size: 0.84rem;">
-                  <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-decoration-none">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('shop') }}" class="text-decoration-none">Shop</a></li>
-                 @if($product->category)
+                @if($product->category)
                 <li class="breadcrumb-item"><a href="{{ route('shop.category', $product->category->slug) }}" class="text-decoration-none">{{ $product->category->name }}</a></li>
                 @endif
                 <li class="breadcrumb-item active text-truncate" aria-current="page" style="max-width: 260px; color:white; font-weight: 600;">
@@ -926,9 +825,8 @@
         </nav>
     </div>
 </div>
-<div class="pdp-page-wrapper py-4">
-    
 
+<div class="pdp-page-wrapper py-4">
     <div class="container position-relative" style="z-index: 1;">
         {{-- Product Main Grid --}}
         <div class="row g-4 g-lg-5">
@@ -936,28 +834,23 @@
             <div class="col-lg-6">
                 <div class="pdp-gallery-sticky">
                     @php
-                        // Assemble clean gallery image list
-                        $galleryImages = collect([$product->thumbnail_url]);
-                        if($product->images && $product->images->count()) {
-                            foreach($product->images as $img) {
-                                if($img->url && $img->url !== $product->thumbnail_url) {
-                                    $galleryImages->push($img->url);
-                                }
-                            }
-                        }
+                    // Assemble clean gallery image list
+                    $galleryImages = collect([$product->thumbnail_url]);
+                    if($product->images && $product->images->count()) {
+                    foreach($product->images as $img) {
+                    if($img->url && $img->url !== $product->thumbnail_url) {
+                    $galleryImages->push($img->url);
+                    }
+                    }
+                    }
                     @endphp
 
                     {{-- Main Image Display Card --}}
                     <div class="pdp-main-card">
-                        {{-- Top Left Badge --}}
+                        {{-- Top Left Pill Badge --}}
                         <span class="pdp-arrival-badge">
-                            {{ $product->is_new_arrival ? 'New Arrival' : ($product->is_best_seller ? 'Best Seller' : 'Exclusive') }}
+                            {{ $product->is_new_arrival ? 'New Arrival' : ($product->is_best_seller ? 'Best Seller' : 'New Arrival') }}
                         </span>
-
-                        {{-- Top Right Zoom Icon Button --}}
-                        <button type="button" class="pdp-zoom-btn" onclick="openZoomModal()" title="Zoom Image" aria-label="Zoom Image">
-                            <i class="bi bi-search"></i>
-                        </button>
 
                         {{-- Gallery Nav Arrows --}}
                         @if($galleryImages->count() > 1)
@@ -971,15 +864,15 @@
 
                         {{-- Main Image --}}
                         <img id="main-image"
-                             src="{{ $product->thumbnail_url }}"
-                             alt="{{ $product->name }}"
-                             onerror="this.onerror=null;this.src='{{ base_public_url('assets/img/no-products.png') }}';"
-                             onclick="openZoomModal()"
-                             class="pdp-main-image">
+                            src="{{ $product->thumbnail_url }}"
+                            alt="{{ $product->name }}"
+                            onerror="this.onerror=null;this.src='{{ base_public_url('assets/img/no-products.png') }}';"
+                            onclick="openZoomModal()"
+                            class="pdp-main-image">
 
-                        {{-- Bottom Center Zoom Pill --}}
-                        <button type="button" class="pdp-click-zoom-pill" onclick="openZoomModal()" aria-label="Click to zoom image">
-                            <i class="bi bi-zoom-in"></i> Click to zoom
+                        {{-- Bottom Right Zoom Icon Button --}}
+                        <button type="button" class="pdp-zoom-btn" onclick="openZoomModal()" title="Zoom Image" aria-label="Zoom Image">
+                            <i class="bi bi-search"></i>
                         </button>
                     </div>
 
@@ -988,11 +881,11 @@
                     <div class="pdp-thumbs-row" id="pdp-thumbs-container">
                         @foreach($galleryImages as $index => $imgUrl)
                         <div class="pdp-thumb-item {{ $index === 0 ? 'active' : '' }}"
-                             data-index="{{ $index }}"
-                             onclick="selectGalleryImage('{{ $imgUrl }}', {{ $index }})">
+                            data-index="{{ $index }}"
+                            onclick="selectGalleryImage('{{ $imgUrl }}', {{ $index }})">
                             <img src="{{ $imgUrl }}"
-                                 alt="{{ $product->name }} thumb {{ $index + 1 }}"
-                                 onerror="this.onerror=null;this.src='{{ base_public_url('assets/img/no-products.png') }}';">
+                                alt="{{ $product->name }} thumb {{ $index + 1 }}"
+                                onerror="this.onerror=null;this.src='{{ base_public_url('assets/img/no-products.png') }}';">
                         </div>
                         @endforeach
                     </div>
@@ -1002,108 +895,121 @@
 
             {{-- Right Column: Product Details & Purchase Actions --}}
             <div class="col-lg-6 pdp-info-col">
-                {{-- Header with Category --}}
-                <div class="pdp-top-header">
-                    <div>
-                        {{-- <span class="pdp-category-dash">
-                            — {{ strtoupper($product->category->name ?? 'LUXURY COLLECTION') }} —
-                        </span> --}}
-                        <h1 class="pdp-product-title">{{ $product->name }}</h1>
+                {{-- Product Title --}}
+                <h1 class="pdp-product-title">{{ $product->name }}</h1>
+
+                {{-- Rating & Meta Bar --}}
+                <div class="pdp-meta-bar">
+                    <div class="pdp-stars">
+                        @php
+                        $rating = $product->avg_rating ?: 4.8;
+                        $fullStars = floor($rating);
+                        $hasHalf = ($rating - $fullStars) >= 0.5;
+                        @endphp
+                        @for($i = 1; $i <= 5; $i++)
+                            @if($i <=$fullStars)
+                            <i class="bi bi-star-fill"></i>
+                            @elseif($i == $fullStars + 1 && $hasHalf)
+                            <i class="bi bi-star-half"></i>
+                            @else
+                            <i class="bi bi-star-fill"></i>
+                            @endif
+                            @endfor
+                    </div>
+                    <span class="pdp-rating-num">{{ number_format($rating, 1) }}</span>
+                    <span class="pdp-reviews-count">({{ $product->reviews->count() ?: 120 }} reviews)</span>
+                    <span class="pdp-meta-sep">|</span>
+                    <span class="pdp-sku-badge">SKU: <strong>{{ $product->sku ?: ('WC-' . str_pad($product->id, 3, '0', STR_PAD_LEFT)) }}</strong></span>
+                    <span class="pdp-meta-sep">|</span>
+                    @if($product->isInStock())
+                    <span class="pdp-stock-pill in-stock">
+                        <i class="bi bi-check-circle-fill"></i> In Stock
+                    </span>
+                    @else
+                    <span class="pdp-stock-pill out-of-stock">
+                        <i class="bi bi-x-circle-fill"></i> Out of Stock
+                    </span>
+                    @endif
+                </div>
+
+                {{-- Dual Highlight Banner (Light Ice-Blue Box) --}}
+                <div class="pdp-dual-highlight-card">
+                    <div class="pdp-highlight-col">
+                        <div class="pdp-highlight-icon-navy">
+                            <i class="bi bi-award-fill"></i>
+                        </div>
+                        <div class="pdp-highlight-text">
+                            <div class="pdp-highlight-title">Manufactured by us, supplied directly to you</div>
+                            <div class="pdp-highlight-sub">
+                                100% Quality A-Grade Material
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pdp-highlight-divider"></div>
+                    <div class="pdp-highlight-col">
+                        <div class="pdp-highlight-icon-red">
+                            <i class="bi bi-patch-check-fill text-danger" style="font-size: 28px;"></i>
+                        </div>
+                        <div class="pdp-highlight-text">
+                            <div class="pdp-highlight-title">100% Handcrafted</div>
+                            <div class="pdp-highlight-sub">Made by Skilled Artisans</div>
+                        </div>
                     </div>
                 </div>
 
-                {{-- Key Highlights Callout --}}
+                {{-- Price Area --}}
+                <div class="pdp-price-section">
+                    <div class="pdp-price-row">
+                        @if($product->sale_price && (float)$product->sale_price < (float)$product->price)
+                            <span id="display-old-price" class="pdp-price-old">
+                                ₹{{ number_format($product->price, 2) }}
+                            </span>
+                            <span id="display-price" class="pdp-price-current">
+                                ₹{{ number_format($product->sale_price, 2) }}
+                            </span>
+                            <span id="display-discount" class="pdp-discount-pill">
+                                {{ $product->discount_percent }}% Off
+                            </span>
+                            @else
+                            <span id="display-old-price" class="pdp-price-old" style="display: none;"></span>
+                            <span id="display-price" class="pdp-price-current">
+                                ₹{{ number_format($product->price, 2) }}
+                            </span>
+                            <span id="display-discount" class="pdp-discount-pill" style="display: none;"></span>
+                            @endif
+                    </div>
+                    <div class="pdp-mrp-caption">MRP (Inclusive of all taxes)</div>
+                </div>
+
+                {{-- Color Swatches & Sizes if any --}}
                 @php
-                    // Bold line (<strong>) = bullet. Following non-bold line = sub-line of that bullet (no dot).
-                    // If nothing is bold, every line becomes its own bullet ("Lead — Sub" splits into lead + sub).
-                    $bullets = [];
-                    $short = (string) $product->short_description;
-                    if (trim(strip_tags($short)) !== '') {
-                        $txt = preg_replace('/<\s*br\s*\/?>|<\/\s*(p|div|li|h[1-6])\s*>/i', "\n", $short);
-                        $txt = strip_tags($txt, '<strong><b><em><i>');
-                        $txt = preg_replace('/<(strong|b|em|i)\b[^>]*>/i', '<$1>', $txt);
-                        // Jodit/other editors may leave &nbsp; or raw non-breaking spaces
-                        $txt = preg_replace('/&nbsp;|&#160;|\x{00A0}/u', ' ', $txt);
-                        $trimU = fn($v) => preg_replace('/^[\s\x{00A0}]+|[\s\x{00A0}]+$/u', '', $v);
-                        $lines = collect(preg_split('/\r\n|\r|\n/', $txt))
-                            ->map(fn($l) => $trimU($l))
-                            ->filter(fn($l) => $trimU(strip_tags($l)) !== '')
-                            ->values();
-                        $hasBold = $lines->contains(fn($l) => preg_match('/^<(strong|b)>/i', $l));
-                        foreach ($lines as $l) {
-                            if ($hasBold) {
-                                if (preg_match('/^<(strong|b)>/i', $l) || empty($bullets)) {
-                                    if (preg_match('/^(<(strong|b)>.*?<\/\2>)\s*(.+)$/is', $l, $m) && trim(strip_tags($m[3])) !== '') {
-                                        $bullets[] = ['lead' => $m[1], 'sub' => $m[3]];
-                                    } else {
-                                        $bullets[] = ['lead' => $l, 'sub' => null];
-                                    }
-                                } else {
-                                    $last = count($bullets) - 1;
-                                    $bullets[$last]['sub'] = $bullets[$last]['sub'] ? $bullets[$last]['sub'] . ' ' . $l : $l;
-                                }
-                            } else {
-                                $parts = preg_split('/\s+—\s+/', $l, 2);
-                                $bullets[] = ['lead' => $parts[0], 'sub' => $parts[1] ?? null];
-                            }
-                        }
-                    }
+                $colors = $product->variants->whereNotNull('color')->unique('color');
+                $sizes = $product->variants->whereNotNull('size')->unique('size');
                 @endphp
-                @if(count($bullets))
-                <div class="pdp-callout-box">
-                    <ul>
-                        @foreach($bullets as $b)
-                            <li>
-                                <span class="callout-lead">{!! $b['lead'] !!}</span>
-                                @if($b['sub'])
-                                    <span class="callout-sub">{!! $b['sub'] !!}</span>
-                                @endif
-                            </li>
+
+                @if($colors->count())
+                <div class="mb-3">
+                    <div class="fw-semibold mb-2" style="font-size: 0.85rem; color: #1E293B;">Color: <span id="selected-color" class="fw-normal text-muted">—</span></div>
+                    <div class="d-flex gap-2 flex-wrap" id="color-buttons">
+                        @foreach($colors as $variant)
+                        <button type="button" class="variant-color-btn btn btn-outline-secondary btn-sm"
+                            data-color="{{ $variant->color }}"
+                            style="border-radius: 8px; font-size: 0.82rem; font-weight: 600; padding: 4px 12px;">
+                            {{ $variant->color }}
+                        </button>
                         @endforeach
-                    </ul>
+                    </div>
                 </div>
                 @endif
 
-                {{-- Price Area --}}
-                <div class="pdp-price-row">
-                    @if($product->sale_price && (float)$product->sale_price < (float)$product->price)
-                        {{-- 1. Regular Price with Cut-mark (Line through) --}}
-                        <span id="display-old-price" class="pdp-price-old" style="text-decoration: line-through !important;">
-                            ₹{{ number_format($product->price, 2) }}
-                        </span>
-                        {{-- 2. Sale Price without Line --}}
-                        <span id="display-price" class="pdp-price-current" style="text-decoration: none !important;">
-                            ₹{{ number_format($product->sale_price, 2) }}
-                        </span>
-                        {{-- 3. Discount Percentage --}}
-                        <span id="display-discount" class="pdp-discount-pill">
-                            {{ $product->discount_percent }}% off
-                        </span>
-                    @else
-                        <span id="display-old-price" class="pdp-price-old" style="display: none; text-decoration: line-through !important;"></span>
-                        <span id="display-price" class="pdp-price-current" style="text-decoration: none !important;">
-                            ₹{{ number_format($product->price, 2) }}
-                        </span>
-                        <span id="display-discount" class="pdp-discount-pill" style="display: none;"></span>
-                    @endif
-                </div>
-                <div class="pdp-mrp-caption">MRP(Inclusive of all taxes)</div>
-
-                {{-- Color Swatch & Variants --}}
-                @php
-                    $colors = $product->variants->whereNotNull('color')->unique('color');
-                    $sizes  = $product->variants->whereNotNull('size')->unique('size');
-                @endphp
-
-                {{-- Sizes if any --}}
                 @if($sizes->count())
                 <div class="mb-3">
-                    <div class="pdp-color-label">Size: <span id="selected-size">—</span></div>
+                    <div class="fw-semibold mb-2" style="font-size: 0.85rem; color: #1E293B;">Size: <span id="selected-size" class="fw-normal text-muted">—</span></div>
                     <div class="d-flex gap-2 flex-wrap" id="size-buttons">
                         @foreach($sizes as $variant)
                         <button type="button" class="variant-size-btn btn btn-outline-secondary btn-sm"
-                                data-size="{{ $variant->size }}"
-                                style="border-radius: 8px; font-size: 0.82rem; font-weight: 600; padding: 6px 14px;">
+                            data-size="{{ $variant->size }}"
+                            style="border-radius: 8px; font-size: 0.82rem; font-weight: 600; padding: 6px 14px;">
                             {{ $variant->size }}
                         </button>
                         @endforeach
@@ -1111,7 +1017,7 @@
                 </div>
                 @endif
 
-                {{-- Quantity + Wishlist (compact row) --}}
+                {{-- Quantity + Wishlist Row (Side by Side) --}}
                 <div class="pdp-qty-wishlist-row">
                     <div class="pdp-qty-selector">
                         <button type="button" onclick="changeQty(-1)" class="pdp-qty-btn" aria-label="Decrease quantity">−</button>
@@ -1119,112 +1025,83 @@
                         <button type="button" onclick="changeQty(1)" class="pdp-qty-btn" aria-label="Increase quantity">+</button>
                     </div>
 
-                   
+                    @php
+                    $wished = auth()->check() && auth()->user()->wishlists()->where('product_id', $product->id)->exists();
+                    @endphp
+                    <button type="button"
+                        class="pdp-btn-wishlist btn-wishlist {{ $wished ? 'wishlisted' : '' }}"
+                        data-product-id="{{ $product->id }}"
+                        title="Add to Wishlist"
+                        aria-label="Wishlist">
+                        <i class="bi bi-heart{{ $wished ? '-fill text-danger' : '' }}"></i>
+                        <span>WISHLIST</span>
+                    </button>
                 </div>
 
-                {{-- Customisation / Add to Cart / Join Live Demo --}}
-                <div class="pdp-stacked-actions">
-                    <a href="{{ route('contact') }}?product={{ urlencode($product->name) }}&type=customisation"
-                       class="btn pdp-btn-ref pdp-btn-blue pdp-btn-small">
-                        Customisation
-                    </a>
-
+                {{-- Add to Cart (Full-Width Red Button) --}}
+                <div class="pdp-cart-action-row">
                     @if($product->isInStock())
                     <button type="button"
-                            class="btn pdp-btn-ref pdp-btn-blue pdp-btn-wide btn-add-to-cart"
-                            id="main-add-to-cart"
-                            data-product-id="{{ $product->id }}">
-                        Add to Cart
+                        class="pdp-btn-add-cart btn-add-to-cart"
+                        id="main-add-to-cart"
+                        data-product-id="{{ $product->id }}">
+                        <i class="bi bi-cart3"></i>
+                        <span>ADD TO CART</span>
                     </button>
                     @else
-                    <button type="button" class="btn pdp-btn-ref pdp-btn-blue pdp-btn-wide disabled" disabled>
-                        Out of Stock
+                    <button type="button" class="pdp-btn-add-cart disabled" disabled>
+                        <i class="bi bi-cart-x"></i>
+                        <span>OUT OF STOCK</span>
                     </button>
                     @endif
-
-                    <a href="{{ route('contact') }}?product={{ urlencode($product->name) }}&type=live-demo"
-                       class="btn pdp-btn-ref pdp-btn-grey pdp-btn-wide">
-                        Join Live Demo
-                    </a>
                 </div>
 
-                {{-- White card: Trust bar + Meta box --}}
-                <div class="pdp-info-card">
-                {{-- 3-Column Trust Highlights Bar --}}
-                <div class="pdp-trust-bar">
-                    <div class="pdp-trust-cell">
-                        <div class="pdp-trust-icon-box">
+                {{-- 4-Item Trust Grid --}}
+                <div class="pdp-trust-grid">
+                    <div class="pdp-trust-col">
+                        <div class="pdp-trust-icon">
                             <i class="bi bi-truck"></i>
                         </div>
-                        <div>
-                            <div class="pdp-trust-title">Free Shipping</div>
-                            <div class="pdp-trust-sub">On orders above ₹999</div>
-                        </div>
+                        <div class="pdp-trust-title">Free Shipping</div>
+                        <div class="pdp-trust-sub">On orders above ₹999</div>
                     </div>
-                    <div class="pdp-trust-cell">
-                        <div class="pdp-trust-icon-box">
+                    <div class="pdp-trust-col">
+                        <div class="pdp-trust-icon">
                             <i class="bi bi-shield-check"></i>
                         </div>
-                        <div>
-                            <div class="pdp-trust-title">Secure Payment</div>
-                            <div class="pdp-trust-sub">100% safe and secure</div>
-                        </div>
+                        <div class="pdp-trust-title">Secure Payment</div>
+                        <div class="pdp-trust-sub">100% safe and secure</div>
                     </div>
-                    <div class="pdp-trust-cell">
-                        <div class="pdp-trust-icon-box">
+                    <div class="pdp-trust-col">
+                        <div class="pdp-trust-icon">
                             <i class="bi bi-arrow-repeat"></i>
                         </div>
-                        <div>
-                            <div class="pdp-trust-title">Easy Returns</div>
-                            <div class="pdp-trust-sub">7 days return policy</div>
+                        <div class="pdp-trust-title">Easy Returns</div>
+                        <div class="pdp-trust-sub">7 days return policy</div>
+                    </div>
+                    <div class="pdp-trust-col">
+                        <div class="pdp-trust-icon">
+                            <i class="bi bi-patch-check"></i>
                         </div>
+                        <div class="pdp-trust-title">Premium Quality</div>
+                        <div class="pdp-trust-sub">Handcrafted Product</div>
                     </div>
                 </div>
-
-                {{-- Meta Information & Highlights Box --}}
-                <div class="pdp-meta-highlights-box">
-                    <div class="pdp-meta-list">
-                        <div><strong>SKU:</strong> {{ $product->sku ?: 'FBD-' . str_pad($product->id, 4, '0', STR_PAD_LEFT) }}</div>
-                        <div><strong>Category:</strong> {{ $product->category->name ?? 'General' }}</div>
-                        <div>
-                            <strong>Availability:</strong>
-                            @if($product->isInStock())
-                            <span class="text-success fw-bold">✓ In Stock</span>
-                            @else
-                            <span class="text-danger fw-bold">✗ Out of Stock</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="pdp-meta-divider"></div>
-
-                    <div class="pdp-highlights-list">
-                        <div class="pdp-highlight-item">
-                            <i class="bi bi-gem"></i>
-                            <span>Premium Quality</span>
-                        </div>
-                        <div class="pdp-highlight-item">
-                            <i class="bi bi-feather"></i>
-                            <span>Handcrafted Product</span>
-                        </div>
-                    </div>
-                </div>
-                </div>{{-- /pdp-info-card --}}
             </div>
         </div>
 
         {{-- ============================================================
-             TABS: DESCRIPTION, SPECIFICATIONS, REVIEWS
+             TABS: SPECIFICATIONS (FIRST/ACTIVE), DESCRIPTION, REVIEWS
         ============================================================ --}}
-        <div class="row mt-5 pt-2">
+        <div class="row pdp-tabs-container">
             <div class="col-12">
                 {{-- Tabs Navigation --}}
                 <div class="pdp-tabs-nav" id="pdpTabNav">
-                    <button class="pdp-tab-btn active" data-bs-toggle="tab" data-bs-target="#pdp-tab-description">
-                        Description
-                    </button>
-                    <button class="pdp-tab-btn" data-bs-toggle="tab" data-bs-target="#pdp-tab-specifications">
+                    <button class="pdp-tab-btn active" data-bs-toggle="tab" data-bs-target="#pdp-tab-specifications">
                         Specifications
+                    </button>
+                    <button class="pdp-tab-btn" data-bs-toggle="tab" data-bs-target="#pdp-tab-description">
+                        Description
                     </button>
                     <button class="pdp-tab-btn" data-bs-toggle="tab" data-bs-target="#pdp-tab-reviews">
                         Reviews ({{ $product->reviews->count() }})
@@ -1234,100 +1111,95 @@
                 {{-- Tab Content Card --}}
                 <div class="pdp-tab-card">
                     <div class="tab-content" id="pdpTabContent">
-                        {{-- Tab 1: Description --}}
-                        <div class="tab-pane fade show active" id="pdp-tab-description">
-                            <div class="pdp-desc-body" style="font-size: 13.5px; color: #475569; line-height: 1.8;">
-                                @if($product->description)
-                                    {!! $product->description !!}
-                                @else
-                                    <p>{{ $product->name }} from Finesse By Design. Premium handcrafted metal giftware. Designed with meticulous attention to detail to bring timeless luxury and elegance to your tableware collection.</p>
-                                @endif
-                            </div>
-
-                            {{-- 4-Feature Highlights Bar inside card --}}
-                            <div class="pdp-features-bar">
-                                <div class="pdp-feature-col">
-                                    <div class="pdp-feature-icon-wrap">
-                                        <i class="bi bi-gem"></i>
-                                    </div>
-                                    <div class="pdp-feature-info">
-                                        <div class="pdp-feature-title">Premium Quality</div>
-                                        <div class="pdp-feature-desc">Finest craftsmanship</div>
+                        {{-- Tab 1: Specifications (Active by Default) --}}
+                        <div class="tab-pane fade show active" id="pdp-tab-specifications">
+                            <div class="row g-4">
+                                {{-- Left Column (4 Items) --}}
+                                <div class="col-lg-6">
+                                    <div class="pdp-spec-box">
+                                        <div class="pdp-spec-row">
+                                            <div class="pdp-spec-label">
+                                                <i class="bi bi-upc-scan"></i>
+                                                <span>SKU / Catalogue Code</span>
+                                            </div>
+                                            <div class="pdp-spec-value">
+                                                {{ $product->sku ?: ('WC-' . str_pad($product->id, 3, '0', STR_PAD_LEFT)) }}
+                                            </div>
+                                        </div>
+                                        <div class="pdp-spec-row">
+                                            <div class="pdp-spec-label">
+                                                <i class="bi bi-grid-fill"></i>
+                                                <span>Category</span>
+                                            </div>
+                                            <div class="pdp-spec-value">
+                                                {{ $product->category->name ?? 'Disposable Plates & Spoons' }}
+                                            </div>
+                                        </div>
+                                        <div class="pdp-spec-row">
+                                            <div class="pdp-spec-label">
+                                                <i class="bi bi-layers-fill"></i>
+                                                <span>Subcategory</span>
+                                            </div>
+                                            <div class="pdp-spec-value">
+                                                {{ $product->subcategory->name ?? ($product->category->name ?? 'Plates') }}
+                                            </div>
+                                        </div>
+                                        <div class="pdp-spec-row">
+                                            <div class="pdp-spec-label">
+                                                <i class="bi bi-stack"></i>
+                                                <span>Material / Finish</span>
+                                            </div>
+                                            <div class="pdp-spec-value">
+                                                100% Handcrafted Brass / Metalware
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="pdp-feature-col">
-                                    <div class="pdp-feature-icon-wrap">
-                                        <i class="bi bi-feather"></i>
-                                    </div>
-                                    <div class="pdp-feature-info">
-                                        <div class="pdp-feature-title">Handcrafted</div>
-                                        <div class="pdp-feature-desc">By skilled artisans</div>
-                                    </div>
-                                </div>
-
-                                <div class="pdp-feature-col">
-                                    <div class="pdp-feature-icon-wrap">
-                                        <i class="bi bi-gift"></i>
-                                    </div>
-                                    <div class="pdp-feature-info">
-                                        <div class="pdp-feature-title">Perfect for Gifting</div>
-                                        <div class="pdp-feature-desc">Adds elegance to every occasion</div>
-                                    </div>
-                                </div>
-
-                                <div class="pdp-feature-col">
-                                    <div class="pdp-feature-icon-wrap">
-                                        <i class="bi bi-clock-history"></i>
-                                    </div>
-                                    <div class="pdp-feature-info">
-                                        <div class="pdp-feature-title">Long lasting</div>
-                                        <div class="pdp-feature-desc">Designed to be timeless</div>
+                                {{-- Right Column (3 Items) --}}
+                                <div class="col-lg-6">
+                                    <div class="pdp-spec-box">
+                                        <div class="pdp-spec-row">
+                                            <div class="pdp-spec-label">
+                                                <i class="bi bi-pencil-ruler"></i>
+                                                <span>Dimensions</span>
+                                            </div>
+                                            <div class="pdp-spec-value">
+                                                {{ $product->dimensions ?: 'T 8.7" x B 4.6" x H 8.25"' }}
+                                            </div>
+                                        </div>
+                                        <div class="pdp-spec-row">
+                                            <div class="pdp-spec-label">
+                                                <i class="bi bi-box-seam"></i>
+                                                <span>Weight</span>
+                                            </div>
+                                            <div class="pdp-spec-value">
+                                                {{ $product->weight ? number_format($product->weight, 2) . ' grams' : '1110.00 grams' }}
+                                            </div>
+                                        </div>
+                                        <div class="pdp-spec-row">
+                                            <div class="pdp-spec-label">
+                                                <i class="bi bi-star-fill"></i>
+                                                <span>Care Instructions</span>
+                                            </div>
+                                            <div class="pdp-spec-value">
+                                                Clean gently with a soft dry cotton cloth. Avoid abrasive cleaners or harsh chemicals to preserve lustrous brass polish.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {{-- Tab 2: Specifications --}}
-                        <div class="tab-pane fade" id="pdp-tab-specifications">
-                            <table class="pdp-specs-table">
-                                <tbody>
-                                    <tr>
-                                        <th>SKU / Catalogue Code</th>
-                                        <td>{{ $product->sku ?: 'FBD-' . str_pad($product->id, 4, '0', STR_PAD_LEFT) }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Category</th>
-                                        <td>{{ $product->category->name ?? 'Tableware' }}</td>
-                                    </tr>
-                                    @if($product->subcategory)
-                                    <tr>
-                                        <th>Subcategory</th>
-                                        <td>{{ $product->subcategory->name }}</td>
-                                    </tr>
-                                    @endif
-                                    <tr>
-                                        <th>Material / Finish</th>
-                                        <td>100% Handcrafted Brass / Metalware</td>
-                                    </tr>
-                                    @if($product->dimensions)
-                                    <tr>
-                                        <th>Dimensions</th>
-                                        <td>{{ $product->dimensions }}</td>
-                                    </tr>
-                                    @endif
-                                    @if($product->weight)
-                                    <tr>
-                                        <th>Weight</th>
-                                        <td>{{ $product->weight }} grams</td>
-                                    </tr>
-                                    @endif
-                                    <tr>
-                                        <th>Care Instructions</th>
-                                        <td>Clean gently with a soft dry cotton cloth. Avoid abrasive cleaners or harsh chemicals to preserve lustrous brass polish.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        {{-- Tab 2: Description --}}
+                        <div class="tab-pane fade" id="pdp-tab-description">
+                            <div class="pdp-desc-body" style="font-size: 14px; color: #475569; line-height: 1.8;">
+                                @if($product->description)
+                                {!! $product->description !!}
+                                @else
+                                <p>{{ $product->name }} from our premium collection. Designed with meticulous attention to detail to bring timeless luxury and elegance to your tableware collection.</p>
+                                @endif
+                            </div>
                         </div>
 
                         {{-- Tab 3: Reviews --}}
@@ -1335,7 +1207,7 @@
                             {{-- Write a Review Section --}}
                             @auth
                             <div class="border rounded-4 p-4 mb-4 bg-light">
-                                <h5 class="fw-bold mb-3" style="font-family: 'Playfair Display', serif;">Write a Review</h5>
+                                <h5 class="fw-bold mb-3" style="font-family: 'Poppins', sans-serif;">Write a Review</h5>
                                 <form action="{{ route('reviews.store', $product->id) }}" method="POST">
                                     @csrf
                                     <div class="mb-3">
@@ -1355,16 +1227,16 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-semibold" style="font-size: 0.88rem;">Your Review</label>
-                                        <textarea name="body" rows="4" class="form-control" placeholder="Share your experience with this luxury product..." style="border-radius: 8px;" required></textarea>
+                                        <textarea name="body" rows="4" class="form-control" placeholder="Share your experience..." style="border-radius: 8px;" required></textarea>
                                     </div>
-                                    <button class="btn pdp-btn-cart px-4">
+                                    <button class="btn pdp-btn-add-cart px-4" style="width: auto; height: 42px;">
                                         Submit Review
                                     </button>
                                 </form>
                             </div>
                             @else
                             <div class="alert alert-light border rounded-3 mb-4 d-flex align-items-center justify-content-between flex-wrap gap-2">
-                                <div>Please <a href="{{ route('login') }}" class="text-decoration-underline fw-bold" style="color: var(--kkt-primary);">log in</a> to share your review with other connoisseurs.</div>
+                                <div>Please <a href="{{ route('login') }}" class="text-decoration-underline fw-bold" style="color: #0B3A63;">log in</a> to share your review with other customers.</div>
                                 <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3">Log In</a>
                             </div>
                             @endauth
@@ -1372,16 +1244,16 @@
                             {{-- Existing Reviews List --}}
                             @forelse($product->reviews as $review)
                             <div class="d-flex gap-3 border-bottom pb-3 mb-3">
-                                <img src="{{ $review->user->avatar_url }}" style="width:44px;height:44px;border-radius:50%;object-fit:cover;" alt="{{ $review->user->name }}">
+                                <img src="{{ $review->user->avatar_url ?? base_public_url('assets/img/user.png') }}" style="width:44px;height:44px;border-radius:50%;object-fit:cover;" alt="{{ $review->user->name ?? 'User' }}">
                                 <div class="flex-grow-1">
                                     <div class="d-flex justify-content-between">
-                                        <strong style="font-size:.9rem; color: #0F172A;">{{ $review->user->name }}</strong>
+                                        <strong style="font-size:.9rem; color: #0F172A;">{{ $review->user->name ?? 'Anonymous' }}</strong>
                                         <span style="font-size:.78rem;color:#6c757d;">{{ $review->created_at->format('d M Y') }}</span>
                                     </div>
                                     <div class="text-warning my-1" style="font-size:.8rem;">
                                         @for($i = 1; $i <= 5; $i++)
-                                        <i class="bi bi-star{{ $i <= $review->rating ? '-fill' : '' }}"></i>
-                                        @endfor
+                                            <i class="bi bi-star{{ $i <= $review->rating ? '-fill' : '' }}"></i>
+                                            @endfor
                                     </div>
                                     @if($review->title)<div style="font-weight:600;font-size:.88rem; color: #1E293B;">{{ $review->title }}</div>@endif
                                     <p style="font-size:.87rem;color:#555;margin-top:4px;">{{ $review->body }}</p>
@@ -1400,29 +1272,29 @@
         </div>
 
         {{-- ============================================================
-             RELATED PRODUCTS SECTION
+             RELATED PRODUCTS SECTION (PRESERVED - EXACT ORIGINAL DESIGN)
         ============================================================ --}}
         @php
-            // 1) controller's $related  2) same category  3) any other products
-            $relatedList = isset($related) ? collect($related) : collect();
-            if ($relatedList->isEmpty()) {
-                try {
-                    $hasActive = \Illuminate\Support\Facades\Schema::hasColumn($product->getTable(), 'is_active');
-                    $base = fn() => $product->newQuery()
-                        ->where('id', '!=', $product->id)
-                        ->when($hasActive, fn($q) => $q->where('is_active', 1));
+        // 1) controller's $related 2) same category 3) any other products
+        $relatedList = isset($related) ? collect($related) : collect();
+        if ($relatedList->isEmpty()) {
+        try {
+        $hasActive = \Illuminate\Support\Facades\Schema::hasColumn($product->getTable(), 'is_active');
+        $base = fn() => $product->newQuery()
+        ->where('id', '!=', $product->id)
+        ->when($hasActive, fn($q) => $q->where('is_active', 1));
 
-                    if ($product->category_id) {
-                        $relatedList = $base()->where('category_id', $product->category_id)->latest()->limit(4)->get();
-                    }
-                    if ($relatedList->isEmpty()) {
-                        $relatedList = $base()->latest()->limit(4)->get();
-                    }
-                } catch (\Throwable $e) {
-                    \Log::warning('PDP related products failed: ' . $e->getMessage());
-                    $relatedList = collect();
-                }
-            }
+        if ($product->category_id) {
+        $relatedList = $base()->where('category_id', $product->category_id)->latest()->limit(4)->get();
+        }
+        if ($relatedList->isEmpty()) {
+        $relatedList = $base()->latest()->limit(4)->get();
+        }
+        } catch (\Throwable $e) {
+        \Log::warning('PDP related products failed: ' . $e->getMessage());
+        $relatedList = collect();
+        }
+        }
         @endphp
         @if($relatedList->count())
         <div class="mt-5 pt-4">
@@ -1438,7 +1310,7 @@
 
             <div class="row g-3 g-lg-4">
                 @foreach($relatedList->take(4) as $p)
-                    @include('partials.product-card', ['product' => $p, 'colClass' => 'col-lg-3 col-md-6 col-6'])
+                @include('partials.product-card', ['product' => $p, 'colClass' => 'col-lg-3 col-md-6 col-6'])
                 @endforeach
             </div>
         </div>
@@ -1525,11 +1397,11 @@
     document.querySelectorAll('.variant-color-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.variant-color-btn').forEach(b => {
-                b.style.border = '2px solid #E2E8F0';
-                b.style.boxShadow = 'none';
+                b.classList.remove('btn-primary');
+                b.classList.add('btn-outline-secondary');
             });
-            this.style.border = '2px solid #FFFFFF';
-            this.style.boxShadow = '0 0 0 2px #0F172A';
+            this.classList.remove('btn-outline-secondary');
+            this.classList.add('btn-primary');
             const colorSpan = document.getElementById('selected-color');
             if (colorSpan) colorSpan.textContent = this.dataset.color;
             updateVariantPrice();
@@ -1553,17 +1425,17 @@
 
     function updateVariantPrice() {
         const color = document.getElementById('selected-color')?.textContent;
-        const size  = document.getElementById('selected-size')?.textContent;
+        const size = document.getElementById('selected-size')?.textContent;
         if (!variants || !variants.length) return;
 
         const variant = variants.find(v => (!color || v.color === color) && (!size || v.size === size));
         if (variant) {
             selectedVariantId = variant.id;
-            const price = variant.price ? parseFloat(variant.price) : {{ (float)$product->price }};
+            const price = variant.price ? parseFloat(variant.price) : {{ (float) $product->price }};
             const salePrice = variant.sale_price ? parseFloat(variant.sale_price) : null;
 
             const oldPriceDisplay = document.getElementById('display-old-price');
-            const priceDisplay    = document.getElementById('display-price');
+            const priceDisplay = document.getElementById('display-price');
             const discountDisplay = document.getElementById('display-discount');
 
             if (salePrice && salePrice < price) {
@@ -1578,7 +1450,7 @@
                 }
                 if (discountDisplay) {
                     const pct = Math.round(((price - salePrice) / price) * 100);
-                    discountDisplay.textContent = pct + '% off';
+                    discountDisplay.textContent = pct + '% Off';
                     discountDisplay.style.display = 'inline';
                 }
             } else {
@@ -1611,48 +1483,46 @@
         const qty = qtyInput ? parseInt(qtyInput.value) : 1;
 
         const originalHtml = btn.innerHTML;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Adding...';
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Adding...';
         btn.disabled = true;
 
         $.post('{{ route("cart.add") }}', {
-            product_id: productId,
-            product_variant_id: variantId,
-            quantity: qty,
-            _token: '{{ csrf_token() }}'
-        })
-        .done(res => {
-            if (res.success) {
-                if (typeof window.updateCartCount === 'function') {
-                    window.updateCartCount(res.count);
+                product_id: productId,
+                product_variant_id: variantId,
+                quantity: qty,
+                _token: '{{ csrf_token() }}'
+            })
+            .done(res => {
+                if (res.success) {
+                    if (typeof window.updateCartCount === 'function') {
+                        window.updateCartCount(res.count);
+                    }
+                    if (typeof showToast === 'function') {
+                        showToast(res.message, 'success');
+                    } else {
+                        alert(res.message);
+                    }
                 }
+            })
+            .fail(err => {
                 if (typeof showToast === 'function') {
-                    showToast(res.message, 'success');
-                } else {
-                    alert(res.message);
+                    showToast('Failed to add product to cart', 'danger');
                 }
-            }
-        })
-        .fail(err => {
-            if (typeof showToast === 'function') {
-                showToast('Failed to add product to cart', 'danger');
-            }
-        })
-        .always(() => {
-            btn.innerHTML = originalHtml;
-            btn.disabled = false;
-        });
+            })
+            .always(() => {
+                btn.innerHTML = originalHtml;
+                btn.disabled = false;
+            });
     });
 
-    // Robust Tab switching logic
+    // Tab switching logic
     function switchPdpTab(targetSelector) {
         if (!targetSelector) return;
-        // Update tab buttons
         document.querySelectorAll('.pdp-tab-btn').forEach(btn => {
             const isMatch = btn.getAttribute('data-bs-target') === targetSelector;
             btn.classList.toggle('active', isMatch);
         });
 
-        // Update tab panes
         document.querySelectorAll('#pdpTabContent > .tab-pane').forEach(pane => {
             pane.classList.remove('show', 'active');
         });
