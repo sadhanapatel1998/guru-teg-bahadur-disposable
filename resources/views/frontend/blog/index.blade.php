@@ -29,10 +29,10 @@
                     <span class="tag-line"></span>
                 </div>
                 <h1 class="sec-main-heading">
-                    The Brass & Decor <span class="sec-heading-accent">Journal</span>
+                    The Disposables & Catering <span class="sec-heading-accent">Journal</span>
                 </h1>
                 <p class="sec-desc mx-auto" style="max-width: 680px;">
-                    Explore curated design guides, artisanal brass craftsmanship traditions, interior inspirations, and timeless living stories.
+                    Explore curated guides, catering tips, party essentials, and quality disposable tableware inspirations.
                 </p>
             </div>
         </div>
@@ -41,13 +41,25 @@
         <div class="row g-4 justify-content-start">
             @forelse($blogs as $blog)
                 @php
-                    $words = str_word_count(strip_tags($blog->body ?? ''));
+                    $words = str_word_count(strip_tags($blog->body ?? ($blog->excerpt ?? '')));
                     $readMin = max(1, ceil($words / 200));
-                    $catName = $blog->blogCategory->name ?? ($blog->category->name ?? 'Artisanal Brass');
+                    $catName = $blog->blogCategory->name ?? ($blog->category->name ?? 'Cutlery');
+                    $catSlug = strtolower($blog->blogCategory->slug ?? ($blog->category->slug ?? ''));
+
+                    $themes = [
+                        ['class' => 'theme-orange', 'accent' => '#EA580C', 'bg' => '#FFEDD5', 'icon' => 'cutlery'],
+                        ['class' => 'theme-green',  'accent' => '#16A34A', 'bg' => '#DCFCE7', 'icon' => 'cutlery'],
+                        ['class' => 'theme-rose',   'accent' => '#E11D48', 'bg' => '#FFE4E6', 'icon' => 'bar-range'],
+                    ];
+                    $theme = $themes[$loop->index % 3];
+
+                    $isBar = str_contains($catSlug, 'bar') || str_contains(strtolower($catName), 'bar');
+                    $iconType = $isBar ? 'bar-range' : ($theme['icon'] ?? 'cutlery');
+                    $dateStr = $blog->published_at ? $blog->published_at->format('d M Y') : ($blog->created_at ? $blog->created_at->format('d M Y') : date('d M Y'));
                 @endphp
                 <div class="col-lg-4 col-md-6">
                     <a href="{{ route('blog.show', $blog->slug) }}" class="text-decoration-none h-100 d-block">
-                        <article class="luxury-article-card">
+                        <article class="luxury-article-card {{ $theme['class'] }}">
                             {{-- Image Wrapper --}}
                             <div class="article-img-wrap">
                                 <img src="{{ $blog->thumbnail_url }}"
@@ -57,35 +69,56 @@
 
                                 {{-- Floating Category Pill Badge --}}
                                 <span class="article-cat-badge">
-                                    {{ $catName }}
-                                </span>
-
-                                {{-- Floating Published Date Badge --}}
-                                <span class="article-date-badge">
-                                    <i class="bi bi-calendar3"></i>
-                                    {{ $blog->published_at ? $blog->published_at->format('d M Y') : $blog->created_at->format('d M Y') }}
+                                    @if($iconType === 'bar-range')
+                                        <svg class="cat-pill-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M8 22h8"/>
+                                            <path d="M12 15v7"/>
+                                            <path d="M5 3l7 9 7-9H5z"/>
+                                        </svg>
+                                    @else
+                                        <svg class="cat-pill-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 2v20M21 2c0 2.5-1 4.5-3 5.5"/>
+                                            <path d="M6 2v6a2 2 0 0 0 2 2v12"/>
+                                            <path d="M4 2v5"/>
+                                            <path d="M8 2v5"/>
+                                        </svg>
+                                    @endif
+                                    <span>{{ strtoupper($catName) }}</span>
                                 </span>
                             </div>
 
                             {{-- Body Content --}}
                             <div class="article-body">
+                                {{-- Meta Row: Date & Read Time --}}
                                 <div class="article-meta-row">
-                                    <span><i class="bi bi-clock-history me-1"></i> {{ $readMin }} min read</span>
-                                    <span>•</span>
-                                    <span><i class="bi bi-gem me-1"></i> Luxury Living</span>
+                                    <span class="meta-item">
+                                        <i class="bi bi-calendar3"></i>
+                                        <span>{{ $dateStr }}</span>
+                                    </span>
+                                    <span class="article-meta-divider">|</span>
+                                    <span class="meta-item">
+                                        <i class="bi bi-clock"></i>
+                                        <span>{{ $readMin }} min read</span>
+                                    </span>
                                 </div>
 
+                                {{-- Article Title --}}
                                 <h3 class="article-title" title="{{ $blog->title }}">
-                                    {{ Str::limit($blog->title, 55) }}
+                                    {{ Str::limit($blog->title, 58) }}
                                 </h3>
 
+                                {{-- Article Excerpt --}}
                                 <p class="article-excerpt">
-                                    {{ Str::limit($blog->excerpt ?? strip_tags($blog->body), 105) }}
+                                    {{ Str::limit($blog->excerpt ?? strip_tags($blog->body), 115) }}
                                 </p>
 
+                                {{-- Footer Action Row --}}
                                 <div class="article-card-footer">
-                                    <span class="article-read-text">Read Full Story</span>
-                                    <span class="article-arrow-btn">
+                                    <div class="article-read-story">
+                                        <span>Read Full Story</span>
+                                        <i class="bi bi-arrow-right"></i>
+                                    </div>
+                                    <span class="article-circle-btn">
                                         <i class="bi bi-arrow-right"></i>
                                     </span>
                                 </div>

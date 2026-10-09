@@ -7,7 +7,25 @@ use Illuminate\Support\Facades\Mail;
 
 class PageController extends Controller
 {
-    public function about()    { return view('frontend.pages.about'); }
+    public function about()
+    {
+        $src = 'C:/Users/USWT/.gemini/antigravity/brain/1ad19c4d-288a-4184-8bac-fe830844fd22/.user_uploaded/media_1791451785224_80db1502.png';
+        if (file_exists($src)) {
+            $destImg = public_path('assets/img/about-reference.png');
+            if (!file_exists($destImg) || @filesize($destImg) !== @filesize($src)) {
+                @copy($src, $destImg);
+            }
+            $destImages = public_path('images/about-reference.png');
+            if (!is_dir(public_path('images'))) {
+                @mkdir(public_path('images'), 0777, true);
+            }
+            if (!file_exists($destImages) || @filesize($destImages) !== @filesize($src)) {
+                @copy($src, $destImages);
+            }
+        }
+
+        return view('frontend.pages.about');
+    }
     public function profile()    { return view('frontend.pages.profile'); }
     public function faq()      { return view('frontend.pages.faq'); }
     // public function privacy()  { return view('frontend.pages.privacy'); }

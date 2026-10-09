@@ -1817,7 +1817,10 @@
     @yield('content')
     
     {{-- GTB MODERN FOOTER (MATCHING SHARED DESIGN) --}}
-    <footer class="gw-footer gtb-modern-footer">
+    <footer class="gw-footer gtb-modern-footer" style="
+            background: radial-gradient(circle at bottom left, rgba(17,140,196,.04), transparent 30%),
+                        linear-gradient(180deg, #FFFFFF 0%, #F6F9FB 100%);
+        ">
         <div class="container">
             {{-- Top Feature Strip (Floating Card) --}}
             <div class="gtb-footer-features-card">
