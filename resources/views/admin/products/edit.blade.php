@@ -241,29 +241,6 @@
                     <small class="text-muted">Select one or more categories this product belongs to.</small>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Subcategories</label>
-                    <div class="border rounded p-2" style="max-height:260px;overflow-y:auto;">
-                        @forelse($categories as $cat)
-                            @if($cat->subcategories->count())
-                            <div class="mb-2">
-                                <div class="text-uppercase fw-700" style="font-size:.7rem;letter-spacing:.03em;color:#9aa0a6;">{{ $cat->name }}</div>
-                                @foreach($cat->subcategories as $sub)
-                                <div class="form-check ms-2">
-                                    <input class="form-check-input" type="checkbox" name="subcategory_ids[]"
-                                           value="{{ $sub->id }}" id="sub-{{ $sub->id }}"
-                                           {{ in_array($sub->id, $selectedSubcategoryIds) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="sub-{{ $sub->id }}">{{ $sub->name }}</label>
-                                </div>
-                                @endforeach
-                            </div>
-                            @endif
-                        @empty
-                        <span class="text-muted">No subcategories found.</span>
-                        @endforelse
-                    </div>
-                    <small class="text-muted">Select any subcategories that apply, from any category.</small>
-                </div>
             </div>
 
             {{-- Thumbnail --}}

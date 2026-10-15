@@ -58,10 +58,6 @@
           <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
             <i class="bi bi-grid"></i> Categories
         </a>
-                 
-        <a href="{{ route('admin.subcategories.index') }}" class="nav-link {{ request()->routeIs('admin.subcategories.*') ? 'active' : '' }}">
-            <i class="bi bi-grid-3x3-gap"></i> Subcategories
-        </a>
         <a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
             <i class="bi bi-box-seam"></i> Products
         </a>

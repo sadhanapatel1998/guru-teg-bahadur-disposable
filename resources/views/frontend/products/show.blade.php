@@ -1137,15 +1137,6 @@
                                         </div>
                                         <div class="pdp-spec-row">
                                             <div class="pdp-spec-label">
-                                                <i class="bi bi-layers-fill"></i>
-                                                <span>Subcategory</span>
-                                            </div>
-                                            <div class="pdp-spec-value">
-                                                {{ $product->subcategory->name ?? ($product->category->name ?? 'Plates') }}
-                                            </div>
-                                        </div>
-                                        <div class="pdp-spec-row">
-                                            <div class="pdp-spec-label">
                                                 <i class="bi bi-stack"></i>
                                                 <span>Material / Finish</span>
                                             </div>

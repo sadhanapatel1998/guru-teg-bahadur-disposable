@@ -83,7 +83,7 @@
                 @if($products->isEmpty())
                 <div class="text-center py-5">
                     <i class="bi bi-search" style="font-size:3rem;color:#e9ecef;display:block;"></i>
-                    <h5 class="mt-3 text-muted">We couldn’t find any products in this category or subcategory. </h5>
+                    <h5 class="mt-3 text-muted">We couldn’t find any products matching your criteria.</h5>
                     <a href="{{ route('shop') }}" class="btn btn-primary mt-2">Browse All</a>
                 </div>
                 @else

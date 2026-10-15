@@ -31,30 +31,16 @@ class ShopController extends Controller
 
         $this->applyFilters($query, $request);
 
-        $products      = $query->paginate(16)->withQueryString();
-        $subcategories = $category->subcategories;
+        $products   = $query->paginate(16)->withQueryString();
         $categories = Category::active()->withCount(['products' => fn($q) => $q->active()])->get();
 
-        return view('frontend.products.category', compact('products', 'category', 'subcategories','categories'));
+        return view('frontend.products.category', compact('products', 'category', 'categories'));
     }
 
 
     public function subcategory(Request $request, $categorySlug, $subcategorySlug)
     {
-        $category    = Category::where('slug', $categorySlug)->firstOrFail();
-        $subcategory = Subcategory::where('slug', $subcategorySlug)
-            ->where('category_id', $category->id)->firstOrFail();
-
-        $query = Product::active()
-            ->whereHas('subcategories', fn($q) => $q->where('subcategories.id', $subcategory->id))
-            ->with(['category', 'images']);
-
-        $this->applyFilters($query, $request);
-
-        $products = $query->paginate(16)->withQueryString();
-        $categories = Category::active()->withCount(['products' => fn($q) => $q->active()])->get();
-
-        return view('frontend.products.subcategory', compact('products', 'category', 'subcategory','categories'));
+        return redirect()->route('shop.category', $categorySlug);
     }
 
     public function show(string $slug)

@@ -82,21 +82,22 @@
                 position: absolute !important;
                 top: 80% !important;
                 left: 0 !important;
-                min-width: 760px;
-                max-width: 820px;
+                width: 280px !important;
+                min-width: 260px !important;
+                max-width: 320px !important;
                 background: #FFFFFF !important;
                 border: 1px solid #E2E8F0 !important;
-                border-radius: 22px !important;
-                padding: 0 !important;
-                margin-top: 10px !important;
+                border-radius: 18px !important;
+                padding: 8px !important;
+                margin-top: 8px !important;
                 box-shadow:
                     0 10px 30px rgba(11, 111, 174, 0.08),
-                    0 24px 60px rgba(15, 23, 42, 0.12) !important;
+                    0 20px 45px rgba(15, 23, 42, 0.12) !important;
                 display: none;
                 opacity: 0;
                 visibility: hidden;
-                transform: translateY(12px);
-                transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+                transform: translateY(10px);
+                transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
                 overflow: hidden;
                 z-index: 1050;
             }
@@ -110,7 +111,7 @@
             }
 
             .mega-desktop-wrapper {
-                display: flex !important;
+                display: block !important;
                 width: 100%;
             }
 
@@ -121,22 +122,22 @@
 
         @media (min-width: 992px) and (max-width: 1199px) {
             .mega-category-dropdown {
-                left: -60px !important;
-                min-width: 700px !important;
-                max-width: 720px !important;
+                left: 0 !important;
+                width: 270px !important;
+                min-width: 260px !important;
+                max-width: 300px !important;
             }
         }
 
-        /* Left Rail: Categories */
+        /* Categories Dropdown List */
         .mega-cat-sidebar {
-            width: 250px;
-            background: #F8FAFC;
-            border-right: 1px solid #E8EDF2;
-            padding: 14px 10px;
-            flex-shrink: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-right: none;
+            padding: 4px;
             display: flex;
             flex-direction: column;
-            max-height: 520px;
+            max-height: 480px;
             overflow-y: auto;
         }
 
@@ -149,18 +150,30 @@
         }
 
         .mega-sidebar-header {
-            padding: 4px 12px 10px 12px;
+            padding: 6px 12px 10px 12px;
             border-bottom: 1px solid #E8EDF2;
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .mega-sidebar-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             color: #64748B;
+        }
+
+        .mega-sidebar-count {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #0B6FAE;
+            background: #E0F2FE;
+            padding: 2px 7px;
+            border-radius: 10px;
         }
 
         .mega-cat-list {
@@ -169,7 +182,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
         }
 
         .mega-cat-item {
@@ -181,13 +194,12 @@
             align-items: center;
             justify-content: space-between;
             padding: 9px 14px;
-            border-radius: 12px;
+            border-radius: 10px;
             text-decoration: none;
             color: #1E293B;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13.5px;
+          font-size: 14.5px;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
             border: 1px solid transparent;
         }
 
@@ -197,273 +209,50 @@
             transition: transform 0.2s ease, color 0.2s ease;
         }
 
-        .mega-cat-item:hover .mega-cat-link,
+        .mega-cat-link:hover,
         .mega-cat-item.active .mega-cat-link {
-            background: #FFFFFF;
+            background: #F0F7FD;
             color: #0B6FAE;
             font-weight: 600;
             border-color: rgba(11, 111, 174, 0.25);
-            box-shadow: 0 4px 12px rgba(11, 111, 174, 0.08);
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(11, 111, 174, 0.08);
         }
 
-        .mega-cat-item:hover .mega-arrow,
+        .mega-cat-link:hover .mega-arrow,
         .mega-cat-item.active .mega-arrow {
             color: #0B6FAE;
             transform: translateX(3px);
         }
 
-        /* Right Panel: Subcategories Showcase */
-        .mega-subcat-content {
-            flex: 1;
-            min-width: 0;
-            background: #FFFFFF;
-            padding: 22px 26px;
+        .mega-cat-footer {
+            border-top: 1px solid #E8EDF2;
+            margin-top: 8px;
+            padding-top: 8px;
+        }
+
+        .mega-cat-footer-link {
             display: flex;
-            flex-direction: column;
-            max-height: 520px;
-            overflow-y: auto;
-        }
-
-        .mega-subcat-panel {
-            display: none;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .mega-subcat-panel.active {
-            display: flex !important;
-            animation: megaFadeIn 0.22s ease-out;
-        }
-
-        @keyframes megaFadeIn {
-            from {
-                opacity: 0;
-                transform: translateX(6px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Panel Header */
-        .mega-panel-header {
-            display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: space-between;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #E8EDF2;
-            margin-bottom: 14px;
-        }
-
-        .mega-panel-tag {
-            font-family: 'Poppins', sans-serif;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: #0B6FAE;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .mega-panel-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 21px;
-            font-weight: 600;
-            color: #151B21;
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        .mega-explore-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 12.5px;
-            font-weight: 600;
-            color: #0B6FAE;
-            text-decoration: none;
-            transition: gap 0.2s ease, color 0.2s ease;
-        }
-
-        .mega-explore-link:hover {
-            color: #09446B;
-            gap: 9px;
-        }
-
-        /* Panel Body & Subcategories Grid */
-        .mega-panel-body {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .mega-subcat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 9px;
-        }
-
-        .mega-subcat-card {
-            display: flex;
-            align-items: center;
-            padding: 10px 14px;
+            padding: 8px 12px;
+            border-radius: 8px;
             background: #F8FAFC;
-            border: 1px solid #E8EDF2;
-            border-radius: 12px;
-            text-decoration: none;
-            color: #1E293B;
+            color: #0B6FAE;
             font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .mega-subcat-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #0B6FAE;
-            opacity: 0.5;
-            margin-right: 10px;
-            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
             transition: all 0.2s ease;
         }
 
-        .mega-subcat-name {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .mega-subcat-icon {
-            font-size: 11px;
-            color: #94A3B8;
-            margin-left: 6px;
-            opacity: 0.5;
-            transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
-        }
-
-        .mega-subcat-card:hover {
-            background: #F0F7FD;
-            border-color: rgba(11, 111, 174, 0.4);
-            color: #0B6FAE;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(11, 111, 174, 0.1);
-        }
-
-        .mega-subcat-card:hover .mega-subcat-dot {
-            opacity: 1;
-            background: #0B6FAE;
-            box-shadow: 0 0 6px rgba(11, 111, 174, 0.4);
-        }
-
-        .mega-subcat-card:hover .mega-subcat-icon {
-            opacity: 1;
-            color: #0B6FAE;
-            transform: translate(2px, -2px);
-        }
-
-        /* Banner strip */
-        .mega-banner-strip {
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
-            border: 1px solid #BAE6FD;
-            border-radius: 14px;
-            padding: 10px 16px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            margin-top: 4px;
-        }
-
-        .mega-banner-strip:hover {
-            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
-            border-color: #7DD3FC;
-            box-shadow: 0 6px 18px rgba(11, 111, 174, 0.12);
-            transform: translateY(-1px);
-        }
-
-        .mega-banner-img-wrap {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #FFFFFF;
-            flex-shrink: 0;
-            margin-right: 14px;
-            border: 1px solid rgba(11, 111, 174, 0.15);
-        }
-
-        .mega-banner-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .mega-banner-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mega-banner-eyebrow {
-            font-family: 'Poppins', sans-serif;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #0B6FAE;
-        }
-
-        .mega-banner-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            color: #1E293B;
-        }
-
-        .mega-banner-arrow {
-            color: #0B6FAE;
-            font-size: 14px;
-            margin-left: 10px;
-            transition: transform 0.2s ease;
-        }
-
-        .mega-banner-strip:hover .mega-banner-arrow {
-            transform: translateX(4px);
-        }
-
-        /* Empty State */
-        .mega-empty-state {
-            padding: 24px;
-            text-align: center;
-            background: #F8FAFC;
-            border-radius: 12px;
-        }
-
-        .mega-empty-state p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            color: #64748B;
-            margin-bottom: 12px;
-        }
-
-        .mega-viewall-btn {
-            background: var(--kkt-primary) !important;
-            color: #FFFFFF !important;
-            font-family: 'Poppins', sans-serif !important;
-            font-size: 12px !important;
-            font-weight: 600 !important;
-            border-radius: 10px !important;
-            padding: 6px 18px !important;
+        .mega-cat-footer-link:hover {
+            background: #E0F2FE;
+            color: #09446B;
         }
 
         /* ============================================================
-           MOBILE ACCORDION DROPDOWN (< 992px)
+           MOBILE CATEGORIES DROPDOWN (< 992px)
         ============================================================ */
         @media (max-width: 991.98px) {
             .nav-item.dropdown-mega {
@@ -540,7 +329,7 @@
                 font-family: 'Poppins', sans-serif;
                 font-size: 13px;
                 font-weight: 600;
-                margin-bottom: 10px;
+                margin-bottom: 8px;
                 box-shadow: 0 4px 12px rgba(11, 111, 174, 0.2);
             }
 
@@ -549,98 +338,38 @@
                 opacity: 0.9;
             }
 
-            .mobile-cat-accordion {
+            .mobile-cat-list-wrap {
                 display: flex;
                 flex-direction: column;
                 gap: 6px;
             }
 
-            .mobile-cat-item {
-                background: #FFFFFF;
-                border: 1px solid #E8EDF2;
-                border-radius: 12px;
-                overflow: hidden;
-                transition: border-color 0.2s ease;
-            }
-
-            .mobile-cat-row {
+            .mobile-cat-direct-link {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 10px 14px;
-            }
-
-            .mobile-cat-link {
-                font-family: 'Poppins', sans-serif;
-                font-size: 14px;
-                font-weight: 600;
+                padding: 11px 14px;
+                background: #FFFFFF;
+                border: 1px solid #E8EDF2;
+                border-radius: 12px;
+                text-decoration: none;
                 color: #1E293B;
-                text-decoration: none;
-                flex: 1;
-            }
-
-            .mobile-subcat-toggle {
-                background: #F1F5F9;
-                border: none;
-                width: 36px;
-                height: 36px;
-                border-radius: 8px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #475569;
-                font-size: 14px;
-                transition: transform 0.25s ease, background 0.2s ease, color 0.2s ease;
-                padding: 0;
-                cursor: pointer;
-                flex-shrink: 0;
-            }
-
-            .mobile-subcat-toggle:not(.collapsed) {
-                transform: rotate(180deg);
-                background: #E0F2FE;
-                color: #0B6FAE;
-            }
-
-            .mobile-subcat-collapse {
-                border-top: 1px solid #F1F5F9;
-                background: #FAFCFE;
-            }
-
-            .mobile-subcat-list {
-                list-style: none;
-                padding: 8px 12px 10px 12px;
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            .mobile-subcat-link {
-                display: flex;
-                align-items: center;
-                gap: 8px;
                 font-family: 'Poppins', sans-serif;
-                font-size: 13px;
+                font-size: 13.5px;
                 font-weight: 500;
-                color: #475569;
-                text-decoration: none;
-                padding: 8px 10px;
-                border-radius: 8px;
                 transition: all 0.2s ease;
             }
 
-            .mobile-subcat-link:hover {
+            .mobile-cat-direct-link:hover,
+            .mobile-cat-direct-link:active {
                 background: #F0F7FD;
                 color: #0B6FAE;
+                border-color: rgba(11, 111, 174, 0.3);
             }
 
-            .mobile-subcat-all {
-                font-weight: 600;
-                color: #0B6FAE;
-                border-top: 1px dashed #E2E8F0;
-                padding-top: 8px;
-                margin-top: 4px;
+            .mobile-cat-direct-link i {
+                font-size: 12px;
+                color: #94A3B8;
             }
         }
 
@@ -1535,9 +1264,7 @@
                         </li>
 
                         @php
-                            $categories = \App\Models\Category::with('subcategories')
-                                ->orderBy('name')
-                                ->get();
+                            $categories = \App\Models\Category::active()->orderBy('name')->get();
                         @endphp
                         <li class="gtb-nav-item nav-item dropdown-mega">
                             <a class="gtb-nav-link nav-link dropdown-toggle"
@@ -1548,84 +1275,31 @@
                                 <span>Categories</span>
                             </a>
 
-                            {{-- SINGLE UNIFIED MEGA DROPDOWN MENU FOR DESKTOP & MOBILE --}}
+                            {{-- SINGLE UNIFIED CATEGORIES DROPDOWN MENU FOR DESKTOP & MOBILE --}}
                             <div class="mega-category-dropdown">
                                 {{-- DESKTOP VIEW (>= 992px) --}}
-                                <div class="mega-desktop-wrapper d-none d-lg-flex">
-                                    {{-- Left Sidebar: Main Categories Rail --}}
+                                <div class="mega-desktop-wrapper d-none d-lg-block">
                                     <div class="mega-cat-sidebar">
                                         <div class="mega-sidebar-header">
                                             <span class="mega-sidebar-title">Categories</span>
+                                            <span class="mega-sidebar-count">{{ $categories->count() }}</span>
                                         </div>
                                         <ul class="mega-cat-list">
-                                            @foreach ($categories as $index => $cat)
-                                                <li class="mega-cat-item {{ $index === 0 ? 'active' : '' }}"
-                                                    data-target="mega-panel-{{ $cat->id }}">
+                                            @foreach ($categories as $cat)
+                                                <li class="mega-cat-item">
                                                     <a href="{{ route('shop.category', $cat->slug) }}" class="mega-cat-link">
                                                         <span class="mega-cat-name">{{ $cat->name }}</span>
-                                                        @if($cat->subcategories->count())
-                                                            <i class="bi bi-chevron-right mega-arrow"></i>
-                                                        @endif
+                                                        <i class="bi bi-chevron-right mega-arrow"></i>
                                                     </a>
                                                 </li>
                                             @endforeach
                                         </ul>
-                                    </div>
-
-                                    {{-- Right Content: Subcategories Showcase --}}
-                                    <div class="mega-subcat-content">
-                                        @foreach ($categories as $index => $cat)
-                                            <div class="mega-subcat-panel {{ $index === 0 ? 'active' : '' }}" id="mega-panel-{{ $cat->id }}">
-                                                {{-- Header --}}
-                                                <div class="mega-panel-header">
-                                                    <div>
-                                                        <span class="mega-panel-tag">Collection</span>
-                                                        <h4 class="mega-panel-title">{{ $cat->name }}</h4>
-                                                    </div>
-                                                    <a href="{{ route('shop.category', $cat->slug) }}" class="mega-explore-link">
-                                                        <span>Explore All {{ $cat->name }}</span>
-                                                        <i class="bi bi-arrow-right"></i>
-                                                    </a>
-                                                </div>
-
-                                                {{-- Subcategories Grid --}}
-                                                <div class="mega-panel-body">
-                                                    @if($cat->subcategories->count())
-                                                        <div class="mega-subcat-grid">
-                                                            @foreach($cat->subcategories as $sub)
-                                                                <a href="{{ route('shop.subcategory', ['categorySlug' => $cat->slug, 'subcategorySlug' => $sub->slug]) }}"
-                                                                   class="mega-subcat-card">
-                                                                    <span class="mega-subcat-dot"></span>
-                                                                    <span class="mega-subcat-name">{{ $sub->name }}</span>
-                                                                    <i class="bi bi-arrow-up-right mega-subcat-icon"></i>
-                                                                </a>
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <div class="mega-empty-state">
-                                                            <p>Discover our exclusive {{ $cat->name }} collection handcrafted for quality living.</p>
-                                                            <a href="{{ route('shop.category', $cat->slug) }}" class="btn btn-sm mega-viewall-btn">
-                                                                Shop {{ $cat->name }}
-                                                            </a>
-                                                        </div>
-                                                    @endif
-
-                                                    {{-- Featured Banner Strip (if category has image) --}}
-                                                    @if($cat->image)
-                                                        <a href="{{ route('shop.category', $cat->slug) }}" class="mega-banner-strip">
-                                                            <div class="mega-banner-img-wrap">
-                                                                <img src="{{ asset('public/storage/' . $cat->image) }}" alt="{{ $cat->name }}">
-                                                            </div>
-                                                            <div class="mega-banner-info">
-                                                                <span class="mega-banner-eyebrow">Quality Disposable</span>
-                                                                <span class="mega-banner-text">View curated {{ strtolower($cat->name) }} products</span>
-                                                            </div>
-                                                            <i class="bi bi-arrow-right mega-banner-arrow"></i>
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        @endforeach
+                                        <div class="mega-cat-footer">
+                                            <a href="{{ route('shop') }}" class="mega-cat-footer-link">
+                                                <span>All Products & Categories</span>
+                                                <i class="bi bi-arrow-right"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1640,46 +1314,12 @@
                                         <span>Explore Catalog &rarr;</span>
                                     </a>
 
-                                    <div class="mobile-cat-accordion">
+                                    <div class="mobile-cat-list-wrap">
                                         @foreach ($categories as $cat)
-                                            <div class="mobile-cat-item">
-                                                <div class="mobile-cat-row">
-                                                    <a href="{{ route('shop.category', $cat->slug) }}" class="mobile-cat-link">
-                                                        {{ $cat->name }}
-                                                    </a>
-                                                    @if($cat->subcategories->count())
-                                                        <button type="button"
-                                                                class="mobile-subcat-toggle collapsed"
-                                                                data-subcat-target="#mob-sub-{{ $cat->id }}"
-                                                                aria-expanded="false"
-                                                                aria-label="Toggle {{ $cat->name }} subcategories">
-                                                            <i class="bi bi-chevron-down"></i>
-                                                        </button>
-                                                    @endif
-                                                </div>
-
-                                                @if($cat->subcategories->count())
-                                                    <div class="collapse mobile-subcat-collapse" id="mob-sub-{{ $cat->id }}">
-                                                        <ul class="mobile-subcat-list">
-                                                            @foreach($cat->subcategories as $sub)
-                                                                <li>
-                                                                    <a href="{{ route('shop.subcategory', ['categorySlug' => $cat->slug, 'subcategorySlug' => $sub->slug]) }}"
-                                                                       class="mobile-subcat-link">
-                                                                        <i class="bi bi-dash"></i>
-                                                                        <span>{{ $sub->name }}</span>
-                                                                    </a>
-                                                                </li>
-                                                            @endforeach
-                                                            <li>
-                                                                <a href="{{ route('shop.category', $cat->slug) }}" class="mobile-subcat-link mobile-subcat-all">
-                                                                    <i class="bi bi-arrow-right"></i>
-                                                                    <span>View All {{ $cat->name }}</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                @endif
-                                            </div>
+                                            <a href="{{ route('shop.category', $cat->slug) }}" class="mobile-cat-direct-link">
+                                                <span>{{ $cat->name }}</span>
+                                                <i class="bi bi-chevron-right"></i>
+                                            </a>
                                         @endforeach
                                     </div>
                                 </div>
@@ -2358,48 +1998,10 @@
         })();
 
         /* ============================================================
-           MEGA MENU HANDLERS (DESKTOP HOVER + MOBILE TOGGLE & ACCORDION)
+           CATEGORIES DROPDOWN HANDLERS (MOBILE TOGGLE & CLICK-OUTSIDE)
         ============================================================ */
         (function() {
-            function switchMegaCategory(item) {
-                if (!item) return;
-                var targetId = item.getAttribute('data-target');
-                if (!targetId) return;
-
-                // Update sidebar items
-                document.querySelectorAll('.mega-cat-item').forEach(function(el) {
-                    el.classList.remove('active');
-                });
-                item.classList.add('active');
-
-                // Update right panels
-                document.querySelectorAll('.mega-subcat-panel').forEach(function(panel) {
-                    panel.classList.remove('active');
-                });
-                var targetPanel = document.getElementById(targetId);
-                if (targetPanel) {
-                    targetPanel.classList.add('active');
-                }
-            }
-
-            // Desktop category hover listeners
-            document.addEventListener('mouseover', function(e) {
-                if (window.innerWidth < 992) return;
-                var item = e.target.closest('.mega-cat-item');
-                if (item) {
-                    switchMegaCategory(item);
-                }
-            }, true);
-
-            if (window.jQuery) {
-                $(document).on('mouseenter mouseover', '.mega-cat-item', function() {
-                    if (window.innerWidth >= 992) {
-                        switchMegaCategory(this);
-                    }
-                });
-            }
-
-            // Helper to toggle mobile products dropdown
+            // Helper to toggle mobile categories dropdown
             function toggleMobileProducts(e) {
                 if (e) {
                     e.preventDefault();
@@ -2422,48 +2024,26 @@
             document.addEventListener('click', function(e) {
                 var isMobile = window.innerWidth < 992;
 
-                // 1. Tapping "Products" toggle button on mobile
+                // 1. Tapping "Categories" toggle button on mobile
                 var toggle = e.target.closest('#productsMenuToggle');
                 if (toggle && isMobile) {
                     toggleMobileProducts(e);
                     return;
                 }
 
-                // 2. Tapping subcategory accordion toggle button on mobile
-                var subcatBtn = e.target.closest('.mobile-subcat-toggle');
-                if (subcatBtn && isMobile) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    var targetId = subcatBtn.getAttribute('data-subcat-target') || subcatBtn.getAttribute('data-bs-target');
-                    if (targetId) {
-                        var targetPanel = document.querySelector(targetId);
-                        if (targetPanel) {
-                            if (window.jQuery) {
-                                $(targetPanel).slideToggle(200);
-                            } else {
-                                targetPanel.classList.toggle('show');
-                            }
-                            subcatBtn.classList.toggle('collapsed');
-                            var isExp = !subcatBtn.classList.contains('collapsed');
-                            subcatBtn.setAttribute('aria-expanded', isExp ? 'true' : 'false');
-                        }
-                    }
-                    return;
-                }
-
-                // 3. Tapping inside the mobile mega dropdown
+                // 2. Tapping inside the mobile mega dropdown
                 var insideMega = e.target.closest('.mega-category-dropdown');
                 if (insideMega && isMobile) {
-                    // If tapped on an <a> tag, allow normal navigation to proceed
+                    // If tapped on an <a> link, allow natural navigation to proceed
                     if (e.target.closest('a')) {
                         return;
                     }
-                    // Prevent closing dropdown when tapping inside container
+                    // Prevent closing dropdown when tapping inside container padding
                     e.stopPropagation();
                     return;
                 }
 
-                // 4. Tapping outside closes the mobile products dropdown
+                // 3. Tapping outside closes the mobile categories dropdown
                 if (isMobile) {
                     var openMegaItem = document.querySelector('.nav-item.dropdown-mega.open');
                     if (openMegaItem) {
