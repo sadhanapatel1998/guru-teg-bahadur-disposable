@@ -85,7 +85,7 @@
 
             {{-- Order Summary --}}
             <div class="col-lg-4">
-                <div class="p-4" style="background:#fff;border-radius:14px;border:1px solid #e9ecef;position:sticky;top:80px;">
+                <div class="p-4" style="background:#fff;border-radius:14px;border:1px solid #e9ecef;position:sticky;top:130px;">
                     <h6 class="fw-700 mb-4">Order Summary</h6>
                     <div id="cart-summary">
                         <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span>₹{{ number_format($totals['subtotal'], 2) }}</span></div>
@@ -144,8 +144,10 @@ function removeCart(id) {
         .done(res => {
             if (res.success) {
                 document.getElementById('cart-row-' + id)?.remove();
-                if (typeof window.updateCartCount === 'function') {
-                    window.updateCartCount(res.count);
+                if (typeof window.updateCartHeader === 'function') {
+                    window.updateCartHeader(res.count, res.cart_total || res.subtotal_formatted);
+                } else if (typeof window.updateCartCount === 'function') {
+                    window.updateCartCount(res.count, res.cart_total || res.subtotal_formatted);
                 }
                 if (res.count === 0) location.reload();
             }

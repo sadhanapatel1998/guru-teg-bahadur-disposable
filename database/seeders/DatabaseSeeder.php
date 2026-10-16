@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
         */
 
         Admin::updateOrCreate(
-            ['email' => 'admin@finessebydesign.com'],
+            ['email' => 'admin@gtb.com'],
             [
-                'name'       => 'Finesse By Design',
-                'password'   => Hash::make('Admin@12345'),
+                'name'       => 'Guru Teg Bahadur Disposable',
+                'password'   => Hash::make(''),
                 'role'       => 'super_admin',
                 'is_active'  => true,
             ]
@@ -39,180 +39,155 @@ class DatabaseSeeder extends Seeder
         $categories = [
 
             /*
-            |--------------------------------------------------------------------------
-            | Bar Range
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Kitchen & Houseware
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Bar Range',
+                'name' => 'Kitchen & Houseware',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'Wine Cooler',
-                    'Ice Bucket',
-                    'Wine Bottle Holder',
-                    'Beer Mug',
+                    'Kitchen Essentials',
+                    'Food Storage Containers',
+                    'Kitchen Accessories',
+                    'Household Essentials',
+                    'Disposable Kitchen Products',
                 ],
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Cutlery
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Kitchen Paper & Rolls
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Cutlery',
+                'name' => 'Kitchen Paper & Rolls',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'All Purpose Spoon',
-                    'All Purpose Fork',
-                    'Spoon & Fork Set',
-                    'Handcrafted Brass Cutlery',
+                    'Kitchen Tissue Rolls',
+                    'Kitchen Paper Towels',
+                    'Baking Paper',
+                    'Butter Paper',
+                    'Cling Film',
                 ],
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Server
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Tissue & Napkins
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Server',
+                'name' => 'Tissue & Napkins',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'Cake Server',
-                    'Serving Spoon',
-                    'Serving Ladle',
-                    'Cheese Server',
-                    'Decorative Server',
+                    'Facial Tissues',
+                    'Table Napkins',
+                    'Paper Napkins',
+                    'Toilet Tissue',
+                    'Wet Wipes',
                 ],
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Gift Basket
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Disposable Cups & Bowls
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Gift Basket',
+                'name' => 'Disposable Cups & Bowls',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'Fruit Basket',
-                    'Hammered Fruit Basket',
-                    'Brass Basket',
-                    'Silver Plated Basket',
-                    'Decorative Basket',
+                    'Paper Cups',
+                    'Plastic Cups',
+                    'Ripple Cups',
+                    'Disposable Bowls',
+                    'Soup Bowls',
+                    'Ice Cream Cups',
                 ],
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Flower Vase
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Disposable Plates & Spoons
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Flower Vase',
+                'name' => 'Disposable Plates & Spoons',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'Flower Vase',
-                    'Hammered Flower Vase',
-                    'Rose Bowl',
-                    'Decorative Vase',
+                    'Paper Plates',
+                    'Areca Leaf Plates',
+                    'Plastic Plates',
+                    'Compartment Plates',
+                    'Disposable Spoons',
+                    'Disposable Forks',
+                    'Disposable Knives',
                 ],
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Dessert Cups
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Kitchen Cleaning Products
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Dessert Cups',
+                'name' => 'Kitchen Cleaning Products',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'Dessert Cup',
-                    'Banana Split',
-                    'Ice Cream Cup',
-                    'Single Scoop Ice Cream Cup',
+                    'Dishwashing Products',
+                    'Scrubbers',
+                    'Scouring Pads',
+                    'Cleaning Brushes',
+                    'Garbage Bags',
+                    'Kitchen Cleaning Accessories',
                 ],
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Serving Trays
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Aluminium Foil Rolls
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Serving Trays',
+                'name' => 'Aluminium Foil Rolls',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'Serving Tray',
-                    'Square Serving Tray',
-                    'Decorative Serving Tray',
-                    'Brass Serving Tray',
+                    'Aluminium Foil',
+                    'Heavy Duty Aluminium Foil',
+                    'Food Wrapping Foil',
+                    'Aluminium Foil Rolls',
+                    'Foil Containers',
                 ],
             ],
 
             /*
-            |--------------------------------------------------------------------------
-            | Nut Dish
-            |--------------------------------------------------------------------------
-            */
+    |--------------------------------------------------------------------------
+    | Catering & Party Supplies
+    |--------------------------------------------------------------------------
+    */
             [
-                'name' => 'Nut Dish',
+                'name' => 'Catering & Party Supplies',
                 'icon' => '',
                 'is_featured' => true,
                 'subcategories' => [
-                    'Reindeer Nut Bowl',
-                    'Trivet',
-                    'Swan Bowl',
-                    'Nut Dish',
-                    'Leaf Platter',
-                    'Decorative Nut Bowl',
-                ],
-            ],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Tea Set
-            |--------------------------------------------------------------------------
-            */
-            [
-                'name' => 'Tea Set',
-                'icon' => '',
-                'is_featured' => true,
-                'subcategories' => [
-                    'Brass Tea Set',
-                    'Silver Plated Tea Set',
-                    'Traditional Tea Set',
-                ],
-            ],
-
-            /*
-            |--------------------------------------------------------------------------
-            | Misc Articles
-            |--------------------------------------------------------------------------
-            */
-            [
-                'name' => 'Misc Articles',
-                'icon' => '',
-                'is_featured' => true,
-                'subcategories' => [
-                    'Snack Server',
-                    'Chafing Dish',
-                    'Toaster',
-                    'Pooja Lamp',
-                    'Soup Bowl',
-                    'Tissue Paper Holder',
+                    'Disposable Catering Products',
+                    'Party Plates',
+                    'Party Cups',
+                    'Food Containers',
+                    'Serving Accessories',
+                    'Party Decoration Supplies',
                 ],
             ],
         ];
+
 
         foreach ($categories as $categoryData) {
 
@@ -269,25 +244,25 @@ class DatabaseSeeder extends Seeder
 
             [
                 'key' => 'site_name',
-                'value' => 'Finesse By Design',
+                'value' => 'Guru Teg Bahadur Disposable',
                 'group' => 'general',
             ],
 
             [
                 'key' => 'site_tagline',
-                'value' => 'Premium Handcrafted Brass & Silver Plated Giftware',
+                'value' => 'Quality Disposable Products for Every Occasion',
                 'group' => 'general',
             ],
 
             [
                 'key' => 'site_email',
-                'value' => 'admin@finessebydesign.com',
+                'value' => 'info@guruteghbahadursdisposable.com',
                 'group' => 'general',
             ],
 
             [
                 'key' => 'site_phone',
-                'value' => '+91 82182 07223',
+                'value' => '+91 98765 43210',
                 'group' => 'general',
             ],
 
@@ -305,33 +280,33 @@ class DatabaseSeeder extends Seeder
 
             [
                 'key' => 'free_shipping_threshold',
-                'value' => '5000',
+                'value' => '2000',
                 'group' => 'general',
             ],
 
             [
                 'key' => 'shipping_charge',
-                'value' => '250',
+                'value' => '100',
                 'group' => 'general',
             ],
 
             [
                 'key' => 'meta_title',
-                'value' => 'Finesse By Design | Premium Handcrafted Brass & Silver Plated Giftware',
+                'value' => 'Guru Teg Bahadur Disposable | Disposable Products & Kitchen Essentials',
                 'group' => 'seo',
             ],
 
             [
                 'key' => 'meta_description',
                 'value' =>
-                    'Shop premium handcrafted brass and silver plated tableware, bar accessories, home decor, wedding gifts and utensils from Finesse By Design.',
+                'Shop quality disposable cups, plates, bowls, spoons, tissues, kitchen paper, aluminium foil, cleaning products, catering and party supplies from Guru Teg Bahadur Disposable.',
                 'group' => 'seo',
             ],
 
             [
                 'key' => 'footer_about',
                 'value' =>
-                    'Finesse By Design offers premium handcrafted brass and silver plated giftware, tableware, bar accessories, home decor, wedding gifts and utensils.',
+                'Guru Teg Bahadur Disposable offers a wide range of quality disposable products, kitchen essentials, tissues, paper products, aluminium foil, cleaning supplies, catering products and party supplies for homes, businesses and events.',
                 'group' => 'general',
             ],
         ];
@@ -353,11 +328,7 @@ class DatabaseSeeder extends Seeder
         */
 
         $this->command->info(
-            'Seeded: Admin, Finesse By Design Categories, Subcategories and Settings'
-        );
-
-        $this->command->info(
-            'Admin Login: admin@finessebydesign.com / Admin@12345'
+            'Seeded: Admin, Guru Teg Bahadur Disposable Categories and Settings'
         );
     }
 }

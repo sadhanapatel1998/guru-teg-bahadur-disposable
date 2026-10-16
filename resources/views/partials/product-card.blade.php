@@ -249,8 +249,8 @@
 
 .prod-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 15.5px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
     color: #0F172A;
     line-height: 1.3;
     margin: 0;

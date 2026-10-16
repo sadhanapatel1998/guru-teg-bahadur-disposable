@@ -16,7 +16,7 @@
         <div class="row g-4">
             {{-- Sidebar Filters --}}
             <div class="col-lg-3">
-                <div class="p-4 bg-white rounded-4 border" style="position:sticky;top:80px;">
+                <div class="p-4 bg-white rounded-4 border" style="position:sticky;top:130px;">
                     <h6 class="fw-700 mb-4">Filters</h6>
                     <form method="GET" id="filter-form">
                         {{-- Categories --}}

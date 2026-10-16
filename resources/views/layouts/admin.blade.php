@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Admin') — Finesse by Designed Admin Panel</title>
+    <title>@yield('title', 'Admin') — Guru Teg Bahadur Disposable</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -13,6 +13,10 @@
   {{-- Custom CSS --}}
     <link rel="stylesheet" href="{{ base_public_url('assets/css/admin.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jodit@3.24.9/build/jodit.min.css">
+    
+    {{-- Favicon --}}
+    <link rel="icon"
+        href="{{ setting('site_favicon') ? asset('public/storage/' . setting('site_favicon')) : asset('images/favicon.png') }}">
  
     @stack('styles')
 </head>

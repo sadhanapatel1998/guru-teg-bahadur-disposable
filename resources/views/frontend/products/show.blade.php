@@ -19,7 +19,7 @@
     /* Left Gallery Column */
     .pdp-gallery-sticky {
         position: sticky;
-        top: 90px;
+        top: 130px;
         z-index: 2;
     }
 
@@ -1484,9 +1484,10 @@
                 _token: '{{ csrf_token() }}'
             })
             .done(res => {
-                if (res.success) {
-                    if (typeof window.updateCartCount === 'function') {
-                        window.updateCartCount(res.count);
+                    if (typeof window.updateCartHeader === 'function') {
+                        window.updateCartHeader(res.count, res.cart_total || res.subtotal_formatted || res.total_formatted);
+                    } else if (typeof window.updateCartCount === 'function') {
+                        window.updateCartCount(res.count, res.cart_total || res.subtotal_formatted || res.total_formatted);
                     }
                     if (typeof showToast === 'function') {
                         showToast(res.message, 'success');

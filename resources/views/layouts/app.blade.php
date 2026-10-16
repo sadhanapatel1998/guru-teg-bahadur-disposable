@@ -17,7 +17,7 @@
 
     {{-- Favicon --}}
     <link rel="icon"
-        href="{{ setting('site_favicon') ? asset('storage/' . setting('site_favicon')) : asset('images/favicon.png') }}">
+        href="{{ setting('site_favicon') ? asset('public/storage/' . setting('site_favicon')) : asset('images/favicon.png') }}">
 
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -456,8 +456,9 @@
         /* Tier 2: Middle Header */
         .gtb-mid-header {
             background: #FFFFFF;
-            padding: 14px 0;
+            padding: 0px 0;
             border-bottom: 1px solid #F1F5F9;
+            transition: padding 0.25s ease;
         }
 
         .gtb-brand-col {
@@ -471,12 +472,13 @@
         }
 
         .gtb-header-logo {
-            height: 68px !important;
-            max-height: 68px !important;
+            height: 68px;
+            max-height: 68px;
             width: auto !important;
             max-width: 280px !important;
             object-fit: contain !important;
             display: block !important;
+            transition: height 0.25s ease, max-height 0.25s ease;
         }
 
         .gtb-header-logo-text {
@@ -628,12 +630,12 @@
         }
 
         .gtb-action-icon {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
             border-radius: 50%;
-            background: #F1F5F9;
-            border: 1.5px solid #E2E8F0;
+            background: #EEF4F9;
+            border: 1px solid rgba(226, 232, 240, 0.8);
             color: var(--gtb-navy);
             display: flex;
             align-items: center;
@@ -643,56 +645,118 @@
         }
 
         .gtb-action-item:hover .gtb-action-icon {
-            background: var(--gtb-navy);
-            border-color: var(--gtb-navy);
-            color: #FFFFFF;
+            background: #E2ECF5;
+            border-color: #CBD5E1;
+            color: var(--gtb-navy);
         }
 
-        .gtb-cart-item:hover .gtb-action-icon {
-            background: var(--gtb-red);
-            border-color: var(--gtb-red);
+        /* Cart action item - exact replica of shared design */
+        .gtb-cart-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none !important;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .gtb-cart-item:hover {
+            transform: translateY(-1px);
+        }
+
+        .gtb-cart-icon-wrap {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            border-radius: 50%;
+            background: #EEF4F9;
+            border: 1px solid rgba(226, 232, 240, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .gtb-cart-item:hover .gtb-cart-icon-wrap {
+            background: #E4EEF7;
+            border-color: #CBD5E1;
+            box-shadow: 0 4px 12px rgba(11, 58, 99, 0.08);
+        }
+
+        .gtb-cart-bag-icon {
+            stroke: #073863;
+            transition: transform 0.2s ease;
+        }
+
+        .gtb-cart-item:hover .gtb-cart-bag-icon {
+            transform: scale(1.05);
+        }
+
+        .gtb-cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 50%;
+            background: #D9232E;
             color: #FFFFFF;
+            font-family: 'Poppins', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 2px 6px rgba(217, 35, 46, 0.45);
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes cartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.28); }
+            100% { transform: scale(1); }
+        }
+
+        .cart-badge-updated {
+            animation: cartPulse 0.35s ease;
         }
 
         .gtb-action-info {
             display: flex;
             flex-direction: column;
-            line-height: 1.25;
+            justify-content: center;
+            line-height: 1.15;
         }
 
         .gtb-action-label {
-            font-size: 11px;
-            color: #64748B;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            color: #5B738B;
             font-weight: 500;
+            margin-bottom: 2px;
+            letter-spacing: 0.1px;
         }
 
         .gtb-action-val {
-            font-size: 13.5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
             color: var(--gtb-navy);
             font-weight: 700;
             white-space: nowrap;
         }
 
         .gtb-cart-total {
-            color: var(--gtb-red);
-        }
-
-        .gtb-cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--gtb-red);
-            color: #FFFFFF;
-            font-size: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #D9232E;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #FFFFFF;
-            box-shadow: 0 2px 5px rgba(217, 35, 46, 0.35);
+            white-space: nowrap;
+            letter-spacing: -0.2px;
+            transition: color 0.2s ease;
         }
 
         .gtb-account-dropdown .dropdown-toggle::after {
@@ -758,23 +822,62 @@
         }
 
         /* ============================================================
-           Tier 3: STICKY NAVIGATION BAR (UNIQUE ID & CLASS)
+           COMBINED STICKY HEADER CONTAINER (Tier 2 Middle Header + Tier 3 Nav Bar)
+           Both Middle Header and Navigation Bar stick together on scroll
         ============================================================ */
-        #gtb-sticky-nav-header.gtb-main-sticky-nav {
+        .gtb-sticky-header-combo {
             position: -webkit-sticky !important;
             position: sticky !important;
             top: 0 !important;
             z-index: 1040 !important;
             width: 100% !important;
             background: #FFFFFF !important;
-            border-top: 1px solid #EEF2F6;
-            border-bottom: 1px solid #E2E8F0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
             transition: box-shadow 0.25s ease, background-color 0.25s ease;
         }
 
-        #gtb-sticky-nav-header.gtb-main-sticky-nav.is-stuck {
-            box-shadow: 0 6px 20px rgba(11, 58, 99, 0.1) !important;
+        .gtb-sticky-header-combo.is-stuck {
+            box-shadow: 0 8px 25px rgba(11, 58, 99, 0.12) !important;
+        }
+
+        /* Subtle compacting on scroll */
+        /* .gtb-sticky-header-combo.is-stuck .gtb-mid-header {
+            padding: 7px 0 !important;
+        } */
+
+        /* .gtb-sticky-header-combo.is-stuck .gtb-header-logo {
+            height: 52px !important;
+            max-height: 52px !important;
+        } */
+
+        .gtb-sticky-header-combo.is-stuck .gtb-action-icon {
+            width: 38px !important;
+            height: 38px !important;
+            min-width: 38px !important;
+            font-size: 17px !important;
+        }
+
+        .gtb-sticky-header-combo.is-stuck .gtb-cart-icon-wrap {
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+        }
+
+        .gtb-sticky-header-combo.is-stuck .gtb-nav-link {
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+        }
+
+        /* Tier 3: Navigation Bar inside sticky combo */
+        #gtb-sticky-nav-header.gtb-main-sticky-nav {
+            position: relative !important;
+            top: auto !important;
+            z-index: 1040 !important;
+            width: 100% !important;
+            background: #FFFFFF !important;
+            border-top: 1px solid #EEF2F6;
+            border-bottom: 1px solid #E2E8F0;
+            box-shadow: none !important;
         }
 
         .gtb-sticky-nav-inner {
@@ -803,8 +906,8 @@
             align-items: center;
             padding: 15px 18px !important;
             font-family: 'Poppins', sans-serif !important;
-            font-size: 14.5px !important;
-            font-weight: 600 !important;
+            font-size: 16px !important;
+            font-weight: 500 !important;
             color: #1E293B !important;
             text-decoration: none !important;
             transition: color 0.2s ease;
@@ -903,7 +1006,7 @@
         .gtb-feature-title {
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             color: #0B3A63;
             white-space: nowrap;
             letter-spacing: -0.2px;
@@ -1037,42 +1140,44 @@
     {{-- ============================================================
          GTB HEADER SECTION (3-TIER MODERN DESIGN)
     ============================================================ --}}
-    <header class="gtb-header-wrapper">
-        {{-- Tier 1: Top Bar (Navy Blue) --}}
-        <div class="gtb-topbar">
-            <div class="container d-flex align-items-center justify-content-between">
-                <div class="gtb-topbar-left d-flex align-items-center">
-                    <a href="mailto:{{ setting('site_email', 'info@GTBdisposable.com') }}" class="gtb-topbar-link">
-                        <i class="bi bi-envelope"></i>
-                        <span>{{ setting('site_email', 'info@GTBdisposable.com') }}</span>
-                    </a>
-                    <span class="gtb-topbar-divider">|</span>
-                    <a href="tel:{{ setting('site_phone', '+91 9310099249') }}" class="gtb-topbar-link">
-                        <i class="bi bi-telephone"></i>
-                        <span>{{ setting('site_phone', '+91 9310099249') }}</span>
-                    </a>
-                </div>
+    {{-- Tier 1: Top Bar (Navy Blue) - Scrolls away naturally --}}
+    <div class="gtb-topbar">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="gtb-topbar-left d-flex align-items-center">
+                <a href="mailto:{{ setting('site_email', 'info@GTBdisposable.com') }}" class="gtb-topbar-link">
+                    <i class="bi bi-envelope"></i>
+                    <span>{{ setting('site_email', 'info@GTBdisposable.com') }}</span>
+                </a>
+                <span class="gtb-topbar-divider">|</span>
+                <a href="tel:{{ setting('site_phone', '+91 9310099249') }}" class="gtb-topbar-link">
+                    <i class="bi bi-telephone"></i>
+                    <span>{{ setting('site_phone', '+91 9310099249') }}</span>
+                </a>
+            </div>
 
-                <div class="gtb-topbar-right d-flex align-items-center">
-                    <span class="gtb-follow-text">Follow Us</span>
-                    <div class="gtb-social-links d-flex align-items-center">
-                        <a href="{{ setting('social_facebook', 'https://www.facebook.com/') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="Facebook">
-                            <i class="bi bi-facebook"></i>
-                        </a>
-                        <a href="{{ setting('social_instagram', 'https://www.instagram.com/') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="Instagram">
-                            <i class="bi bi-instagram"></i>
-                        </a>
-                        <a href="{{ setting('social_linkedin', '#') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="LinkedIn">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                        <a href="{{ setting('social_youtube', '#') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="YouTube">
-                            <i class="bi bi-youtube"></i>
-                        </a>
-                    </div>
+            <div class="gtb-topbar-right d-flex align-items-center">
+                <span class="gtb-follow-text">Follow Us</span>
+                <div class="gtb-social-links d-flex align-items-center">
+                    <a href="{{ setting('social_facebook', 'https://www.facebook.com/') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="{{ setting('social_instagram', 'https://www.instagram.com/') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="{{ setting('social_linkedin', '#') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="{{ setting('social_youtube', '#') }}" target="_blank" rel="noopener" class="gtb-social-icon" title="YouTube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 
+    {{-- COMBINED STICKY HEADER (Tier 2 Middle Header + Tier 3 Nav Bar) --}}
+    {{-- Both Middle Header and Navigation Bar stick together on scroll at top: 0 --}}
+    <header id="gtb-sticky-header-combo" class="gtb-header-wrapper gtb-sticky-header-combo">
         {{-- Tier 2: Middle Header (Logo, Centered Pill Search, 3 Action Blocks) - Desktop --}}
         <div class="gtb-mid-header d-none d-lg-block">
             <div class="container">
@@ -1081,7 +1186,7 @@
                     <div class="gtb-brand-col">
                         <a class="gtb-brand-link" href="{{ route('home') }}">
                             @if (setting('site_logo'))
-                                <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name', 'Guru Teg Bahadur Disposable') }}" class="gtb-header-logo" style="height:68px; max-height:68px; width:auto; max-width:280px; object-fit:contain;">
+                                <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name', 'Guru Teg Bahadur Disposable') }}" class="gtb-header-logo" style="width:auto; max-width:280px; object-fit:contain;">
                             @else
                                 <span class="gtb-header-logo-text">
                                     <span class="gtb-logo-title">GURU TEG BAHADUR</span>
@@ -1175,36 +1280,39 @@
                             </a>
                         @endauth
 
-                        {{-- Action 3: Cart --}}
+                        {{-- Action 3: Cart (Exact match of shared design) --}}
                         @php
                             $cartTotalAmount = app(\App\Services\CartService::class)->totals()['subtotal'] ?? 0;
+                            $cartCount = app(\App\Services\CartService::class)->count();
                         @endphp
-                        <a href="{{ route('cart.index') }}" class="gtb-action-item gtb-cart-item" title="View Cart">
-                            <div class="gtb-action-icon gtb-cart-icon-wrap position-relative">
-                                <i class="bi bi-bag"></i>
+                        <a href="{{ route('cart.index') }}" class="gtb-cart-item" title="View Cart">
+                            <div class="gtb-cart-icon-wrap position-relative">
+                                <svg class="gtb-cart-bag-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#073863" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="4" y="8" width="16" height="13" rx="2" ry="2"></rect>
+                                    <path d="M8 8V6a4 4 0 0 1 8 0v2"></path>
+                                </svg>
                                 <span class="gtb-cart-badge" id="desktop-cart-count">
-                                    {{ app(\App\Services\CartService::class)->count() }}
+                                    {{ $cartCount }}
                                 </span>
                             </div>
                             <div class="gtb-action-info">
                                 <span class="gtb-action-label">Cart</span>
-                                <span class="gtb-action-val gtb-cart-total">₹{{ number_format($cartTotalAmount, 2) }}</span>
+                                <span class="gtb-cart-total">₹{{ number_format($cartTotalAmount, 2) }}</span>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
 
-    {{-- Tier 3: Sticky Navigation Bar with Unique ID & Class --}}
+        {{-- Tier 3: Sticky Navigation Bar with Unique ID & Class --}}
     <nav id="gtb-sticky-nav-header" class="navbar navbar-expand-lg gtb-main-sticky-nav py-0">
         <div class="container">
             {{-- Mobile Row (< 992px) with Logo, Search, Cart & Menu toggler --}}
             <div class="gtb-mobile-bar d-flex d-lg-none align-items-center justify-content-between w-100 py-2">
                 <a class="gtb-brand-link" href="{{ route('home') }}">
                     @if (setting('site_logo'))
-                        <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name', 'Guru Teg Bahadur Disposable') }}" class="gtb-mobile-logo" style="height: 40px; max-height: 42px; width: auto; max-width: 150px; object-fit: contain;">
+                        <img src="{{ asset('public/storage/' . setting('site_logo')) }}" alt="{{ config('app.name', 'Guru Teg Bahadur Disposable') }}" class="gtb-mobile-logo" style="height: 60px; max-height: 62px; width: auto; max-width: 200px; object-fit: contain;">
                     @else
                         <span class="gtb-logo-title fs-5">GTB Crockery</span>
                     @endif
@@ -1215,9 +1323,12 @@
                         <i class="bi bi-search"></i>
                     </button>
                     <a href="{{ route('cart.index') }}" class="btn gtb-mobile-icon-btn position-relative" title="Cart">
-                        <i class="bi bi-bag"></i>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#073863" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="8" width="16" height="13" rx="2" ry="2"></rect>
+                            <path d="M8 8V6a4 4 0 0 1 8 0v2"></path>
+                        </svg>
                         <span class="gtb-cart-badge" id="mobile-cart-count">
-                            {{ app(\App\Services\CartService::class)->count() }}
+                            {{ $cartCount }}
                         </span>
                     </a>
                     <button class="navbar-toggler gtb-mobile-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gtbNavCollapse" aria-controls="gtbNavCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -1438,6 +1549,7 @@
             </div>
         </div>
     </nav>
+</header>
 
     {{-- Flash Messages --}}
     @if (session('success') || session('error'))
@@ -1742,26 +1854,52 @@
             }
         });
 
-        // Sticky Header scroll elevation class
+        // Sticky Header scroll elevation class (both combo container and nav)
+        const stickyCombo = document.getElementById('gtb-sticky-header-combo');
         const stickyNav = document.getElementById('gtb-sticky-nav-header');
-        if (stickyNav) {
+        if (stickyCombo || stickyNav) {
             const checkSticky = () => {
-                if (window.scrollY > 20) {
-                    stickyNav.classList.add('is-stuck');
-                } else {
-                    stickyNav.classList.remove('is-stuck');
-                }
+                const isStuck = window.scrollY > 30;
+                if (stickyCombo) stickyCombo.classList.toggle('is-stuck', isStuck);
+                if (stickyNav) stickyNav.classList.toggle('is-stuck', isStuck);
             };
             window.addEventListener('scroll', checkSticky, { passive: true });
             checkSticky();
         }
 
-        // Shared helper: keep the navbar cart badges (mobile + desktop) in sync
-        // instantly, without needing a page refresh. Any add/remove/update flow
-        // anywhere in the app should call this with the fresh count from the server.
-        window.updateCartCount = function(count) {
-            $('#mobile-cart-count').text(count);
-            $('#desktop-cart-count').text(count);
+        // Shared helper: keep the navbar cart badges (mobile + desktop) and total amounts in sync
+        // instantly without needing a page refresh.
+        window.updateCartHeader = function(count, total) {
+            if (count !== undefined && count !== null) {
+                $('#mobile-cart-count, #desktop-cart-count')
+                    .text(count)
+                    .addClass('cart-badge-updated');
+                setTimeout(() => {
+                    $('#mobile-cart-count, #desktop-cart-count').removeClass('cart-badge-updated');
+                }, 400);
+            }
+            if (total !== undefined && total !== null) {
+                let formatted = total;
+                if (typeof total === 'number') {
+                    formatted = '₹' + total.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                } else if (typeof total === 'string' && !total.includes('₹')) {
+                    const num = parseFloat(total);
+                    formatted = !isNaN(num)
+                        ? '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                        : '₹' + total;
+                }
+                $('.gtb-cart-total')
+                    .text(formatted)
+                    .addClass('cart-badge-updated');
+                setTimeout(() => {
+                    $('.gtb-cart-total').removeClass('cart-badge-updated');
+                }, 400);
+            }
+        };
+
+        // Backward compatibility
+        window.updateCartCount = function(count, total) {
+            window.updateCartHeader(count, total);
         };
 
         // Add to Cart AJAX (product listing / category / wishlist cards).
@@ -1782,7 +1920,7 @@
                 })
                  .done(res => {
                     if (res.success) {
-                        window.updateCartCount(res.count);
+                        window.updateCartHeader(res.count, res.cart_total || res.subtotal_formatted || res.total_formatted);
                         showToast(res.message, 'success');
                     }
                 })

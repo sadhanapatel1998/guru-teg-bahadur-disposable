@@ -101,7 +101,7 @@
 
         {{-- Order Summary --}}
         <div class="col-lg-5">
-            <div class="p-4 bg-white rounded-4 border" style="position:sticky;top:80px;">
+            <div class="p-4 bg-white rounded-4 border" style="position:sticky;top:130px;">
                 <h6 class="fw-700 mb-3">Order Summary</h6>
                 @foreach($items as $item)
                 @if($item->product)

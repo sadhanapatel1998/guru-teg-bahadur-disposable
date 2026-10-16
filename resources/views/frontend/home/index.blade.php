@@ -111,8 +111,8 @@
                                 <a href="{{ route('shop.category', $cat->slug) }}" class="cat-circle-card">
                                     <div class="cat-circle-media">
                                         <svg class="cat-ring-svg" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <circle class="ring-arc ring-arc-red" cx="70" cy="70" r="66" stroke="#D9232E" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="115 300" stroke-dashoffset="15"/>
-                                            <circle class="ring-arc ring-arc-blue" cx="70" cy="70" r="66" stroke="#0B3A63" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="115 300" stroke-dashoffset="225"/>
+                                            <circle class="ring-arc ring-arc-red" cx="70" cy="70" r="66" stroke="#D9232E" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="115 300" stroke-dashoffset="15"/>
+                                            <circle class="ring-arc ring-arc-blue" cx="70" cy="70" r="66" stroke="#0B3A63" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="115 300" stroke-dashoffset="225"/>
                                         </svg>
                                         <div class="cat-circle-img-wrap">
                                             @if ($cat->image)

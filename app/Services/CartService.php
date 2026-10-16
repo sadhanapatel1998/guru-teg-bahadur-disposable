@@ -13,9 +13,15 @@ class CartService
 {
     private function getIdentifier(): array
     {
-        return Auth::check()
-            ? ['user_id' => Auth::id()]
-            : ['session_id' => Session::getId()];
+        if (Auth::check()) {
+            return ['user_id' => Auth::id()];
+        }
+
+        if (!Session::isStarted()) {
+            Session::start();
+        }
+
+        return ['session_id' => Session::getId()];
     }
 
     public function getItems()
@@ -40,6 +46,11 @@ class CartService
 
     public function add(int $productId, int $quantity = 1, ?int $variantId = null): void
     {
+        if (!Auth::check()) {
+            Session::put('cart_active', true);
+            Session::save();
+        }
+
         $identifier = $this->getIdentifier();
         $query = Cart::where($identifier)
             ->where('product_id', $productId)

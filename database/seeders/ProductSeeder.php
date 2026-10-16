@@ -22,7 +22,7 @@ class ProductSeeder extends Seeder
         | Products
         |--------------------------------------------------------------------------
         |
-        | Product data taken from Finesse By Design catalogue.
+        | Product data taken from Guru Teg Bahadur Disposable catalogue.
         |
         */
 
@@ -1020,7 +1020,7 @@ class ProductSeeder extends Seeder
         */
 
         $this->command->info(
-            'Finesse By Design products seeded successfully.'
+            'Guru Teg Bahadur Disposable products seeded successfully.'
         );
     }
 

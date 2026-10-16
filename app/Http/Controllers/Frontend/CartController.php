@@ -33,10 +33,19 @@ class CartController extends Controller
         );
 
         if ($request->ajax()) {
+            $totals = $this->cartService->totals(session('coupon_code'));
+            $subtotalFormatted = '₹' . number_format($totals['subtotal'], 2);
+            $totalFormatted = '₹' . number_format($totals['total'], 2);
+
             return response()->json([
-                'success' => true,
-                'message' => 'Item added to cart!',
-                'count'   => $this->cartService->count(),
+                'success'            => true,
+                'message'            => 'Item added to cart!',
+                'count'              => $this->cartService->count(),
+                'subtotal'           => $totals['subtotal'],
+                'total'              => $totals['total'],
+                'subtotal_formatted' => $subtotalFormatted,
+                'total_formatted'    => $totalFormatted,
+                'cart_total'         => $subtotalFormatted,
             ]);
         }
 
@@ -49,9 +58,16 @@ class CartController extends Controller
         $this->cartService->update($cartId, $request->quantity);
 
         $totals = $this->cartService->totals(session('coupon_code'));
+        $subtotalFormatted = '₹' . number_format($totals['subtotal'], 2);
 
         if ($request->ajax()) {
-            return response()->json(['success' => true, 'totals' => $totals]);
+            return response()->json([
+                'success'            => true,
+                'totals'             => $totals,
+                'count'              => $this->cartService->count(),
+                'subtotal_formatted' => $subtotalFormatted,
+                'cart_total'         => $subtotalFormatted,
+            ]);
         }
 
         return back();
@@ -60,11 +76,16 @@ class CartController extends Controller
     public function remove(int $cartId)
     {
         $this->cartService->remove($cartId);
+        $totals = $this->cartService->totals(session('coupon_code'));
+        $subtotalFormatted = '₹' . number_format($totals['subtotal'], 2);
 
         if (request()->ajax()) {
             return response()->json([
-                'success' => true,
-                'count'   => $this->cartService->count(),
+                'success'            => true,
+                'count'              => $this->cartService->count(),
+                'totals'             => $totals,
+                'subtotal_formatted' => $subtotalFormatted,
+                'cart_total'         => $subtotalFormatted,
             ]);
         }
 

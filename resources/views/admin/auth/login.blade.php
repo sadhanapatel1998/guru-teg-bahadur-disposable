@@ -25,7 +25,7 @@
     <style>
         :root {
             /* ===============================
-               FINESSE BY DESIGN BRAND COLORS
+               Guru Teg Bahadur Disposable BRAND COLORS
             =============================== */
 
             --kkt-primary: #0B6FAE;
