@@ -1927,23 +1927,38 @@
                 .fail(() => showToast('Failed to add product to cart', 'danger'));
         });
 
-        // Wishlist toggle
-        $(document).on('click', '.btn-wishlist', function(e) {
+        // Wishlist toggle (Global for all product cards)
+        $(document).on('click', '.btn-wishlist:not(.pdp-btn-wishlist)', function(e) {
             e.preventDefault();
             @guest
-            return;
-        @endguest
-        const btn = $(this); $.post('{{ route('wishlist.toggle') }}', {
-            product_id: btn.data('product-id')
-        })
-        .done(res => {
-            if (res.success) {
-                btn.toggleClass('wishlisted', res.inWishlist);
-                btn.find('i').toggleClass('bi-heart', !res.inWishlist).toggleClass('bi-heart-fill', res
-                    .inWishlist);
-                showToast(res.message, res.inWishlist ? 'success' : 'warning');
-            }
-        });
+                showToast('Please log in to add items to your wishlist', 'info');
+                setTimeout(() => {
+                    window.location.href = '{{ route('login') }}';
+                }, 1200);
+                return;
+            @endguest
+            const btn = $(this);
+            const productId = btn.data('product-id') || btn.attr('data-product-id');
+            if (!productId) return;
+
+            $.post('{{ route('wishlist.toggle') }}', {
+                product_id: productId
+            })
+            .done(res => {
+                if (res.success) {
+                    btn.toggleClass('wishlisted', res.inWishlist);
+                    const $icon = btn.find('i');
+                    if (res.inWishlist) {
+                        $icon.removeClass('bi-heart').addClass('bi-heart-fill text-danger');
+                    } else {
+                        $icon.removeClass('bi-heart-fill text-danger').addClass('bi-heart');
+                    }
+                    showToast(res.message, res.inWishlist ? 'success' : 'info');
+                }
+            })
+            .fail(() => {
+                showToast('Failed to update wishlist', 'danger');
+            });
         });
 
         function showToast(msg, type = 'success') {

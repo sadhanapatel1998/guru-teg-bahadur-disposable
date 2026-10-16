@@ -854,10 +854,10 @@
 
                         {{-- Gallery Nav Arrows --}}
                         @if($galleryImages->count() > 1)
-                        <button type="button" class="pdp-gallery-arrow prev" onclick="navigateGallery(-1)" title="Previous image" aria-label="Previous image">
+                        <button type="button" class="pdp-gallery-arrow prev pdp-arrow-prev" onclick="navigateGallery(-1)" title="Previous image" aria-label="Previous image">
                             <i class="bi bi-chevron-left"></i>
                         </button>
-                        <button type="button" class="pdp-gallery-arrow next" onclick="navigateGallery(1)" title="Next image" aria-label="Next image">
+                        <button type="button" class="pdp-gallery-arrow next pdp-arrow-next" onclick="navigateGallery(1)" title="Next image" aria-label="Next image">
                             <i class="bi bi-chevron-right"></i>
                         </button>
                         @endif
@@ -882,6 +882,7 @@
                         @foreach($galleryImages as $index => $imgUrl)
                         <div class="pdp-thumb-item {{ $index === 0 ? 'active' : '' }}"
                             data-index="{{ $index }}"
+                            data-img-url="{{ $imgUrl }}"
                             onclick="selectGalleryImage('{{ $imgUrl }}', {{ $index }})">
                             <img src="{{ $imgUrl }}"
                                 alt="{{ $product->name }} thumb {{ $index + 1 }}"
@@ -1020,9 +1021,9 @@
                 {{-- Quantity + Wishlist Row (Side by Side) --}}
                 <div class="pdp-qty-wishlist-row">
                     <div class="pdp-qty-selector">
-                        <button type="button" onclick="changeQty(-1)" class="pdp-qty-btn" aria-label="Decrease quantity">−</button>
+                        <button type="button" onclick="changeQty(-1)" class="pdp-qty-btn pdp-qty-minus" aria-label="Decrease quantity">−</button>
                         <input type="number" id="qty-input" value="1" min="1" max="{{ $product->stock ?: 99 }}" class="pdp-qty-input" aria-label="Quantity">
-                        <button type="button" onclick="changeQty(1)" class="pdp-qty-btn" aria-label="Increase quantity">+</button>
+                        <button type="button" onclick="changeQty(1)" class="pdp-qty-btn pdp-qty-plus" aria-label="Increase quantity">+</button>
                     </div>
 
                     @php
@@ -1096,14 +1097,14 @@
         <div class="row pdp-tabs-container">
             <div class="col-12">
                 {{-- Tabs Navigation --}}
-                <div class="pdp-tabs-nav" id="pdpTabNav">
-                    <button class="pdp-tab-btn active" data-bs-toggle="tab" data-bs-target="#pdp-tab-specifications">
+                <div class="pdp-tabs-nav" id="pdpTabNav" role="tablist">
+                    <button type="button" role="tab" class="pdp-tab-btn active" data-tab-target="#pdp-tab-specifications" data-bs-target="#pdp-tab-specifications" aria-selected="true">
                         Specifications
                     </button>
-                    <button class="pdp-tab-btn" data-bs-toggle="tab" data-bs-target="#pdp-tab-description">
+                    <button type="button" role="tab" class="pdp-tab-btn" data-tab-target="#pdp-tab-description" data-bs-target="#pdp-tab-description" aria-selected="false">
                         Description
                     </button>
-                    <button class="pdp-tab-btn" data-bs-toggle="tab" data-bs-target="#pdp-tab-reviews">
+                    <button type="button" role="tab" class="pdp-tab-btn" data-tab-target="#pdp-tab-reviews" data-bs-target="#pdp-tab-reviews" aria-selected="false">
                         Reviews ({{ $product->reviews->count() }})
                     </button>
                 </div>
@@ -1318,13 +1319,15 @@
 
 @push('scripts')
 <script>
+    // Product Gallery & Slider
     const galleryUrls = @json($galleryImages->values());
     let currentGalleryIndex = 0;
     const variants = @json($product->variants);
     let selectedVariantId = null;
 
-    // Change Main Image via thumbnail click
-    function selectGalleryImage(url, index) {
+    // Change Main Image via thumbnail click or arrow
+    window.selectGalleryImage = function(url, index) {
+        if (!url) return;
         currentGalleryIndex = index;
         const mainImg = document.getElementById('main-image');
         if (mainImg) {
@@ -1334,20 +1337,38 @@
         if (zoomImg) {
             zoomImg.src = url;
         }
-        document.querySelectorAll('.pdp-thumb-item').forEach((thumb, i) => {
-            thumb.classList.toggle('active', i === index);
+        $('.pdp-thumb-item').each(function(i) {
+            $(this).toggleClass('active', i === index);
         });
-    }
+    };
 
     // Navigate with Left / Right Arrows
-    function navigateGallery(delta) {
+    window.navigateGallery = function(delta) {
         if (!galleryUrls || galleryUrls.length <= 1) return;
         currentGalleryIndex = (currentGalleryIndex + delta + galleryUrls.length) % galleryUrls.length;
-        selectGalleryImage(galleryUrls[currentGalleryIndex], currentGalleryIndex);
-    }
+        window.selectGalleryImage(galleryUrls[currentGalleryIndex], currentGalleryIndex);
+    };
+
+    // Delegated click listeners for gallery
+    $(document).on('click', '.pdp-thumb-item', function(e) {
+        e.preventDefault();
+        const index = parseInt($(this).data('index'));
+        const url = $(this).data('img-url') || (galleryUrls && galleryUrls[index]) || $(this).find('img').attr('src');
+        window.selectGalleryImage(url, index);
+    });
+
+    $(document).on('click', '.pdp-arrow-prev, .pdp-gallery-arrow.prev', function(e) {
+        e.preventDefault();
+        window.navigateGallery(-1);
+    });
+
+    $(document).on('click', '.pdp-arrow-next, .pdp-gallery-arrow.next', function(e) {
+        e.preventDefault();
+        window.navigateGallery(1);
+    });
 
     // Zoom Modal
-    function openZoomModal() {
+    window.openZoomModal = function() {
         const modal = document.getElementById('pdpZoomModal');
         const mainImg = document.getElementById('main-image');
         const zoomImg = document.getElementById('pdpZoomModalImage');
@@ -1356,9 +1377,9 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-    }
+    };
 
-    function closeZoomModal(e, force = false) {
+    window.closeZoomModal = function(e, force = false) {
         if (force || (e && e.target.id === 'pdpZoomModal')) {
             const modal = document.getElementById('pdpZoomModal');
             if (modal) {
@@ -1366,52 +1387,68 @@
                 document.body.style.overflow = '';
             }
         }
-    }
+    };
 
-    // Close zoom modal with ESC key
-    document.addEventListener('keydown', function(e) {
+    $(document).on('click', '.pdp-zoom-btn', function(e) {
+        e.preventDefault();
+        window.openZoomModal();
+    });
+
+    // Keyboard support for gallery and zoom
+    $(document).on('keydown', function(e) {
         if (e.key === 'Escape') {
-            closeZoomModal(null, true);
+            window.closeZoomModal(null, true);
+        } else if (e.key === 'ArrowLeft') {
+            window.navigateGallery(-1);
+        } else if (e.key === 'ArrowRight') {
+            window.navigateGallery(1);
         }
     });
 
-    // Quantity selector
-    function changeQty(delta) {
+    // Quantity Selector (+ / -)
+    window.changeQty = function(delta) {
         const input = document.getElementById('qty-input');
         if (!input) return;
-        let val = parseInt(input.value) + delta;
+        let current = parseInt(input.value) || 1;
+        let val = current + delta;
         const max = parseInt(input.getAttribute('max')) || 99;
-        input.value = Math.max(1, Math.min(max, isNaN(val) ? 1 : val));
-    }
+        const min = parseInt(input.getAttribute('min')) || 1;
+        input.value = Math.max(min, Math.min(max, isNaN(val) ? 1 : val));
+    };
+
+    $(document).on('click', '.pdp-qty-minus', function(e) {
+        e.preventDefault();
+        window.changeQty(-1);
+    });
+
+    $(document).on('click', '.pdp-qty-plus', function(e) {
+        e.preventDefault();
+        window.changeQty(1);
+    });
+
+    $(document).on('change input', '#qty-input', function() {
+        let val = parseInt(this.value);
+        const max = parseInt(this.getAttribute('max')) || 99;
+        const min = parseInt(this.getAttribute('min')) || 1;
+        this.value = Math.max(min, Math.min(max, isNaN(val) ? 1 : val));
+    });
 
     // Color Swatch Selection
-    document.querySelectorAll('.variant-color-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.variant-color-btn').forEach(b => {
-                b.classList.remove('btn-primary');
-                b.classList.add('btn-outline-secondary');
-            });
-            this.classList.remove('btn-outline-secondary');
-            this.classList.add('btn-primary');
-            const colorSpan = document.getElementById('selected-color');
-            if (colorSpan) colorSpan.textContent = this.dataset.color;
-            updateVariantPrice();
-        });
+    $(document).on('click', '.variant-color-btn', function() {
+        $('.variant-color-btn').removeClass('btn-primary').addClass('btn-outline-secondary');
+        $(this).removeClass('btn-outline-secondary').addClass('btn-primary');
+        const colorSpan = document.getElementById('selected-color');
+        if (colorSpan) colorSpan.textContent = this.dataset.color;
+        updateVariantPrice();
     });
 
     // Size Selection
-    document.querySelectorAll('.variant-size-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.variant-size-btn').forEach(b => {
-                b.classList.remove('btn-primary');
-                b.classList.add('btn-outline-secondary');
-            });
-            this.classList.remove('btn-outline-secondary');
-            this.classList.add('btn-primary');
-            const sizeSpan = document.getElementById('selected-size');
-            if (sizeSpan) sizeSpan.textContent = this.dataset.size;
-            updateVariantPrice();
-        });
+    $(document).on('click', '.variant-size-btn', function() {
+        $('.variant-size-btn').removeClass('btn-primary').addClass('btn-outline-secondary');
+        $(this).removeClass('btn-outline-secondary').addClass('btn-primary');
+        const sizeSpan = document.getElementById('selected-size');
+        if (sizeSpan) sizeSpan.textContent = this.dataset.size;
+        updateVariantPrice();
     });
 
     function updateVariantPrice() {
@@ -1464,72 +1501,125 @@
         }
     }
 
-    // Add to Cart with Quantity & Variant
-    document.getElementById('main-add-to-cart')?.addEventListener('click', function(e) {
+    // Add to Cart Button (with Loading State & Instant Header Sync)
+    $(document).on('click', '#main-add-to-cart', function(e) {
         e.preventDefault();
-        const btn = this;
-        const productId = btn.dataset.productId;
-        const variantId = btn.dataset.variantId || null;
-        const qtyInput = document.getElementById('qty-input');
-        const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+        const btn = $(this);
+        if (btn.prop('disabled')) return;
 
-        const originalHtml = btn.innerHTML;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Adding...';
-        btn.disabled = true;
+        const productId = btn.attr('data-product-id');
+        const variantId = btn.attr('data-variant-id') || null;
+        const qtyInput = document.getElementById('qty-input');
+        const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+
+        const originalHtml = btn.html();
+        btn.html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Adding...').prop('disabled', true);
 
         $.post('{{ route("cart.add") }}', {
-                product_id: productId,
-                product_variant_id: variantId,
-                quantity: qty,
-                _token: '{{ csrf_token() }}'
-            })
-            .done(res => {
-                    if (typeof window.updateCartHeader === 'function') {
-                        window.updateCartHeader(res.count, res.cart_total || res.subtotal_formatted || res.total_formatted);
-                    } else if (typeof window.updateCartCount === 'function') {
-                        window.updateCartCount(res.count, res.cart_total || res.subtotal_formatted || res.total_formatted);
-                    }
-                    if (typeof showToast === 'function') {
-                        showToast(res.message, 'success');
-                    } else {
-                        alert(res.message);
-                    }
+            product_id: productId,
+            product_variant_id: variantId,
+            quantity: qty,
+            _token: '{{ csrf_token() }}'
+        })
+        .done(res => {
+            if (res.success) {
+                if (typeof window.updateCartHeader === 'function') {
+                    window.updateCartHeader(res.count, res.cart_total || res.subtotal_formatted || res.total_formatted);
+                } else if (typeof window.updateCartCount === 'function') {
+                    window.updateCartCount(res.count, res.cart_total || res.subtotal_formatted || res.total_formatted);
                 }
-            })
-            .fail(err => {
                 if (typeof showToast === 'function') {
-                    showToast('Failed to add product to cart', 'danger');
+                    showToast(res.message || 'Product added to cart!', 'success');
+                } else {
+                    alert(res.message || 'Product added to cart!');
                 }
-            })
-            .always(() => {
-                btn.innerHTML = originalHtml;
-                btn.disabled = false;
-            });
+            } else {
+                if (typeof showToast === 'function') {
+                    showToast(res.message || 'Could not add to cart', 'danger');
+                } else {
+                    alert(res.message || 'Could not add to cart');
+                }
+            }
+        })
+        .fail(err => {
+            const msg = (err.responseJSON && err.responseJSON.message) ? err.responseJSON.message : 'Failed to add product to cart';
+            if (typeof showToast === 'function') {
+                showToast(msg, 'danger');
+            } else {
+                alert(msg);
+            }
+        })
+        .always(() => {
+            btn.html(originalHtml).prop('disabled', false);
+        });
     });
 
-    // Tab switching logic
-    function switchPdpTab(targetSelector) {
+    // Wishlist Button Handler (with guest feedback & visual toggle)
+    $(document).on('click', '.pdp-btn-wishlist', function(e) {
+        e.preventDefault();
+        @guest
+            if (typeof showToast === 'function') {
+                showToast('Please log in to add items to your wishlist', 'info');
+            } else {
+                alert('Please log in to add items to your wishlist');
+            }
+            setTimeout(() => {
+                window.location.href = '{{ route("login") }}';
+            }, 1200);
+            return;
+        @endguest
+
+        const btn = $(this);
+        const productId = btn.attr('data-product-id');
+        if (!productId) return;
+
+        $.post('{{ route("wishlist.toggle") }}', {
+            product_id: productId,
+            _token: '{{ csrf_token() }}'
+        })
+        .done(res => {
+            if (res.success) {
+                btn.toggleClass('wishlisted', res.inWishlist);
+                const $icon = btn.find('i');
+                if (res.inWishlist) {
+                    $icon.removeClass('bi-heart').addClass('bi-heart-fill text-danger');
+                } else {
+                    $icon.removeClass('bi-heart-fill text-danger').addClass('bi-heart');
+                }
+                if (typeof showToast === 'function') {
+                    showToast(res.message, res.inWishlist ? 'success' : 'info');
+                }
+            }
+        })
+        .fail(() => {
+            if (typeof showToast === 'function') {
+                showToast('Failed to update wishlist', 'danger');
+            } else {
+                alert('Failed to update wishlist');
+            }
+        });
+    });
+
+    // Tab switching logic (Specifications, Description, Reviews)
+    window.switchPdpTab = function(targetSelector) {
         if (!targetSelector) return;
-        document.querySelectorAll('.pdp-tab-btn').forEach(btn => {
-            const isMatch = btn.getAttribute('data-bs-target') === targetSelector;
-            btn.classList.toggle('active', isMatch);
+        $('.pdp-tab-btn').each(function() {
+            const isMatch = ($(this).data('tab-target') || $(this).data('bs-target') || $(this).attr('data-bs-target')) === targetSelector;
+            $(this).toggleClass('active', isMatch);
+            $(this).attr('aria-selected', isMatch ? 'true' : 'false');
         });
 
-        document.querySelectorAll('#pdpTabContent > .tab-pane').forEach(pane => {
-            pane.classList.remove('show', 'active');
-        });
-        const targetPane = document.querySelector(targetSelector);
-        if (targetPane) {
-            targetPane.classList.add('show', 'active');
+        $('#pdpTabContent > .tab-pane').removeClass('show active');
+        const $targetPane = $(targetSelector);
+        if ($targetPane.length) {
+            $targetPane.addClass('show active');
         }
-    }
+    };
 
-    document.querySelectorAll('.pdp-tab-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetSelector = this.getAttribute('data-bs-target');
-            switchPdpTab(targetSelector);
-        });
+    $(document).on('click', '.pdp-tab-btn', function(e) {
+        e.preventDefault();
+        const target = $(this).data('tab-target') || $(this).data('bs-target') || $(this).attr('data-bs-target');
+        window.switchPdpTab(target);
     });
 </script>
 @endpush
