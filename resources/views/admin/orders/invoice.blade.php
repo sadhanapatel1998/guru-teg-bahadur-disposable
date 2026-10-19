@@ -24,7 +24,7 @@
     <table>
         <tr>
             <td width="60%">
-                <div class="company-name">Gastro Wellness</div>
+                <div class="company-name">Guru Teg Bahadur Disposable</div>
                 <div style="color:#6c757d;margin-top:4px;">{{ setting('site_address', 'Your Business Address') }}</div>
                 <div>📞 {{ setting('site_phone') }} | ✉ {{ setting('site_email') }}</div>
             </td>
@@ -109,7 +109,7 @@
 </table>
 
 <div style="margin-top:40px;border-top:1px solid #e9ecef;padding-top:16px;color:#6c757d;text-align:center;font-size:11px;">
-    Thank you for shopping with Gastro Wellness For support: {{ setting('site_email') }}
+    Thank you for shopping with Guru Teg Bahadur Disposable For support: {{ setting('site_email') }}
 </div>
 </body>
 </html>

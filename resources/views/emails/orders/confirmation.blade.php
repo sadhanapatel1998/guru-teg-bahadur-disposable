@@ -31,7 +31,7 @@
 <div class="wrapper">
   <div class="header">
     <h1> Order Confirmed!</h1>
-    <p>Thank you for shopping with Gastro Wellness</p>
+    <p>Thank you for shopping with Guru Teg Bahadur Disposable</p>
   </div>
   <div class="body">
     <p>Hi <strong>{{ $order->user->name ?? $order->shipping_name }}</strong>,</p>
@@ -92,7 +92,7 @@
     </p>
   </div>
   <div class="footer">
-    <p>© {{ date('Y') }} Gastro Wellness. All rights reserved.</p>
+    <p>© {{ date('Y') }} Guru Teg Bahadur Disposable. All rights reserved.</p>
     <p>If you have any questions, reply to this email or contact our support.</p>
   </div>
 </div>

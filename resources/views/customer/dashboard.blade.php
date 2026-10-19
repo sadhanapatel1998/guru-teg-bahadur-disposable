@@ -40,19 +40,19 @@
             {{-- Stats --}}
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
-                    <div class="p-4 rounded-4 text-center" style="background:linear-gradient(135deg,#0b6b57,#6dc242);color:#fff;border:none;box-shadow:0 12px 30px rgba(11,107,87,.18);">
+                    <div class="p-4 rounded-4 text-center" style="    background: linear-gradient(135deg, #011d4c, #920406);color:#fff;border:none;box-shadow:0 12px 30px rgba(11,107,87,.18);">
                         <div  style="font-size:2rem;font-weight:800;color:#fff;">{{ $totalOrders }}</div>
                         <div style="font-size:.84rem;color:rgba(255,255,255,.85);">Total Orders</div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 border text-center" style="background:linear-gradient(135deg,#0b6b57,#6dc242);color:#fff;border:none;box-shadow:0 12px 30px rgba(11,107,87,.18);">
+                    <div class="p-4 bg-white rounded-4 border text-center" style="    background: linear-gradient(135deg, #011d4c, #920406);color:#fff;border:none;box-shadow:0 12px 30px rgba(11,107,87,.18);">
                         <div style="font-size:2rem;font-weight:800;color:#fff;">₹{{ number_format($totalSpent, 0) }}</div>
                         <div style="font-size:.84rem;color:rgba(255,255,255,.85);">Total Spent</div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 border text-center" style="background:linear-gradient(135deg,#0b6b57,#6dc242);color:#fff;border:none;box-shadow:0 12px 30px rgba(11,107,87,.18);">
+                    <div class="p-4 bg-white rounded-4 border text-center" style="    background: linear-gradient(135deg, #011d4c, #920406);color:#fff;border:none;box-shadow:0 12px 30px rgba(11,107,87,.18);">
                         <div style="font-size:2rem;font-weight:800;color:#fff;">{{ $wishlistCount }}</div>
                         <div style="font-size:.84rem;color:rgba(255,255,255,.85);">Wishlist Items</div>
                     </div>

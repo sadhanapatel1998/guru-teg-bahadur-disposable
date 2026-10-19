@@ -123,7 +123,16 @@
                 @if($totals['discount'] > 0)
                 <div class="d-flex justify-content-between mb-2"><span class="text-muted" style="font-size:.87rem;">Discount</span><span class="text-success">-₹{{ number_format($totals['discount'], 2) }}</span></div>
                 @endif
-                {{-- <div class="d-flex justify-content-between mb-2"><span class="text-muted" style="font-size:.87rem;">Shipping</span><span>{{ $totals['shippingCharge'] > 0 ? '₹'.number_format($totals['shippingCharge'],2) : 'Free' }}</span></div> --}}
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted" style="font-size:.87rem;">Shipping</span>
+                    @if($totals['shippingCharge'] > 0)
+                        <span style="font-weight:600;">₹{{ number_format($totals['shippingCharge'], 2) }}</span>
+                    @else
+                        <span class="text-success fw-bold">
+                            <i class="bi bi-truck me-1"></i>Free
+                        </span>
+                    @endif
+                </div>
                 <hr>
                 <div class="d-flex justify-content-between fw-700 mb-4" style="font-size:1.1rem;">
                     <span>Total</span><span style="color:var(--kkt-primary);">₹{{ number_format($totals['total'], 2) }}</span>

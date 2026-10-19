@@ -29,6 +29,6 @@ class RegisterController extends Controller
         event(new Registered($user));
         Auth::login($user);
         $this->cartService->mergeTo($user->id);
-        return redirect()->route('home')->with('success', 'Welcome to Gastro Wellness!');
+        return redirect()->route('home')->with('success', 'Welcome to Guru Teg Bahadur Disposable!');
     }
 }

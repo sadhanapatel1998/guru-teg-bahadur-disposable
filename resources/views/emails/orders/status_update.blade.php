@@ -83,7 +83,7 @@
     </p>
   </div>
   <div class="footer">
-    <p>© {{ date('Y') }} Gastro Wellness. All rights reserved.</p>
+    <p>© {{ date('Y') }} Guru Teg Bahadur Disposable. All rights reserved.</p>
   </div>
 </div>
 </body>
