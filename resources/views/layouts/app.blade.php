@@ -1970,9 +1970,11 @@
                 return;
             @endguest
             const btn = $(this);
+            if (btn.data('processing')) return;
             const productId = btn.data('product-id') || btn.attr('data-product-id');
             if (!productId) return;
 
+            btn.data('processing', true);
             $.post('{{ route('wishlist.toggle') }}', {
                 product_id: productId
             })
@@ -1986,10 +1988,37 @@
                         $icon.removeClass('bi-heart-fill text-danger').addClass('bi-heart');
                     }
                     showToast(res.message, res.inWishlist ? 'success' : 'info');
+
+                    // If on the Wishlist page and an item was removed, immediately animate & remove it from the page
+                    const $wishlistGrid = $('#wishlist-grid');
+                    const isWishlistPage = $wishlistGrid.length > 0 || btn.closest('#wishlist-section').length > 0;
+                    if (isWishlistPage && !res.inWishlist) {
+                        const $cardCol = btn.closest('.col-xl-3, .col-lg-4, .col-md-6, .col-6, [class*="col-"]');
+                        if ($cardCol.length) {
+                            $cardCol.css({
+                                'transition': 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                'transform': 'scale(0.85)',
+                                'opacity': '0'
+                            });
+                            setTimeout(() => {
+                                $cardCol.remove();
+                                const remaining = typeof res.count !== 'undefined' ? res.count : $wishlistGrid.children('[class*="col-"]').length;
+                                $('#wishlist-count').text(remaining);
+                                $('#wishlist-count-title').html(`My Wishlist (<span id="wishlist-count">${remaining}</span>)`);
+                                if (remaining <= 0 || $wishlistGrid.children('[class*="col-"]').length === 0) {
+                                    $wishlistGrid.hide();
+                                    $('#wishlist-empty-state').removeClass('d-none').show();
+                                }
+                            }, 300);
+                        }
+                    }
                 }
             })
             .fail(() => {
                 showToast('Failed to update wishlist', 'danger');
+            })
+            .always(() => {
+                btn.data('processing', false);
             });
         });
 
