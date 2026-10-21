@@ -37,6 +37,14 @@
             if (request('max_price')) $activeFilterCount++;
             if (request('in_stock')) $activeFilterCount++;
             if (request('on_sale')) $activeFilterCount++;
+
+            $isPriceFiltered = request()->filled('min_price') || request()->filled('max_price');
+            $currentSort = request('sort');
+            if ($isPriceFiltered && (!$currentSort || $currentSort === 'latest')) {
+                $currentSort = 'price_asc';
+            } elseif (!$currentSort) {
+                $currentSort = 'latest';
+            }
         @endphp
 
         {{-- Mobile Sliding Filter Sidebar / Offcanvas (< 992px) --}}
@@ -115,10 +123,10 @@
                         </button>
 
                         <select name="sort" class="form-select gtb-sort-select" onchange="applySortChange(this.value)">
-                            <option value="latest" {{ request('sort','latest') === 'latest' ? 'selected' : '' }}>Sort: Latest</option>
-                            <option value="price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
-                            <option value="price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
-                            <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>Most Popular</option>
+                            <option value="latest" {{ $currentSort === 'latest' ? 'selected' : '' }}>Sort: Latest</option>
+                            <option value="price_asc" {{ $currentSort === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
+                            <option value="price_desc" {{ $currentSort === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
+                            <option value="popular" {{ $currentSort === 'popular' ? 'selected' : '' }}>Most Popular</option>
                         </select>
                     </div>
 
@@ -131,10 +139,10 @@
                         <div class="d-flex align-items-center gap-2">
                             <label class="text-muted small mb-0" style="font-size:0.84rem; white-space:nowrap;">Sort by:</label>
                             <select name="sort" class="form-select form-select-sm gtb-sort-select" style="width:170px;" onchange="applySortChange(this.value)">
-                                <option value="latest" {{ request('sort','latest') === 'latest' ? 'selected' : '' }}>Latest</option>
-                                <option value="price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
-                                <option value="price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
-                                <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>Most Popular</option>
+                                <option value="latest" {{ $currentSort === 'latest' ? 'selected' : '' }}>Latest</option>
+                                <option value="price_asc" {{ $currentSort === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
+                                <option value="price_desc" {{ $currentSort === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
+                                <option value="popular" {{ $currentSort === 'popular' ? 'selected' : '' }}>Most Popular</option>
                             </select>
                         </div>
                     </div>

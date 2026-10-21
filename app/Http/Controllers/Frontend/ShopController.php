@@ -158,25 +158,37 @@ class ShopController extends Controller
             }
         }
 
+        $effectivePriceSql = 'CASE WHEN sale_price IS NOT NULL AND sale_price > 0 AND sale_price < price THEN sale_price ELSE price END';
+
         if ($request->filled('min_price')) {
-            $query->where(fn($q) => $q->where('sale_price', '>=', $request->min_price)
-                ->orWhere(fn($q2) => $q2->whereNull('sale_price')->where('price', '>=', $request->min_price)));
+            $minPrice = (float) $request->min_price;
+            $query->whereRaw("({$effectivePriceSql}) >= ?", [$minPrice]);
         }
         if ($request->filled('max_price')) {
-            $query->where(fn($q) => $q->where('sale_price', '<=', $request->max_price)
-                ->orWhere(fn($q2) => $q2->whereNull('sale_price')->where('price', '<=', $request->max_price)));
+            $maxPrice = (float) $request->max_price;
+            $query->whereRaw("({$effectivePriceSql}) <= ?", [$maxPrice]);
         }
         if ($request->boolean('in_stock')) {
             $query->where(fn($q) => $q->where('manage_stock', false)
                 ->orWhere('stock', '>', 0));
         }
         if ($request->boolean('on_sale')) {
-            $query->whereNotNull('sale_price');
+            $query->whereNotNull('sale_price')->whereRaw('sale_price > 0 AND sale_price < price');
         }
 
-        match ($request->input('sort', 'latest')) {
-            'price_asc'  => $query->orderByRaw('COALESCE(sale_price, price) ASC'),
-            'price_desc' => $query->orderByRaw('COALESCE(sale_price, price) DESC'),
+        $isPriceFiltered = $request->filled('min_price') || $request->filled('max_price');
+        $sort = $request->input('sort');
+
+        // When filtering in price range, default to ascending order unless another explicit sort is specified
+        if ($isPriceFiltered && (!$sort || $sort === 'latest')) {
+            $sort = 'price_asc';
+        } elseif (!$sort) {
+            $sort = 'latest';
+        }
+
+        match ($sort) {
+            'price_asc'  => $query->orderByRaw("{$effectivePriceSql} ASC"),
+            'price_desc' => $query->orderByRaw("{$effectivePriceSql} DESC"),
             'popular'    => $query->orderByDesc('views'),
             default      => $query->latest(),
         };

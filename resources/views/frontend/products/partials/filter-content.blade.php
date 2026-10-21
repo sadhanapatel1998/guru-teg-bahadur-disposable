@@ -26,7 +26,7 @@
 @if(request('q'))
 <input type="hidden" name="q" value="{{ request('q') }}">
 @endif
-@if(request('sort'))
+@if(request('sort') && request('sort') !== 'latest')
 <input type="hidden" name="sort" value="{{ request('sort') }}">
 @endif
 

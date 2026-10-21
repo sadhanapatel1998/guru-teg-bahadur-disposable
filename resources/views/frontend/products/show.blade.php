@@ -561,6 +561,11 @@
         margin-top: 45px;
     }
 
+    .pdp-tabs-nav-wrap {
+        position: relative;
+        width: 100%;
+    }
+
     .pdp-tabs-nav {
         display: flex;
         gap: 6px;
@@ -589,6 +594,7 @@
         cursor: pointer;
         transition: all 0.2s ease;
         white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .pdp-tab-btn.active {
@@ -752,9 +758,91 @@
             display: none;
         }
 
+        .pdp-tabs-container {
+            margin-top: 32px;
+        }
+
+        .pdp-tabs-nav-wrap {
+            position: relative;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        /* Modern Horizontally Scrollable Tabs for Mobile & Tablets */
+        .pdp-tabs-nav {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 8px !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            -webkit-overflow-scrolling: touch !important;
+            scroll-behavior: smooth !important;
+            padding: 4px 20px 8px 2px !important;
+            margin-bottom: 0 !important;
+            border-bottom: none !important;
+            scrollbar-width: thin !important;
+            scrollbar-color: #0B3A63 #E2E8F0 !important;
+        }
+
+        /* Sleek custom scrollbar on mobile so it visibly shows like scrollable */
+        .pdp-tabs-nav::-webkit-scrollbar {
+            display: block !important;
+            height: 4px !important;
+        }
+
+        .pdp-tabs-nav::-webkit-scrollbar-track {
+            background: #E2E8F0 !important;
+            border-radius: 10px !important;
+        }
+
+        .pdp-tabs-nav::-webkit-scrollbar-thumb {
+            background: #0B3A63 !important;
+            border-radius: 10px !important;
+        }
+
+        .pdp-tab-btn {
+            flex: 0 0 auto !important;
+            flex-shrink: 0 !important;
+            padding: 9px 18px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            border-radius: 10px !important;
+            border: 1.5px solid #CBD5E1 !important;
+            background: #F1F5F9 !important;
+            color: #334155 !important;
+            white-space: nowrap !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .pdp-tab-btn.active {
+            background: #0B3A63 !important;
+            color: #FFFFFF !important;
+            border-color: #0B3A63 !important;
+            box-shadow: 0 4px 10px rgba(11, 58, 99, 0.22) !important;
+        }
+
+        /* Subtle edge fade indicator for horizontal scroll overflow */
+        .pdp-tabs-nav-wrap::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 8px;
+            width: 28px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95));
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.25s ease;
+        }
+
+        .pdp-tabs-nav-wrap.scrolled-to-end::after {
+            opacity: 0 !important;
+        }
+
         .pdp-tab-card {
-            border-radius: 12px;
-            padding: 20px 16px;
+            border-radius: 14px !important;
+            padding: 20px 16px !important;
         }
     }
 
@@ -1097,16 +1185,18 @@
         <div class="row pdp-tabs-container">
             <div class="col-12">
                 {{-- Tabs Navigation --}}
-                <div class="pdp-tabs-nav" id="pdpTabNav" role="tablist">
-                    <button type="button" role="tab" class="pdp-tab-btn active" data-tab-target="#pdp-tab-specifications" data-bs-target="#pdp-tab-specifications" aria-selected="true">
-                        Specifications
-                    </button>
-                    <button type="button" role="tab" class="pdp-tab-btn" data-tab-target="#pdp-tab-description" data-bs-target="#pdp-tab-description" aria-selected="false">
-                        Description
-                    </button>
-                    <button type="button" role="tab" class="pdp-tab-btn" data-tab-target="#pdp-tab-reviews" data-bs-target="#pdp-tab-reviews" aria-selected="false">
-                        Reviews ({{ $product->reviews->count() }})
-                    </button>
+                <div class="pdp-tabs-nav-wrap position-relative">
+                    <div class="pdp-tabs-nav" id="pdpTabNav" role="tablist">
+                        <button type="button" role="tab" class="pdp-tab-btn active" data-tab-target="#pdp-tab-specifications" data-bs-target="#pdp-tab-specifications" aria-selected="true">
+                            Specifications
+                        </button>
+                        <button type="button" role="tab" class="pdp-tab-btn" data-tab-target="#pdp-tab-description" data-bs-target="#pdp-tab-description" aria-selected="false">
+                            Description
+                        </button>
+                        <button type="button" role="tab" class="pdp-tab-btn" data-tab-target="#pdp-tab-reviews" data-bs-target="#pdp-tab-reviews" aria-selected="false">
+                            Reviews ({{ $product->reviews->count() }})
+                        </button>
+                    </div>
                 </div>
 
                 {{-- Tab Content Card --}}
@@ -1625,6 +1715,28 @@
         e.preventDefault();
         const target = $(this).data('tab-target') || $(this).data('bs-target') || $(this).attr('data-bs-target');
         window.switchPdpTab(target);
+
+        // Smoothly bring clicked tab into view on mobile
+        if (this.scrollIntoView) {
+            this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    });
+
+    // Mobile tabs scroll listener to toggle fade indicator
+    $(function() {
+        const tabsNav = document.getElementById('pdpTabNav');
+        if (tabsNav) {
+            const updateScrollEnd = () => {
+                const atEnd = tabsNav.scrollLeft + tabsNav.clientWidth >= tabsNav.scrollWidth - 6;
+                const wrap = tabsNav.closest('.pdp-tabs-nav-wrap');
+                if (wrap) {
+                    wrap.classList.toggle('scrolled-to-end', atEnd);
+                }
+            };
+            tabsNav.addEventListener('scroll', updateScrollEnd, { passive: true });
+            window.addEventListener('resize', updateScrollEnd, { passive: true });
+            setTimeout(updateScrollEnd, 150);
+        }
     });
 </script>
 @endpush
