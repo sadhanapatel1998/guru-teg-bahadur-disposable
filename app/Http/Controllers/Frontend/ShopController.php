@@ -79,42 +79,48 @@ class ShopController extends Controller
 
     public function search(Request $request)
     {
-        $query    = $request->input('q', '');
-        $products = collect();
-
-        if (strlen($query) >= 2) {
-            $q = Product::active()->with(['category', 'images']);
-            $q->where(function ($qr) use ($query) {
-                $qr->where('name', 'like', '%' . $query . '%')
-                   ->orWhere('sku', 'like', '%' . $query . '%')
-                   ->orWhere('short_description', 'like', '%' . $query . '%')
-                   ->orWhereHas('category', fn($c) => $c->where('name', 'like', '%' . $query . '%'));
-            });
-            $this->applyFilters($q, $request);
-            $products = $q->paginate(16)->withQueryString();
-        }
-
-        return view('frontend.search.results', compact('products', 'query'));
+        return redirect()->route('shop', $request->query());
     }
 
     public function ajaxSearch(Request $request)
     {
-        $q = $request->input('q', '');
+        $q = trim($request->input('q', ''));
         if (strlen($q) < 2) return response()->json([]);
 
+        $terms = array_filter(explode(' ', $q), fn($t) => strlen($t) > 0);
+
         $products = Product::active()
-            ->where(function ($query) use ($q) {
-                $query->where('name', 'like', '%' . $q . '%')
-                      ->orWhere('sku', 'like', '%' . $q . '%');
+            ->where(function ($subQ) use ($q, $terms) {
+                $subQ->where('name', 'like', '%' . $q . '%')
+                     ->orWhere('sku', 'like', '%' . $q . '%')
+                     ->orWhere('short_description', 'like', '%' . $q . '%')
+                     ->orWhere('description', 'like', '%' . $q . '%')
+                     ->orWhere('meta_keywords', 'like', '%' . $q . '%')
+                     ->orWhereHas('category', fn($c) => $c->where('name', 'like', '%' . $q . '%'))
+                     ->orWhereHas('categories', fn($c) => $c->where('categories.name', 'like', '%' . $q . '%'));
+
+                if (count($terms) > 1) {
+                    $subQ->orWhere(function ($allTermsQ) use ($terms) {
+                        foreach ($terms as $term) {
+                            $allTermsQ->where(function ($termQ) use ($term) {
+                                $termQ->where('name', 'like', '%' . $term . '%')
+                                      ->orWhere('sku', 'like', '%' . $term . '%')
+                                      ->orWhereHas('category', fn($c) => $c->where('name', 'like', '%' . $term . '%'))
+                                      ->orWhereHas('categories', fn($c) => $c->where('categories.name', 'like', '%' . $term . '%'));
+                            });
+                        }
+                    });
+                }
             })
-            ->with('images')
+            ->with(['category', 'images'])
             ->take(8)->get()
             ->map(fn($p) => [
-                'id'    => $p->id,
-                'name'  => $p->name,
-                'price' => $p->effective_price,
-                'image' => $p->thumbnail_url,
-                'url'   => route('product.show', $p->slug),
+                'id'       => $p->id,
+                'name'     => $p->name,
+                'category' => $p->category?->name,
+                'price'    => $p->effective_price,
+                'image'    => $p->thumbnail_url,
+                'url'      => route('product.show', $p->slug),
             ]);
 
         return response()->json($products);
@@ -122,6 +128,36 @@ class ShopController extends Controller
 
     private function applyFilters($query, Request $request): void
     {
+        if ($request->filled('q')) {
+            $searchTerm = trim($request->input('q'));
+            if ($searchTerm !== '') {
+                $terms = array_filter(explode(' ', $searchTerm), fn($t) => strlen($t) > 0);
+                $query->where(function ($subQ) use ($searchTerm, $terms) {
+                    $subQ->where('name', 'like', '%' . $searchTerm . '%')
+                         ->orWhere('sku', 'like', '%' . $searchTerm . '%')
+                         ->orWhere('short_description', 'like', '%' . $searchTerm . '%')
+                         ->orWhere('description', 'like', '%' . $searchTerm . '%')
+                         ->orWhere('meta_keywords', 'like', '%' . $searchTerm . '%')
+                         ->orWhereHas('category', fn($c) => $c->where('name', 'like', '%' . $searchTerm . '%'))
+                         ->orWhereHas('categories', fn($c) => $c->where('categories.name', 'like', '%' . $searchTerm . '%'))
+                         ->orWhereHas('variants', fn($v) => $v->where('sku', 'like', '%' . $searchTerm . '%')->orWhere('size', 'like', '%' . $searchTerm . '%')->orWhere('color', 'like', '%' . $searchTerm . '%'));
+
+                    if (count($terms) > 1) {
+                        $subQ->orWhere(function ($allTermsQ) use ($terms) {
+                            foreach ($terms as $term) {
+                                $allTermsQ->where(function ($termQ) use ($term) {
+                                    $termQ->where('name', 'like', '%' . $term . '%')
+                                          ->orWhere('sku', 'like', '%' . $term . '%')
+                                          ->orWhereHas('category', fn($c) => $c->where('name', 'like', '%' . $term . '%'))
+                                          ->orWhereHas('categories', fn($c) => $c->where('categories.name', 'like', '%' . $term . '%'));
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
         if ($request->filled('min_price')) {
             $query->where(fn($q) => $q->where('sale_price', '>=', $request->min_price)
                 ->orWhere(fn($q2) => $q2->whereNull('sale_price')->where('price', '>=', $request->min_price)));

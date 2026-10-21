@@ -16,6 +16,7 @@ class Page extends Model
         'status',
         'meta_title',
         'meta_description',
+        'meta_keywords',
         'canonical_url',
     ];
 

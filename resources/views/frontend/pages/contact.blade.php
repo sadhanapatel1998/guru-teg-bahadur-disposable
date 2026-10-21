@@ -88,7 +88,7 @@
                             </div>
                         @endif
                         {{-- Form --}}
-                        <form method="POST" action="{{ route('contact.submit') }}">
+                        <form method="POST" action="{{ route('contact.submit') }}" id="contact-form">
                             @csrf
                             <div class="row g-4">
                                 {{-- Name --}}
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                             {{-- Button --}}
-                            <button type="submit" class="contact-btn">
+                            <button type="submit" class="contact-btn" id="contact-submit-btn" style="display:inline-flex;align-items:center;justify-content:center;">
                                 Send Message
                                 <i class="bi bi-arrow-right ms-2"></i>
                             </button>
@@ -156,3 +156,40 @@
  --}}
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('contact-submit-btn');
+
+    if (!form || !btn) return;
+
+    form.addEventListener('submit', function () {
+        if (!form.checkValidity()) {
+            return;
+        }
+
+        // Immediately show loading state
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...';
+        btn.style.pointerEvents = 'none';
+        btn.style.opacity = '0.85';
+        btn.style.cursor = 'not-allowed';
+
+        // Disable button to prevent multiple clicks while submission proceeds
+        setTimeout(function () {
+            btn.disabled = true;
+        }, 10);
+    });
+
+    // Reset button if page restored from cache
+    window.addEventListener('pageshow', function () {
+        btn.disabled = false;
+        btn.style.pointerEvents = '';
+        btn.style.opacity = '';
+        btn.style.cursor = '';
+        btn.innerHTML = 'Send Message <i class="bi bi-arrow-right ms-2"></i>';
+    });
+});
+</script>
+@endpush

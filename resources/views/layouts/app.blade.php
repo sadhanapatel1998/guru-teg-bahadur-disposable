@@ -1345,8 +1345,7 @@
                                name="q"
                                id="mobile-search-input"
                                class="gtb-search-input"
-                               placeholder="Search products, categories...
-"
+                               placeholder="Search products, categories..."
                                value="{{ request('q') }}"
                                autocomplete="off">
                         <button type="submit" class="gtb-search-btn" aria-label="Search">
@@ -1830,22 +1829,55 @@
                 return;
             }
             searchTimeout = setTimeout(() => {
-                $.get('{{ route('search.ajax') }}', {
-                    q
-                }, function(data) {
-                    if (!data.length) {
-                        $d.addClass('d-none');
+                $.get('{{ route('search.ajax') }}', { q: q }, function(data) {
+                    if (!data || !data.length) {
+                        $d.html(`
+                            <div class="p-3 text-center text-muted">
+                                <i class="bi bi-search d-block mb-1 text-secondary" style="font-size:1.4rem;"></i>
+                                <div style="font-size:0.86rem;">No products found for "<strong>${$('<div>').text(q).html()}</strong>"</div>
+                                <div class="mt-2">
+                                    <a href="{{ route('shop') }}?q=${encodeURIComponent(q)}" class="btn btn-sm btn-outline-primary" style="font-size:0.78rem;">
+                                        Search all in Shop
+                                    </a>
+                                </div>
+                            </div>
+                        `).removeClass('d-none');
                         return;
                     }
+
                     let html = data.map(p => `
-                <a href="${p.url}" class="search-item">
-                    <img src="${p.image}" alt="${p.name}">
-                    <div><div style="font-size:.88rem;font-weight:600;">${p.name}</div>
-                    <div style="color:var(--gtb-red, #D9232E);font-weight:700;">₹ ${Math.round(parseFloat(p.price)).toLocaleString('en-IN')}</div></div>
-                </a>`).join('');
+                        <a href="${p.url}" class="search-item d-flex align-items-center gap-3">
+                            <img src="${p.image}" alt="${$('<div>').text(p.name).html()}" style="width:44px; height:44px; object-fit:cover; border-radius:8px; border:1px solid #E2E8F0; flex-shrink:0;">
+                            <div class="flex-grow-1 min-w-0" style="overflow:hidden;">
+                                <div class="text-truncate fw-semibold" style="font-size:0.88rem; color:#0F172A;">${$('<div>').text(p.name).html()}</div>
+                                <div class="d-flex align-items-center gap-2 mt-1">
+                                    ${p.category ? `<span class="badge bg-light text-secondary border" style="font-size:0.7rem; font-weight:500;">${$('<div>').text(p.category).html()}</span>` : ''}
+                                    <span style="color:var(--gtb-red, #D9232E); font-weight:700; font-size:0.85rem;">₹ ${Math.round(parseFloat(p.price)).toLocaleString('en-IN')}</span>
+                                </div>
+                            </div>
+                        </a>`).join('');
+
+                    html += `
+                        <div class="p-2 border-top text-center bg-light rounded-bottom">
+                            <a href="{{ route('shop') }}?q=${encodeURIComponent(q)}" class="text-decoration-none fw-bold d-inline-flex align-items-center gap-1" style="font-size:0.84rem; color:var(--gtb-navy, #0B3A63);">
+                                View all results for "${$('<div>').text(q).html()}" <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    `;
                     $d.html(html).removeClass('d-none');
                 });
             }, 300);
+        });
+
+        // Reopen dropdown on focus if input has value and dropdown has content
+        $('#search-input, #mobile-search-input').on('focus', function() {
+            const inputEl = $(this);
+            const q = inputEl.val().trim();
+            const form = inputEl.closest('form');
+            const $d = form.find('.gtb-search-dropdown, #search-results-dropdown');
+            if (q.length >= 2 && $d.children().length > 0) {
+                $d.removeClass('d-none');
+            }
         });
 
         $(document).on('click', function(e) {

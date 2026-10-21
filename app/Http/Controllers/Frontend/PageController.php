@@ -47,7 +47,7 @@ class PageController extends Controller
 
     Mail::send([], [], function ($message) use ($data) {
 
-        $message->to('codersvox@gmail.com')
+        $message->to('info@gtbdisposable.com')
                 ->subject('New Contact Inquiry')
                 ->html("
                 <!DOCTYPE html>

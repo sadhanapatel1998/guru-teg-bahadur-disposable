@@ -166,21 +166,6 @@
                 <article class="blog-article-content">
                     {!! $blog->body !!}
                 </article>
-
-                {{-- Tags If Available --}}
-                @if(!empty($blog->tags) && is_array($blog->tags) && count($blog->tags))
-                    <div class="d-flex align-items-center flex-wrap gap-2 mt-4 pt-3 border-top">
-                        <span class="fw-bold text-dark me-2" style="font-size: 0.9rem;"><i class="bi bi-tags me-1"></i> Tags:</span>
-                        @foreach($blog->tags as $tag)
-                            <a href="{{ route('blog.index', ['tag' => $tag]) }}"
-                               class="badge text-decoration-none"
-                               style="background:#EDF6FB; color:var(--kkt-primary); font-size:0.8rem; font-weight:600; padding:6px 14px; border-radius:14px;">
-                                #{{ $tag }}
-                            </a>
-                        @endforeach
-                    </div>
-                @endif
-
             </div>
                 </div>
             {{-- Right Sidebar Column --}}

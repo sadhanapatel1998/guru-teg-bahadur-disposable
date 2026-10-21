@@ -13,7 +13,7 @@
             </div>
             <div class="d-flex gap-2 align-items-center">
                 {!! $order->status_badge !!}
-                <span class="badge {{ $order->payment_status === 'paid' ? 'bg-success' : 'bg-warning text-dark' }}">{{ ucfirst($order->payment_status) }}</span>
+                <!-- <span class="badge {{ $order->payment_status === 'paid' ? 'bg-success' : 'bg-warning text-dark' }}">{{ ucfirst($order->payment_status) }}</span> -->
             </div>
         </div>
         <div class="d-flex gap-2 mt-3 flex-wrap">

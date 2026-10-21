@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $page->meta_title ?: $page->title)
+@section('meta_description', $page->meta_description ?: setting('meta_description', ''))
+@section('meta_keywords', $page->meta_keywords ?: setting('meta_keywords', ''))
 
 @section('content')
 

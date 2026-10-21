@@ -1021,9 +1021,9 @@
                 {{-- Quantity + Wishlist Row (Side by Side) --}}
                 <div class="pdp-qty-wishlist-row">
                     <div class="pdp-qty-selector">
-                        <button type="button" onclick="changeQty(-1)" class="pdp-qty-btn pdp-qty-minus" aria-label="Decrease quantity">−</button>
+                        <button type="button" class="pdp-qty-btn pdp-qty-minus" aria-label="Decrease quantity">−</button>
                         <input type="number" id="qty-input" value="1" min="1" max="{{ $product->stock ?: 99 }}" class="pdp-qty-input" aria-label="Quantity">
-                        <button type="button" onclick="changeQty(1)" class="pdp-qty-btn pdp-qty-plus" aria-label="Increase quantity">+</button>
+                        <button type="button" class="pdp-qty-btn pdp-qty-plus" aria-label="Increase quantity">+</button>
                     </div>
 
                     @php
@@ -1409,28 +1409,33 @@
     window.changeQty = function(delta) {
         const input = document.getElementById('qty-input');
         if (!input) return;
-        let current = parseInt(input.value) || 1;
-        let val = current + delta;
+        let current = parseInt(input.value);
+        if (isNaN(current) || current < 1) current = 1;
+        let val = current + parseInt(delta);
         const max = parseInt(input.getAttribute('max')) || 99;
         const min = parseInt(input.getAttribute('min')) || 1;
         input.value = Math.max(min, Math.min(max, isNaN(val) ? 1 : val));
+        $(input).trigger('change');
     };
 
-    $(document).on('click', '.pdp-qty-minus', function(e) {
+    $(document).off('click', '.pdp-qty-minus').on('click', '.pdp-qty-minus', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         window.changeQty(-1);
     });
 
-    $(document).on('click', '.pdp-qty-plus', function(e) {
+    $(document).off('click', '.pdp-qty-plus').on('click', '.pdp-qty-plus', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         window.changeQty(1);
     });
 
     $(document).on('change input', '#qty-input', function() {
         let val = parseInt(this.value);
+        if (isNaN(val) || val < 1) val = 1;
         const max = parseInt(this.getAttribute('max')) || 99;
         const min = parseInt(this.getAttribute('min')) || 1;
-        this.value = Math.max(min, Math.min(max, isNaN(val) ? 1 : val));
+        this.value = Math.max(min, Math.min(max, val));
     });
 
     // Color Swatch Selection

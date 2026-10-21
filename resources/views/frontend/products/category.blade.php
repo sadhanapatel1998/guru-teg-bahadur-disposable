@@ -1,13 +1,21 @@
 @extends('layouts.app')
-@section('title', 'Shop')
+@section('title', $category->name . (request('q') ? ' - Search: "' . request('q') . '"' : ''))
 
 @section('content')
 <div class="breadcrumb-kkt">
     <div class="container">
-        <nav><ol class="breadcrumb mb-0" style="font-size:.84rem;">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-            <li class="breadcrumb-item active">Shop</li>
-        </ol></nav>
+        <nav>
+            <ol class="breadcrumb mb-0" style="font-size:.84rem;">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bi bi-house-door-fill me-1"></i>Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('shop') }}">Shop</a></li>
+                @if(request('q'))
+                <li class="breadcrumb-item"><a href="{{ route('shop.category', $category->slug) }}">{{ $category->name }}</a></li>
+                <li class="breadcrumb-item active text-truncate" style="max-width:250px;">Search: &ldquo;{{ request('q') }}&rdquo;</li>
+                @else
+                <li class="breadcrumb-item active">{{ $category->name }}</li>
+                @endif
+            </ol>
+        </nav>
     </div>
 </div>
 
@@ -19,12 +27,16 @@
                 <div class="p-4 bg-white rounded-4 border" style="position:sticky;top:130px;">
                     <h6 class="fw-700 mb-4">Filters</h6>
                     <form method="GET" id="filter-form">
+                        @if(request('q'))
+                        <input type="hidden" name="q" value="{{ request('q') }}">
+                        @endif
+
                         {{-- Categories --}}
                         <div class="mb-4">
                             <div class="fw-600 mb-2" style="font-size:.88rem;">Categories</div>
                             @foreach($categories as $cat)
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <a href="{{ route('shop.category', $cat->slug) }}" class="text-decoration-none" style="font-size:.85rem;color:{{ request()->route()->getName() === 'shop.category' && request()->route('categorySlug') === $cat->slug ? 'var(--kkt-primary)' : '#555' }};font-weight:{{ request()->route('categorySlug') === $cat->slug ? '700' : '400' }};">{{ $cat->name }}</a>
+                                <a href="{{ route('shop.category', $cat->slug) }}" class="text-decoration-none" style="font-size:.85rem;color:{{ $category->slug === $cat->slug ? 'var(--kkt-primary)' : '#555' }};font-weight:{{ $category->slug === $cat->slug ? '700' : '400' }};">{{ $cat->name }}</a>
                                 <span style="font-size:.72rem;color:#aaa;">{{ $cat->products_count }}</span>
                             </div>
                             @endforeach
@@ -54,15 +66,29 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100 btn-sm">Apply Filters</button>
-                        <a href="{{ route('shop') }}" class="btn btn-outline-secondary w-100 btn-sm mt-2">Reset</a>
+                        <a href="{{ route('shop.category', $category->slug) }}" class="btn btn-outline-secondary w-100 btn-sm mt-2">
+                            {{ request('q') ? 'Reset Filters & Search' : 'Reset' }}
+                        </a>
                     </form>
                 </div>
             </div>
 
             {{-- Products Grid --}}
             <div class="col-lg-9">
+                @if(request('q'))
+                <div class="alert bg-white border rounded-4 p-3 mb-3 d-flex flex-wrap justify-content-between align-items-center gap-2 shadow-sm" style="border-left: 4px solid var(--gtb-red, #D9232E) !important;">
+                    <div>
+                        <span class="text-muted" style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.8px; font-weight:600;">Search in {{ $category->name }}</span>
+                        <h5 class="mb-0 fw-bold text-dark mt-1">&ldquo;{{ request('q') }}&rdquo;</h5>
+                    </div>
+                    <a href="{{ route('shop.category', $category->slug) }}" class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1 rounded-pill px-3">
+                        <i class="bi bi-x-circle"></i> Clear Search
+                    </a>
+                </div>
+                @endif
+
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted" style="font-size:.88rem;">{{ $products->total() }} products found</span>
+                    <span class="text-muted" style="font-size:.88rem;">{{ $products->total() }} {{ Str::plural('product', $products->total()) }} found</span>
                     <select name="sort" class="form-select form-select-sm" style="width:auto;" onchange="this.form.submit()" form="filter-form">
                         <option value="latest" {{ request('sort','latest') === 'latest' ? 'selected' : '' }}>Latest</option>
                         <option value="price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
@@ -72,10 +98,28 @@
                 </div>
 
                 @if($products->isEmpty())
-                <div class="text-center py-5">
-                    <i class="bi bi-search" style="font-size:3rem;color:#e9ecef;display:block;"></i>
-                    <h5 class="mt-3 text-muted">We couldn’t find any products in this category.</h5>
-                    <a href="{{ route('shop') }}" class="btn btn-primary mt-2">Browse All</a>
+                <div class="text-center py-5 bg-white rounded-4 border p-4">
+                    <i class="bi bi-search" style="font-size:3rem;color:#cbd5e1;display:block;"></i>
+                    <h5 class="mt-3 text-dark fw-bold">
+                        @if(request('q'))
+                            No products found matching &ldquo;{{ request('q') }}&rdquo; in {{ $category->name }}.
+                        @else
+                            We couldn’t find any products in this category.
+                        @endif
+                    </h5>
+                    <p class="text-muted mb-3" style="font-size:0.9rem;">
+                        @if(request('q'))
+                            Try checking your spelling, or searching across all categories.
+                        @else
+                            Try adjusting your filters or checking back soon.
+                        @endif
+                    </p>
+                    <div class="d-flex justify-content-center gap-2">
+                        @if(request('q') || request('min_price') || request('max_price') || request('in_stock') || request('on_sale'))
+                        <a href="{{ route('shop.category', $category->slug) }}" class="btn btn-outline-secondary">Clear Filters</a>
+                        @endif
+                        <a href="{{ route('shop') }}" class="btn btn-primary">Browse All Products</a>
+                    </div>
                 </div>
                 @else
                 <div class="row g-3">
