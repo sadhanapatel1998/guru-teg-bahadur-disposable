@@ -5749,3 +5749,181 @@ ABOUT PAGE
         color: var(--gtb-red) !important;
     }
 }
+
+
+/* ============================================================
+   GTB CUSTOMER ACCOUNT TOPBAR & BACK TO DASHBOARD NAVIGATION
+============================================================ */
+.gtb-dash-topbar {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 18px rgba(11, 58, 99, 0.04);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.gtb-btn-back-dash {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #EAF3F9;
+    color: #0B3A63 !important;
+    border: 1px solid #D5E4F0;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 2px 6px rgba(11, 58, 99, 0.05);
+}
+
+.gtb-btn-back-dash:hover {
+    background: #0B3A63;
+    color: #FFFFFF !important;
+    border-color: #0B3A63;
+    transform: translateX(-3px);
+    box-shadow: 0 4px 14px rgba(11, 58, 99, 0.22);
+}
+
+.gtb-btn-back-dash i {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.gtb-btn-back-dash:hover i {
+    transform: translateX(-2px);
+}
+
+.gtb-btn-nav-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FFFFFF;
+    color: #475569 !important;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.gtb-btn-nav-home:hover {
+    background: #F8FAFC;
+    color: #0B3A63 !important;
+    border-color: #CBD5E1;
+}
+
+.gtb-dash-breadcrumb {
+    margin-bottom: 0;
+    font-size: 0.84rem;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.gtb-dash-breadcrumb .breadcrumb-item a {
+    color: #64748B;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.gtb-dash-breadcrumb .breadcrumb-item a:hover {
+    color: #0B3A63;
+}
+
+.gtb-dash-breadcrumb .breadcrumb-item.active {
+    color: #0B3A63;
+    font-weight: 600;
+}
+
+/* Mobile Quick Navigation Tabs (< 992px) */
+.gtb-mobile-tabs-wrap {
+    display: none;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 991.98px) {
+    .gtb-mobile-tabs-wrap {
+        display: block;
+    }
+
+    .gtb-mobile-tabs-scroll {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .gtb-mobile-tabs-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .gtb-mobile-tab-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        padding: 9px 16px;
+        border-radius: 50px;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        color: #334155;
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        transition: all 0.2s ease;
+    }
+
+    .gtb-mobile-tab-pill.active {
+        background: #0B3A63;
+        color: #FFFFFF !important;
+        border-color: #0B3A63;
+        box-shadow: 0 4px 12px rgba(11, 58, 99, 0.25);
+    }
+}
+
+@media (max-width: 576px) {
+    .gtb-dash-topbar {
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .gtb-dash-topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+    }
+    .gtb-btn-back-dash {
+        flex: 1;
+        justify-content: center;
+        padding: 7px 12px;
+        font-size: 0.82rem;
+    }
+    .gtb-btn-nav-home {
+        padding: 7px 12px;
+        font-size: 0.82rem;
+    }
+    .gtb-dash-breadcrumb {
+        font-size: 0.78rem;
+        justify-content: flex-start;
+        padding-top: 6px;
+        border-top: 1px dashed #E2E8F0;
+    }
+}

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Address;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -10,6 +11,7 @@ use App\Models\Product;
 use App\Events\OrderPlaced;
 use App\Events\OrderStatusUpdated;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class OrderService
 {
@@ -88,10 +90,74 @@ class OrderService
             // Clear cart
             $this->cartService->clear();
 
+            // Save delivery address to user's dashboard saved addresses
+            if ($userId) {
+                $this->saveShippingAddressToUser((int)$userId, $checkoutData);
+            }
+
             // event(new OrderPlaced($order));
 
             return $order;
         });
+    }
+
+    /**
+     * Automatically save the order's delivery location to user's saved addresses
+     */
+    private function saveShippingAddressToUser(int $userId, array $checkoutData): void
+    {
+        try {
+            $line1   = trim($checkoutData['shipping_address_line1'] ?? '');
+            $line2   = !empty($checkoutData['shipping_address_line2']) ? trim($checkoutData['shipping_address_line2']) : null;
+            $city    = trim($checkoutData['shipping_city'] ?? '');
+            $state   = trim($checkoutData['shipping_state'] ?? '');
+            $pincode = trim($checkoutData['shipping_pincode'] ?? '');
+            $name    = trim($checkoutData['shipping_name'] ?? '');
+            $phone   = trim($checkoutData['shipping_phone'] ?? '');
+
+            if (empty($line1) || empty($city) || empty($pincode)) {
+                return;
+            }
+
+            // Check if this exact location already exists for this user
+            $existing = Address::where('user_id', $userId)
+                ->whereRaw('LOWER(TRIM(address_line1)) = ?', [strtolower($line1)])
+                ->whereRaw('LOWER(TRIM(city)) = ?', [strtolower($city)])
+                ->whereRaw('LOWER(TRIM(pincode)) = ?', [strtolower($pincode)])
+                ->first();
+
+            if (!$existing) {
+                $hasAddresses = Address::where('user_id', $userId)->exists();
+
+                Address::create([
+                    'user_id'       => $userId,
+                    'name'          => $name,
+                    'phone'         => $phone,
+                    'address_line1' => $line1,
+                    'address_line2' => $line2,
+                    'city'          => $city,
+                    'state'         => $state,
+                    'pincode'       => $pincode,
+                    'country'       => $checkoutData['shipping_country'] ?? 'India',
+                    'type'          => 'home',
+                    'is_default'    => !$hasAddresses,
+                ]);
+            } else {
+                // Update recipient name or phone if existing record was missing them
+                $updates = [];
+                if (!empty($name) && empty($existing->name)) {
+                    $updates['name'] = $name;
+                }
+                if (!empty($phone) && empty($existing->phone)) {
+                    $updates['phone'] = $phone;
+                }
+                if (!empty($updates)) {
+                    $existing->update($updates);
+                }
+            }
+        } catch (\Throwable $e) {
+            Log::warning('Failed to save order address to dashboard: ' . $e->getMessage());
+        }
     }
 
    public function updateStatus(Order $order, string $status, ?string $trackingNumber = null): Order

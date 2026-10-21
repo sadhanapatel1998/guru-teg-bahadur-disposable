@@ -1,20 +1,22 @@
 @extends('layouts.app')
 @section('title', 'My Addresses')
 @section('content')
-<div class="py-5" style="background:#f8f9fa;min-height:70vh;">
+<div class="py-4 py-lg-5" style="background:#F8FAFC;min-height:75vh;">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h5 class="fw-700 mb-0">Saved Addresses</h5>
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addAddressModal">+ Add New</button>
+            @include('customer.partials.topbar', ['title' => 'Saved Addresses'])
+
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                <h5 class="fw-700 text-dark mb-0" style="font-family:'Poppins',sans-serif;">Saved Addresses</h5>
+                <button class="btn btn-sm text-white" style="background:#0B3A63;border-radius:10px;font-weight:600;padding:7px 16px;" data-bs-toggle="modal" data-bs-target="#addAddressModal"><i class="bi bi-plus-lg me-1"></i> Add New Address</button>
             </div>
             <div class="row g-3">
                 @forelse($addresses as $addr)
                 <div class="col-md-6">
                     <div class="bg-white rounded-4 border p-4 h-100">
                         <div class="d-flex justify-content-between mb-2">
-                            <span class="badge" style="background:var(--kkt-light);color:var(--kkt-primary);">{{ ucfirst($addr->type) }}</span>
+                            <span class="badge" style="background:#EAF3F9;color:#0B3A63;font-weight:600;">{{ ucfirst($addr->type) }}</span>
                             @if($addr->is_default)<span class="badge bg-success" style="font-size:.7rem;">Default</span>@endif
                         </div>
                         <div class="fw-600">{{ $addr->name }}</div>

@@ -40,11 +40,11 @@
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label fw-600" style="font-size:.85rem;">Full Name *</label>
-                        <input type="text" name="shipping_name" class="form-control @error('shipping_name') is-invalid @enderror" value="{{ old('shipping_name', Auth::user()->name) }}" required>
+                        <input type="text" name="shipping_name" id="addr_name" class="form-control @error('shipping_name') is-invalid @enderror" value="{{ old('shipping_name', Auth::user()->name) }}" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-600" style="font-size:.85rem;">Phone *</label>
-                        <input type="tel" name="shipping_phone" class="form-control @error('shipping_phone') is-invalid @enderror" value="{{ old('shipping_phone', Auth::user()->phone) }}" required>
+                        <input type="tel" name="shipping_phone" id="addr_phone" class="form-control @error('shipping_phone') is-invalid @enderror" value="{{ old('shipping_phone', Auth::user()->phone) }}" required>
                     </div>
                     <div class="col-12">
                         <label class="form-label fw-600" style="font-size:.85rem;">Address Line 1 *</label>
@@ -66,6 +66,10 @@
                         <label class="form-label fw-600" style="font-size:.85rem;">Pincode *</label>
                         <input type="text" name="shipping_pincode" id="addr_pincode" class="form-control" value="{{ old('shipping_pincode') }}" required>
                     </div>
+                </div>
+                <div class="d-flex align-items-center gap-1 mt-3 text-muted" style="font-size:0.8rem;">
+                    <i class="bi bi-geo-alt text-primary me-1"></i>
+                    <span>Delivery locations are automatically saved to your dashboard address book.</span>
                 </div>
             </div>
 
@@ -151,8 +155,19 @@
 @push('scripts')
 <script>
 function fillAddress(addr, el) {
-    document.querySelectorAll('[id^="addr-"]').forEach(e => e.style.borderColor = '#e9ecef');
-    el.style.borderColor = 'var(--kkt-primary)';
+    document.querySelectorAll('[id^="addr-"]').forEach(e => {
+        e.style.borderColor = '#e9ecef';
+        e.style.background = '#ffffff';
+    });
+    el.style.borderColor = '#0B3A63';
+    el.style.background = '#F0F7FD';
+
+    if (addr.name && document.getElementById('addr_name')) {
+        document.getElementById('addr_name').value = addr.name;
+    }
+    if (addr.phone && document.getElementById('addr_phone')) {
+        document.getElementById('addr_phone').value = addr.phone;
+    }
     document.getElementById('addr_line1').value  = addr.address_line1 || '';
     document.getElementById('addr_line2').value  = addr.address_line2 || '';
     document.getElementById('addr_city').value   = addr.city || '';

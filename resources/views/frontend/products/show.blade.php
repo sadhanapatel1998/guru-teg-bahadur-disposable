@@ -497,7 +497,7 @@
 
     /* 4-Item Trust Grid */
     .pdp-trust-grid {
-        display: grid;
+        display: none;
         grid-template-columns: repeat(4, 1fr);
         gap: 12px;
         padding-top: 18px;
@@ -895,7 +895,7 @@
             </div>
 
             {{-- Right Column: Product Details & Purchase Actions --}}
-            <div class="col-lg-6 pdp-info-col">
+            <div class="col-lg-6 pdp-info-col pt-3">
                 {{-- Product Title --}}
                 <h1 class="pdp-product-title">{{ $product->name }}</h1>
 

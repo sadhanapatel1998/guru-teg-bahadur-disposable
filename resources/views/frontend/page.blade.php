@@ -28,10 +28,9 @@
         <div class="row justify-content-center">
 
             <div class="col-lg-10">
-                <div class="page-content">
+                <div class="page-content bg-white rounded-4 border p-4 p-md-5 shadow-sm" style="color: #1E293B;">
                     {!! $page->content !!}
                 </div>
-
             </div>
 
         </div>

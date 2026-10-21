@@ -1,16 +1,24 @@
 @extends('layouts.app')
 @section('title', 'Order #' . $order->order_number)
 @section('content')
-<div class="py-5" style="background:#f8f9fa;min-height:70vh;">
+<div class="py-4 py-lg-5" style="background:#F8FAFC;min-height:75vh;">
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    @include('customer.partials.topbar', [
+        'title' => '#' . $order->order_number,
+        'parentTitle' => 'Orders',
+        'parentRoute' => route('account.orders'),
+        'backRoute' => route('account.orders'),
+        'backLabel' => 'Back to Orders'
+    ])
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
         <div>
-            <h5 class="fw-700 mb-1">Order #{{ $order->order_number }}</h5>
+            <h5 class="fw-700 text-dark mb-1" style="font-family:'Poppins',sans-serif;">Order #{{ $order->order_number }}</h5>
             <small class="text-muted">Placed on {{ $order->created_at->format('d M Y, h:i A') }}</small>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('account.orders.invoice', $order) }}" class="btn btn-outline-secondary btn-sm">Download Invoice</a>
-            <a href="{{ route('account.orders') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+            <a href="{{ route('account.orders.invoice', $order) }}" class="btn btn-sm text-white" style="background:#0B3A63;border-radius:10px;font-weight:600;"><i class="bi bi-file-earmark-arrow-down me-1"></i> Download Invoice</a>
+            <a href="{{ route('account.orders') }}" class="btn btn-sm btn-outline-secondary" style="border-radius:10px;font-weight:600;"><i class="bi bi-arrow-left me-1"></i> Orders</a>
         </div>
     </div>
 
