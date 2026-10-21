@@ -21,59 +21,54 @@
 
 <section class="py-4">
     <div class="container">
+        @php
+            $activeFilterCount = 0;
+            if (request('min_price')) $activeFilterCount++;
+            if (request('max_price')) $activeFilterCount++;
+            if (request('in_stock')) $activeFilterCount++;
+            if (request('on_sale')) $activeFilterCount++;
+        @endphp
+
+        {{-- Mobile Sliding Filter Sidebar / Offcanvas (< 992px) --}}
+        <div class="offcanvas offcanvas-start gtb-filter-offcanvas d-lg-none" tabindex="-1" id="mobileFilterDrawer" aria-labelledby="mobileFilterDrawerLabel">
+            <div class="offcanvas-header border-bottom py-3 px-4">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-funnel-fill text-danger fs-5"></i>
+                    <h5 class="offcanvas-title fw-bold text-dark mb-0" id="mobileFilterDrawerLabel">Filters</h5>
+                    @if($activeFilterCount > 0)
+                        <span class="badge bg-danger rounded-pill" style="font-size:0.72rem;">{{ $activeFilterCount }} active</span>
+                    @endif
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-4">
+                <form method="GET" action="{{ route('shop.category', $category->slug) }}" id="mobile-filter-form">
+                    @include('frontend.products.partials.filter-content', [
+                        'formId' => 'mobile',
+                        'isMobile' => true,
+                        'activeCategorySlug' => $category->slug,
+                        'resetRoute' => route('shop.category', $category->slug)
+                    ])
+                </form>
+            </div>
+        </div>
+
         <div class="row g-4">
-            {{-- Sidebar Filters --}}
-            <div class="col-lg-3">
-                <div class="p-4 bg-white rounded-4 border" style="position:sticky;top:130px;">
-                    <h6 class="fw-700 mb-4">Filters</h6>
-                    <form method="GET" id="filter-form">
-                        @if(request('q'))
-                        <input type="hidden" name="q" value="{{ request('q') }}">
-                        @endif
-
-                        {{-- Categories --}}
-                        <div class="mb-4">
-                            <div class="fw-600 mb-2" style="font-size:.88rem;">Categories</div>
-                            @foreach($categories as $cat)
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <a href="{{ route('shop.category', $cat->slug) }}" class="text-decoration-none" style="font-size:.85rem;color:{{ $category->slug === $cat->slug ? 'var(--kkt-primary)' : '#555' }};font-weight:{{ $category->slug === $cat->slug ? '700' : '400' }};">{{ $cat->name }}</a>
-                                <span style="font-size:.72rem;color:#aaa;">{{ $cat->products_count }}</span>
-                            </div>
-                            @endforeach
-                        </div>
-
-                        {{-- Price Range --}}
-                        <div class="mb-4">
-                            <div class="fw-600 mb-2" style="font-size:.88rem;">Price Range</div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <input type="number" name="min_price" class="form-control form-control-sm" placeholder="Min" value="{{ request('min_price') }}">
-                                <span>—</span>
-                                <input type="number" name="max_price" class="form-control form-control-sm" placeholder="Max" value="{{ request('max_price') }}">
-                            </div>
-                        </div>
-
-                        {{-- Availability --}}
-                        <div class="mb-4">
-                            <div class="fw-600 mb-2" style="font-size:.88rem;">Availability</div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="in_stock" id="in_stock" value="1" {{ request('in_stock') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="in_stock" style="font-size:.84rem;">In Stock Only</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="on_sale" id="on_sale" value="1" {{ request('on_sale') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="on_sale" style="font-size:.84rem;">On Sale</label>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100 btn-sm">Apply Filters</button>
-                        <a href="{{ route('shop.category', $category->slug) }}" class="btn btn-outline-secondary w-100 btn-sm mt-2">
-                            {{ request('q') ? 'Reset Filters & Search' : 'Reset' }}
-                        </a>
+            {{-- Desktop Sidebar Filters (Visible >= 992px) --}}
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="gtb-filter-card" style="position:sticky;top:130px;">
+                    <form method="GET" action="{{ route('shop.category', $category->slug) }}" id="desktop-filter-form">
+                        @include('frontend.products.partials.filter-content', [
+                            'formId' => 'desktop',
+                            'isMobile' => false,
+                            'activeCategorySlug' => $category->slug,
+                            'resetRoute' => route('shop.category', $category->slug)
+                        ])
                     </form>
                 </div>
             </div>
 
-            {{-- Products Grid --}}
+            {{-- Products Grid Column --}}
             <div class="col-lg-9">
                 @if(request('q'))
                 <div class="alert bg-white border rounded-4 p-3 mb-3 d-flex flex-wrap justify-content-between align-items-center gap-2 shadow-sm" style="border-left: 4px solid var(--gtb-red, #D9232E) !important;">
@@ -87,14 +82,54 @@
                 </div>
                 @endif
 
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted" style="font-size:.88rem;">{{ $products->total() }} {{ Str::plural('product', $products->total()) }} found</span>
-                    <select name="sort" class="form-select form-select-sm" style="width:auto;" onchange="this.form.submit()" form="filter-form">
-                        <option value="latest" {{ request('sort','latest') === 'latest' ? 'selected' : '' }}>Latest</option>
-                        <option value="price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
-                        <option value="price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
-                        <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>Most Popular</option>
-                    </select>
+                {{-- Toolbar: Product Count & Filter/Sort Controls --}}
+                <div class="bg-white rounded-4 border p-3 mb-4 shadow-sm">
+                    {{-- Mobile Status Row (< 992px) --}}
+                    <div class="d-flex d-lg-none align-items-center justify-content-between mb-2.5 pb-2 border-bottom">
+                        <span class="text-muted" style="font-size:0.84rem; font-family:'Poppins', sans-serif;">
+                            Showing <strong class="text-dark">{{ $products->total() }}</strong> {{ Str::plural('product', $products->total()) }}
+                        </span>
+                        @if($activeFilterCount > 0)
+                            <a href="{{ route('shop.category', $category->slug) }}" class="text-danger text-decoration-none fw-semibold d-inline-flex align-items-center gap-1" style="font-size:0.78rem;">
+                                <i class="bi bi-x-circle"></i> Clear ({{ $activeFilterCount }})
+                            </a>
+                        @endif
+                    </div>
+
+                    {{-- Mobile 2-Column Symmetrical Actions Grid (< 992px) --}}
+                    <div class="d-lg-none gtb-mobile-toolbar-grid">
+                        <button type="button" class="btn gtb-mobile-filter-trigger" data-bs-toggle="offcanvas" data-bs-target="#mobileFilterDrawer" aria-controls="mobileFilterDrawer">
+                            <i class="bi bi-sliders2"></i>
+                            <span>Filters</span>
+                            @if($activeFilterCount > 0)
+                                <span class="badge bg-danger rounded-pill">{{ $activeFilterCount }}</span>
+                            @endif
+                        </button>
+
+                        <select name="sort" class="form-select gtb-sort-select" onchange="applySortChange(this.value)">
+                            <option value="latest" {{ request('sort','latest') === 'latest' ? 'selected' : '' }}>Sort: Latest</option>
+                            <option value="price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
+                            <option value="price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
+                            <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>Most Popular</option>
+                        </select>
+                    </div>
+
+                    {{-- Desktop Toolbar (>= 992px) --}}
+                    <div class="d-none d-lg-flex align-items-center justify-content-between">
+                        <span class="text-muted" style="font-size:0.9rem; font-family:'Poppins', sans-serif;">
+                            <strong class="text-dark">{{ $products->total() }}</strong> {{ Str::plural('product', $products->total()) }} found
+                        </span>
+
+                        <div class="d-flex align-items-center gap-2">
+                            <label class="text-muted small mb-0" style="font-size:0.84rem; white-space:nowrap;">Sort by:</label>
+                            <select name="sort" class="form-select form-select-sm gtb-sort-select" style="width:170px;" onchange="applySortChange(this.value)">
+                                <option value="latest" {{ request('sort','latest') === 'latest' ? 'selected' : '' }}>Latest</option>
+                                <option value="price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Price: Low → High</option>
+                                <option value="price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Price: High → Low</option>
+                                <option value="popular" {{ request('sort') === 'popular' ? 'selected' : '' }}>Most Popular</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 @if($products->isEmpty())
@@ -133,4 +168,15 @@
         </div>
     </div>
 </section>
+
+@push('scripts')
+<script>
+function applySortChange(sortVal) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('sort', sortVal);
+    url.searchParams.set('page', '1');
+    window.location.href = url.toString();
+}
+</script>
+@endpush
 @endsection

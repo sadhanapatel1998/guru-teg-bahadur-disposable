@@ -1116,6 +1116,7 @@
             padding: 18px 16px 20px 16px !important;
             max-height: calc(100vh - 85px) !important;
             overflow-y: auto !important;
+            overflow-x: hidden !important;
             -webkit-overflow-scrolling: touch;
             z-index: 1060 !important;
 
@@ -1635,21 +1636,24 @@
                         </ul>
 
                         {{-- Mobile User & Quick Links Drawer Section (< 992px) --}}
-                        <div class="d-lg-none mt-3 pt-3 border-top px-3">
+                        <div class="d-lg-none mt-3 pt-3 border-top px-1">
                             @auth
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="gtb-action-icon" style="width:36px; height:36px; min-width:36px;">
+                            <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+                                <div class="d-flex align-items-center gap-2" style="min-width: 0; flex: 1 1 auto; overflow: hidden;">
+                                    <div class="gtb-action-icon flex-shrink-0" style="width:38px; height:38px; min-width:38px;">
                                         <i class="bi bi-person"></i>
                                     </div>
-                                    <div>
-                                        <div class="fw-bold text-dark fs-6">{{ Auth::user()->name }}</div>
-                                        <div class="text-muted small">{{ Auth::user()->email }}</div>
+                                    <div style="min-width: 0; flex: 1 1 auto; overflow: hidden;">
+                                        <div class="fw-bold text-dark text-truncate" style="font-size: 14.5px; line-height: 1.25;">{{ Auth::user()->name }}</div>
+                                        <div class="text-muted small text-truncate" style="font-size: 12px; line-height: 1.3;" title="{{ Auth::user()->email }}">{{ Auth::user()->email }}</div>
                                     </div>
                                 </div>
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="POST" action="{{ route('logout') }}" class="m-0 flex-shrink-0">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-outline-danger">Logout</button>
+                                    <button type="submit" class="btn btn-sm btn-outline-danger d-inline-flex align-items-center gap-1 px-2.5 py-1" style="font-size: 12px; font-weight: 500; border-radius: 8px; white-space: nowrap;">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                        <span>Logout</span>
+                                    </button>
                                 </form>
                             </div>
                             <div class="d-flex gap-2 gtb-mobile-user-actions">
