@@ -46,16 +46,37 @@ class Order extends Model
     public function getStatusBadgeAttribute(): string
     {
         return match($this->status) {
-            'pending'          => '<span class="badge bg-warning">Pending</span>',
-            'confirmed'        => '<span class="badge bg-info">Confirmed</span>',
-            'processing'       => '<span class="badge bg-primary">Processing</span>',
-            'shipped'          => '<span class="badge bg-secondary">Shipped</span>',
-            'out_for_delivery' => '<span class="badge bg-info">Out for Delivery</span>',
-            'delivered'        => '<span class="badge bg-success">Delivered</span>',
-            'cancelled'        => '<span class="badge bg-danger">Cancelled</span>',
-            'returned'         => '<span class="badge bg-dark">Returned</span>',
-            'refunded'         => '<span class="badge bg-secondary">Refunded</span>',
+            'pending'          => '<span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>Pending</span>',
+            'confirmed'        => '<span class="badge" style="background:#0B3A63;color:#FFFFFF;"><i class="bi bi-check-circle-fill me-1"></i>Confirmed</span>',
+            'processing'       => '<span class="badge bg-primary"><i class="bi bi-arrow-repeat me-1"></i>Processing</span>',
+            'shipped'          => '<span class="badge bg-secondary"><i class="bi bi-truck me-1"></i>Shipped</span>',
+            'out_for_delivery' => '<span class="badge bg-info text-dark"><i class="bi bi-bicycle me-1"></i>Out for Delivery</span>',
+            'delivered'        => '<span class="badge bg-success"><i class="bi bi-bag-check-fill me-1"></i>Delivered</span>',
+            'cancelled'        => '<span class="badge bg-danger"><i class="bi bi-x-circle-fill me-1"></i>Cancelled</span>',
+            'returned'         => '<span class="badge bg-dark"><i class="bi bi-arrow-counterclockwise me-1"></i>Returned</span>',
+            'refunded'         => '<span class="badge bg-secondary"><i class="bi bi-arrow-return-left me-1"></i>Refunded</span>',
             default            => '<span class="badge bg-secondary">' . ucfirst($this->status) . '</span>',
+        };
+    }
+
+    public function getPaymentStatusBadgeAttribute(): string
+    {
+        return match($this->payment_status) {
+            'paid'     => '<span class="badge bg-success"><i class="bi bi-check2 me-1"></i>Paid</span>',
+            'pending'  => '<span class="badge bg-warning text-dark"><i class="bi bi-clock-history me-1"></i>Pending</span>',
+            'failed'   => '<span class="badge bg-danger"><i class="bi bi-exclamation-triangle me-1"></i>Failed</span>',
+            'refunded' => '<span class="badge bg-secondary"><i class="bi bi-arrow-return-left me-1"></i>Refunded</span>',
+            default    => '<span class="badge bg-light text-dark border">' . ucfirst($this->payment_status ?? 'Pending') . '</span>',
+        };
+    }
+
+    public function getPaymentMethodNameAttribute(): string
+    {
+        $method = strtolower($this->payment_method ?? '');
+        return match($method) {
+            'cod'      => 'Cash on Delivery (COD)',
+            'razorpay' => 'Online (Razorpay)',
+            default    => strtoupper($method ?: 'N/A'),
         };
     }
 

@@ -48,7 +48,7 @@
             <thead>
                 <tr>
                     <th>Order #</th><th>Customer</th><th>Items</th>
-                    <th>Total</th><th>Payment</th><th>Status</th><th>Date</th><th>Action</th>
+                    <th>Total</th><th>Payment Info</th><th>Order Status</th><th>Date</th><th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,10 +62,10 @@
                     <td style="font-size:.84rem;">{{ $order->items->count() }} item(s)</td>
                     <td style="font-weight:700;color:#2E6F40;">₹{{ number_format($order->total, 2) }}</td>
                     <td>
-                        <span class="badge {{ $order->payment_status === 'paid' ? 'bg-success' : ($order->payment_status === 'failed' ? 'bg-danger' : 'bg-warning text-dark') }}">
-                            {{ ucfirst($order->payment_status) }}
-                        </span>
-                        <div style="font-size:.72rem;color:#6c757d;">{{ strtoupper($order->payment_method) }}</div>
+                        {!! $order->payment_status_badge !!}
+                        <div class="mt-1" style="font-size:.76rem;color:#475569;font-weight:600;">
+                            <i class="bi bi-wallet2 text-primary me-1"></i>{{ $order->payment_method_name }}
+                        </div>
                     </td>
                     <td>{!! $order->status_badge !!}</td>
                     <td style="font-size:.82rem;color:#6c757d;">{{ $order->created_at->format('d M Y') }}</td>

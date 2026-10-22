@@ -1049,7 +1049,7 @@
                             <div class="flex-grow-1 min-w-0">
                                 <div class="d-flex align-items-center justify-content-between justify-content-md-start gap-2 mb-1">
                                     <div class="gtb-order-num text-truncate">#{{ $order->order_number }}</div>
-                                    <div class="d-md-none">
+                                    <div class="d-md-none d-flex flex-column align-items-end gap-1">
                                         @php
                                             $status = strtolower($order->status);
                                             $pillClass = match($status) {
@@ -1074,12 +1074,18 @@
                                         <span class="gtb-status-pill {{ $pillClass }}">
                                             <i class="bi {{ $iconClass }}"></i> {{ ucfirst($order->status) }}
                                         </span>
+                                        {!! $order->payment_status_badge !!}
                                     </div>
                                 </div>
                                 <div class="gtb-order-meta">
                                     <span>
                                         <i class="bi bi-calendar3 me-1 text-secondary"></i>
                                         {{ $order->created_at->format('d M Y, h:i A') }}
+                                    </span>
+                                    <span>•</span>
+                                    <span>
+                                        <i class="bi bi-wallet2 me-1 text-secondary"></i>
+                                        {{ $order->payment_method_name }}
                                     </span>
                                     <span>•</span>
                                     <span>
@@ -1105,7 +1111,7 @@
                             </div>
 
                             {{-- Middle/Right: Price & Status (Desktop) --}}
-                            <div class="d-none d-md-flex flex-column align-items-end text-end" style="min-width: 140px;">
+                            <div class="d-none d-md-flex flex-column align-items-end text-end" style="min-width: 150px;">
                                 <div class="gtb-order-price">₹{{ number_format($order->total, 2) }}</div>
                                 @php
                                     $status = strtolower($order->status);
@@ -1128,9 +1134,12 @@
                                         default     => 'bi-info-circle-fill'
                                     };
                                 @endphp
-                                <span class="gtb-status-pill {{ $pillClass }}">
-                                    <i class="bi {{ $iconClass }}"></i> {{ ucfirst($order->status) }}
-                                </span>
+                                <div class="d-flex flex-column align-items-end gap-1 mt-1">
+                                    <span class="gtb-status-pill {{ $pillClass }}">
+                                        <i class="bi {{ $iconClass }}"></i> {{ ucfirst($order->status) }}
+                                    </span>
+                                    {!! $order->payment_status_badge !!}
+                                </div>
                             </div>
 
                             {{-- Mobile Bottom Row: Price + View button --}}

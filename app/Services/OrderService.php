@@ -49,8 +49,9 @@ class OrderService
                 'discount_amount'       => $totals['discount'],
                 'total'                 => $totals['total'],
                 'coupon_code'           => $couponCode,
+                'status'                => (strtolower($checkoutData['payment_method'] ?? '') === 'cod') ? 'confirmed' : 'pending',
                 'payment_method'        => $checkoutData['payment_method'],
-                'payment_status'        => $checkoutData['payment_method'] === 'cod' ? 'pending' : 'pending',
+                'payment_status'        => 'pending',
                 'notes'                 => $checkoutData['notes'] ?? null,
             ]);
 
@@ -58,7 +59,6 @@ class OrderService
             foreach ($cartItems as $cartItem) {
                 $product = $cartItem->product;
                 $variant = $cartItem->productVariant;
-
                 OrderItem::create([
                     'order_id'           => $order->id,
                     'product_id'         => $product->id,
@@ -160,20 +160,26 @@ class OrderService
         }
     }
 
-   public function updateStatus(Order $order, string $status, ?string $trackingNumber = null): Order
-{
-    $previousStatus = $order->status;
+    public function updateStatus(Order $order, string $status, ?string $trackingNumber = null, ?string $paymentStatus = null): Order
+    {
+        $previousStatus = $order->status;
 
-    $order->update([
-        'status'          => $status,
-        'tracking_number' => $trackingNumber ?? $order->tracking_number,
-        'delivered_at'    => $status === 'delivered' ? now() : $order->delivered_at,
-    ]);
+        $updates = [
+            'status'          => $status,
+            'tracking_number' => $trackingNumber ?? $order->tracking_number,
+            'delivered_at'    => $status === 'delivered' ? ($order->delivered_at ?? now()) : $order->delivered_at,
+        ];
 
-    event(new OrderStatusUpdated($order, $previousStatus));
+        if ($paymentStatus) {
+            $updates['payment_status'] = $paymentStatus;
+        }
 
-    return $order->fresh();
-}
+        $order->update($updates);
+
+        event(new OrderStatusUpdated($order, $previousStatus));
+
+        return $order->fresh();
+    }
 
     public function cancel(Order $order): void
     {

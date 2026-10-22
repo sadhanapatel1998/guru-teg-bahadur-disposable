@@ -105,7 +105,13 @@
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Order #</th><th>Customer</th><th>Amount</th><th>Payment</th><th>Status</th><th></th>
+                            <th>Order #</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                            <th>Payment Status</th>
+                            <th>Order Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,14 +119,15 @@
                         <tr>
                             <td><strong>#{{ $order->order_number }}</strong></td>
                             <td>{{ $order->user->name ?? 'N/A' }}</td>
-                            <td>₹{{ number_format($order->total, 2) }}</td>
+                            <td class="fw-700" style="color:#0B3A63;">₹{{ number_format($order->total, 2) }}</td>
                             <td>
-                                <span class="badge {{ $order->payment_status === 'paid' ? 'bg-success' : 'bg-secondary' }}">
-                                    {{ ucfirst($order->payment_status) }}
+                                <span class="badge bg-light text-dark border px-2 py-1" style="font-size:.76rem;font-weight:600;">
+                                    <i class="bi bi-wallet2 text-primary me-1"></i>{{ $order->payment_method_name }}
                                 </span>
                             </td>
+                            <td>{!! $order->payment_status_badge !!}</td>
                             <td>{!! $order->status_badge !!}</td>
-                            <td><a href="{{ route('admin.orders.show', $order) }}" class="btn btn-xs btn-light" style="font-size:.75rem;padding:2px 8px;border-radius:6px;">View</a></td>
+                            <td><a href="{{ route('admin.orders.show', $order) }}" class="btn btn-xs btn-light" style="font-size:.75rem;padding:3px 10px;border-radius:6px;">View</a></td>
                         </tr>
                         @endforeach
                     </tbody>

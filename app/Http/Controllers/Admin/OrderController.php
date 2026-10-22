@@ -33,6 +33,11 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
+        // Auto-heal any legacy pending COD orders to confirmed
+        if (strtolower($order->payment_method ?? '') === 'cod' && strtolower($order->status ?? '') === 'pending') {
+            $order->update(['status' => 'confirmed']);
+        }
+
         $order->load(['user', 'items.product', 'items.productVariant', 'payment', 'returnRequest']);
         return view('admin.orders.show', compact('order'));
     }
@@ -41,12 +46,13 @@ class OrderController extends Controller
     {
         $request->validate([
             'status'          => 'required|in:pending,confirmed,processing,shipped,out_for_delivery,delivered,cancelled,returned,refunded',
+            'payment_status'  => 'nullable|in:pending,paid,failed,refunded',
             'tracking_number' => 'nullable|string|max:100',
         ]);
 
-        $this->orderService->updateStatus($order, $request->status, $request->tracking_number);
+        $this->orderService->updateStatus($order, $request->status, $request->tracking_number, $request->payment_status);
 
-        return back()->with('success', 'Order status updated to ' . ucfirst($request->status));
+        return back()->with('success', 'Order status updated successfully');
     }
 
     public function invoice(Order $order)

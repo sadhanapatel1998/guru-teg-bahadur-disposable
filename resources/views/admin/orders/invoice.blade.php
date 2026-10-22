@@ -91,8 +91,9 @@
                 <table>
                     <tr><td class="label" style="padding:2px 0;">Order Number:</td><td style="padding:2px 0;"><strong style="color:#0B3A63;">{{ $order->order_number }}</strong></td></tr>
                     <tr><td class="label" style="padding:2px 0;">Order Date:</td><td style="padding:2px 0;"><strong>{{ $order->created_at->format('d M Y') }}</strong></td></tr>
-                    <tr><td class="label" style="padding:2px 0;">Payment Method:</td><td style="padding:2px 0;"><strong>{{ strtoupper($order->payment_method) }}</strong></td></tr>
+                    <tr><td class="label" style="padding:2px 0;">Payment Method:</td><td style="padding:2px 0;"><strong>{{ $order->payment_method_name }}</strong></td></tr>
                     <tr><td class="label" style="padding:2px 0;">Order Status:</td><td style="padding:2px 0;"><strong style="color:#0B3A63;">{{ ucfirst($order->status) }}</strong></td></tr>
+                    <tr><td class="label" style="padding:2px 0;">Payment Status:</td><td style="padding:2px 0;"><strong style="{{ strtolower($order->payment_status) === 'paid' ? 'color:#16A34A;' : 'color:#D9232E;' }}">{{ ucfirst($order->payment_status) }}</strong></td></tr>
                 </table>
             </div>
         </td>

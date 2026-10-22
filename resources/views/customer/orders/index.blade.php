@@ -17,10 +17,13 @@
             <div>
                 <div class="fw-700 text-dark">#{{ $order->order_number }}</div>
                 <div style="font-size:.8rem;color:#6c757d;">{{ $order->created_at->format('d M Y, h:i A') }}</div>
+                <div class="mt-1" style="font-size:.78rem;color:#475569;">
+                    <span><i class="bi bi-wallet2 text-primary me-1"></i><strong>Payment:</strong> {{ $order->payment_method_name }}</span>
+                </div>
             </div>
-            <div class="d-flex gap-2 align-items-center">
+            <div class="d-flex gap-2 align-items-center flex-wrap">
                 {!! $order->status_badge !!}
-                <!-- <span class="badge {{ $order->payment_status === 'paid' ? 'bg-success' : 'bg-warning text-dark' }}">{{ ucfirst($order->payment_status) }}</span> -->
+                {!! $order->payment_status_badge !!}
             </div>
         </div>
         <div class="d-flex gap-2 mt-3 flex-wrap">

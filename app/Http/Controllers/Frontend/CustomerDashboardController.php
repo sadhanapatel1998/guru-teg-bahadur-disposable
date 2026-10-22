@@ -22,7 +22,14 @@ class CustomerDashboardController extends Controller
 
     public function index()
     {
-        $user         = Auth::user();
+        $user = Auth::user();
+
+        // Ensure any existing COD order that was placed as pending is marked as confirmed
+        Order::where('user_id', $user->id)
+            ->where('payment_method', 'cod')
+            ->where('status', 'pending')
+            ->update(['status' => 'confirmed']);
+
         $recentOrders = $user->orders()->with('items')->latest()->take(5)->get();
         $totalOrders  = $user->orders()->count();
         $totalSpent   = $user->orders()->where('payment_status', 'paid')->sum('total');
@@ -33,6 +40,12 @@ class CustomerDashboardController extends Controller
 
     public function orders(Request $request)
     {
+        // Ensure any existing COD order that was placed as pending is marked as confirmed
+        Order::where('user_id', Auth::id())
+            ->where('payment_method', 'cod')
+            ->where('status', 'pending')
+            ->update(['status' => 'confirmed']);
+
         $query = Auth::user()->orders()->with('items.product')->latest();
         if ($request->filled('status')) $query->where('status', $request->status);
         $orders = $query->paginate(10);
@@ -42,6 +55,12 @@ class CustomerDashboardController extends Controller
     public function orderShow(Order $order)
     {
         abort_unless($order->user_id === Auth::id(), 403);
+
+        // Ensure COD pending orders display as confirmed
+        if (strtolower($order->payment_method) === 'cod' && $order->status === 'pending') {
+            $order->update(['status' => 'confirmed']);
+        }
+
         $order->load(['items.product', 'items.productVariant', 'payment', 'returnRequest']);
         return view('customer.orders.show', compact('order'));
     }
@@ -135,6 +154,43 @@ class CustomerDashboardController extends Controller
 
         Address::create($data);
         return back()->with('success', 'Address added.');
+    }
+
+    public function updateAddress(Request $request, Address $address)
+    {
+        abort_unless($address->user_id === Auth::id(), 403);
+
+        $data = $request->validate([
+            'name'             => 'required|string|max:100',
+            'phone'            => 'required|string|max:15',
+            'address_line1'    => 'required|string|max:200',
+            'address_line2'    => 'nullable|string|max:200',
+            'city'             => 'required|string|max:100',
+            'state'            => 'required|string|max:100',
+            'pincode'          => 'required|string|max:10',
+            'type'             => 'nullable|in:home,work,other',
+            'is_default'       => 'nullable|boolean',
+        ]);
+
+        if (!empty($data['is_default'])) {
+            Address::where('user_id', Auth::id())
+                ->where('id', '!=', $address->id)
+                ->update(['is_default' => false]);
+        }
+
+        $address->update($data);
+        $fresh = $address->fresh();
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success'      => true,
+                'message'      => 'Address updated successfully.',
+                'address'      => $fresh,
+                'full_address' => $fresh->full_address,
+            ]);
+        }
+
+        return back()->with('success', 'Address updated successfully.');
     }
 
     public function deleteAddress(Address $address)

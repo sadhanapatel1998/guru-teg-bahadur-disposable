@@ -55,19 +55,21 @@
 
                             {{-- Order Number --}}
                             <div class="text-center mb-4">
-
                                 <div class="text-muted" style="font-size:.8rem;">
                                     ORDER NUMBER
                                 </div>
-
-                                <div class="fw-bold"
+                                <div class="fw-bold mb-2"
                                     style="
                                     font-size:1.4rem;
                                     color:#000;
                                 ">
                                     #{{ $order->order_number }}
                                 </div>
-
+                                <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
+                                    {!! $order->status_badge !!}
+                                    {!! $order->payment_status_badge !!}
+                                    <span class="badge bg-light text-dark border px-2 py-1" style="font-size:.78rem;font-weight:600;"><i class="bi bi-wallet2 me-1 text-primary"></i>{{ $order->payment_method_name }}</span>
+                                </div>
                             </div>
 
                             {{-- Items & Bill Summary --}}
@@ -159,7 +161,7 @@
 
                                     <span class="fw-bold"
                                         style="
-                                        color:#198754;
+                                        color:#dc1717;
                                         font-size:1.25rem;
                                     ">
                                         ₹{{ number_format($order->total, 2) }}

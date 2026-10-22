@@ -97,6 +97,7 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function (
     Route::put('/password', [CustomerDashboardController::class, 'changePassword'])->name('password.update');
     Route::get('/addresses', [CustomerDashboardController::class, 'addresses'])->name('addresses');
     Route::post('/addresses', [CustomerDashboardController::class, 'storeAddress'])->name('addresses.store');
+    Route::match(['put', 'patch', 'post'], '/addresses/{address}', [CustomerDashboardController::class, 'updateAddress'])->name('addresses.update');
     Route::delete('/addresses/{address}', [CustomerDashboardController::class, 'deleteAddress'])->name('addresses.destroy');
 });
 

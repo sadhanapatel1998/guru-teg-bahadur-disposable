@@ -11,10 +11,18 @@
         'backLabel' => 'Back to Orders'
     ])
 
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
         <div>
-            <h5 class="fw-700 text-dark mb-1" style="font-family:'Poppins',sans-serif;">Order #{{ $order->order_number }}</h5>
-            <small class="text-muted">Placed on {{ $order->created_at->format('d M Y, h:i A') }}</small>
+            <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+                <h5 class="fw-700 text-dark mb-0" style="font-family:'Poppins',sans-serif;">Order #{{ $order->order_number }}</h5>
+                {!! $order->status_badge !!}
+                {!! $order->payment_status_badge !!}
+            </div>
+            <div class="d-flex align-items-center gap-3 flex-wrap mt-1" style="font-size:.84rem;color:#64748b;">
+                <span><i class="bi bi-calendar3 me-1"></i>Placed on {{ $order->created_at->format('d M Y, h:i A') }}</span>
+                <span>•</span>
+                <span><i class="bi bi-wallet2 me-1 text-primary"></i>Payment: <strong class="text-dark">{{ $order->payment_method_name }}</strong></span>
+            </div>
         </div>
         <div class="d-flex gap-2">
             <a href="{{ route('account.orders.invoice', $order) }}" class="btn btn-sm text-white" style="background:#0B3A63;border-radius:10px;font-weight:600;"><i class="bi bi-file-earmark-arrow-down me-1"></i> Download Invoice</a>
@@ -57,10 +65,25 @@
                 </div>
             </div>
             <div class="bg-white rounded-4 border p-4">
-                <h6 class="fw-700 mb-3">Order Status</h6>
-                <div class="d-flex justify-content-between mb-2"><span class="text-muted" style="font-size:.84rem;">Status</span>{!! $order->status_badge !!}</div>
-                <div class="d-flex justify-content-between mb-2"><span class="text-muted" style="font-size:.84rem;">Payment</span><span class="badge {{ $order->payment_status === 'paid' ? 'bg-success' : 'bg-warning text-dark' }}">{{ ucfirst($order->payment_status) }}</span></div>
-                @if($order->tracking_number)<div class="d-flex justify-content-between"><span class="text-muted" style="font-size:.84rem;">Tracking</span><span style="font-size:.84rem;font-weight:600;">{{ $order->tracking_number }}</span></div>@endif
+                <h6 class="fw-700 mb-3">Order & Payment Info</h6>
+                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                    <span class="text-muted" style="font-size:.84rem;">Order Status</span>
+                    {!! $order->status_badge !!}
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
+                    <span class="text-muted" style="font-size:.84rem;">Payment Method</span>
+                    <span class="badge bg-light text-dark border px-2 py-1" style="font-size:.78rem;font-weight:600;"><i class="bi bi-wallet2 me-1 text-primary"></i>{{ $order->payment_method_name }}</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted" style="font-size:.84rem;">Payment Status</span>
+                    {!! $order->payment_status_badge !!}
+                </div>
+                @if($order->tracking_number)
+                <div class="d-flex justify-content-between align-items-center pt-2 border-top mt-2">
+                    <span class="text-muted" style="font-size:.84rem;">Tracking</span>
+                    <span style="font-size:.84rem;font-weight:600;">{{ $order->tracking_number }}</span>
+                </div>
+                @endif
             </div>
         </div>
     </div>
