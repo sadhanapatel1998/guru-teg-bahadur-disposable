@@ -15,14 +15,10 @@
         <div>
             <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
                 <h5 class="fw-700 text-dark mb-0" style="font-family:'Poppins',sans-serif;">Order #{{ $order->order_number }}</h5>
-                {!! $order->status_badge !!}
-                {!! $order->payment_status_badge !!}
             </div>
             <div class="d-flex align-items-center gap-3 flex-wrap mt-1" style="font-size:.84rem;color:#64748b;">
                 <span><i class="bi bi-calendar3 me-1"></i>Placed on {{ $order->created_at->format('d M Y, h:i A') }}</span>
-                <span>•</span>
-                <span><i class="bi bi-wallet2 me-1 text-primary"></i>Payment: <strong class="text-dark">{{ $order->payment_method_name }}</strong></span>
-            </div>
+                </div>
         </div>
         <div class="d-flex gap-2">
             <a href="{{ route('account.orders.invoice', $order) }}" class="btn btn-sm text-white" style="background:#0B3A63;border-radius:10px;font-weight:600;"><i class="bi bi-file-earmark-arrow-down me-1"></i> Download Invoice</a>

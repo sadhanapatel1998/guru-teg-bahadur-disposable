@@ -80,7 +80,8 @@ class CustomerDashboardController extends Controller
     {
         abort_unless($order->user_id === Auth::id(), 403);
         $order->load(['user', 'items.product']);
-        $pdf = Pdf::loadView('admin.orders.invoice', compact('order'));
+        $pdf = Pdf::loadView('admin.orders.invoice', compact('order'))
+            ->setPaper('a4', 'portrait');
         return $pdf->download('invoice-' . $order->order_number . '.pdf');
     }
 

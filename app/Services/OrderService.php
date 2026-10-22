@@ -24,7 +24,6 @@ class OrderService
             $cartItems   = $this->cartService->getItems();
             $couponCode  = $checkoutData['coupon_code'] ?? null;
             $totals      = $this->cartService->totals($couponCode);
-
             $coupon = null;
             if ($couponCode) {
                 $coupon = Coupon::where('code', strtoupper($couponCode))->first();
